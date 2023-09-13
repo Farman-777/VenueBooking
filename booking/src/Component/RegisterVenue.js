@@ -1,0 +1,124 @@
+import React, { useState,useEffect } from 'react';
+// import VenueCard from './VenueCard';
+import Swal from 'sweetalert2'
+import axios from 'axios'
+
+const RegisterVenue = () => {
+  const [venueName, setVenueName] = useState('');
+  const [venueLocation, setVenueLocation] = useState('');
+  const [venueDescription, setVenueDescription] = useState('');
+  const [venueImage, setVenueImage] = useState(null);
+
+  const handleImageChange = (e) => { setVenueImage(e.target.files[0]); };
+  const handleVenueNameChange = (e) => { setVenueName(e.target.value); };
+  const handleVenueLocationChange = (e) => { setVenueLocation(e.target.value); };
+  const handleVenueDescriptionChange = (e) => { setVenueDescription(e.target.value); };
+  // const [cardData, setCardData] = useState([]);
+
+  // const userData = async () => {
+  //   try {
+  //     const res = await axios.get("http://localhost:8000/getData");
+  //     setCardData(res.data);
+   
+  //   } catch (ex) { console.log(ex); }
+  //   console.log(cardData)
+  // };
+
+  // useEffect(() => {
+  //   userData();
+  // }, []);
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     setRegisterForm({
+//         ...registerForm, 
+//             venueName,
+//             venueLocation,
+//             venueDescription        
+//     })
+//     console.log(registerForm)
+//     axios.post("http://localhost:8000/addData",registerForm)
+//     // alert(registerForm)
+//   };
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const formData = new FormData();
+  formData.append('venueName', venueName);
+  formData.append('venueLocation', venueLocation);
+  formData.append('venueDescription', venueDescription);
+  formData.append('image', venueImage);
+
+  axios.post("http://localhost:8000/addData", formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  })
+    .then(response => {
+      // Check the status code in the response
+      if (response.status === 200) {
+        // Successful registration
+        Swal.fire({
+          icon: 'success',
+          title: 'Venue Registered',
+          text: 'Your venue has been successfully registered!',
+        });
+  
+        // Clear the form fields and reset the venueImage
+        setVenueName('');
+        setVenueLocation('');
+        setVenueDescription('');
+        setVenueImage(null);
+      } 
+    })
+    .catch(error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text:" Venue With The Same Name Exist", // Display the error message from the response
+      });
+      console.error(error);
+    });
+}
+
+
+  return (
+    <div className="container mt-2">
+      <div className="card">
+        <div className="card-header" style={{ backgroundColor: '#007bff', color: '#fff', textAlign: 'center' }}>
+          <h1 className="mb-0">Register Your Venue</h1>
+        </div>
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="venueName" className="form-label" style={{ fontWeight: 'bold' }}> Venue Name: </label>
+              <input type="text" className="form-control" id="venueName" value={venueName} onChange={handleVenueNameChange} required />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="venueLocation" className="form-label" style={{ fontWeight: 'bold' }}> Venue Location:</label>
+              <input type="text" className="form-control" id="venueLocation" value={venueLocation} onChange={handleVenueLocationChange} required />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="venueDescription" className="form-label" style={{ fontWeight: 'bold' }}>
+                Venue Description:
+              </label>
+              <textarea className="form-control" id="venueDescription" rows="4" value={venueDescription} onChange={handleVenueDescriptionChange} required />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="venueImage" className="form-label" style={{ fontWeight: 'bold' }}>Venue Image:</label>
+              <input type="file" className="form-control" id="venueImage" accept="image/*" onChange={handleImageChange} required />
+            </div>
+
+            <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#007bff', border: 'none' }}>Register Venue</button>
+          </form>
+        </div>
+      </div>
+{/* <div className='ms-3 p-4' style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '20px', marginTop: "30px", borderRadius: "10px", overflow: 'hidden', border: '1px solid #e0e0e0' }}>
+      {cardData.map((user) => (
+        <VenueCard key={user._id} user={user} />
+      ))}
+    </div> */}
+    </div>
+  )
+        }
+
+export default RegisterVenue;
