@@ -11,7 +11,8 @@ function MainComponent() {
       try {
         const res = await axios.get("http://localhost:8000/getData");
         // Assuming res.data is an array, you can directly set it to cardData
-        setCardData(res.data.map((doc) => ({ ...doc, id: doc.id })));
+        // setCardData(res.data.map((doc) => ({ ...doc, id: doc.id })));
+        setCardData(res.data);
         console.log(res.data);
 
       } catch (ex) {
@@ -38,7 +39,7 @@ function MainComponent() {
           }}
         >
           {cardData.map((user, i) => (
-            <Link to={`/VenueBook/${user._id}`}><VenueCard key={i} user={user} /></Link>
+            <Link to={`/venueBookingB5/${user._id}`}><VenueCard key={i} user={user} /></Link>
           ))}
         </div>
       )}

@@ -8,20 +8,26 @@ import { useParams } from "react-router-dom";
 const VenueBookingB5 = () => {
   const [showDateModal, setShowDateModal] = useState(false);
   const [showDateModal1, setShowDateModal1] = useState(false);
-  const [VenueData,setVenueData] = useState({})
-  const {id} = useParams();
+  const [VenueData, setVenueData] = useState({
+    images: []
+  });
+  const { id } = useParams();
   // window.alert(id)
 
   useEffect(() => {
-    const  fetchData = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/getData/${id}`);
-        setVenueData(response.data);
-        console.log(response.data)
+        if (id !== undefined) {
+          const response = await axios.get(
+            `http://localhost:8000/getData/${id}`
+          );
+          setVenueData(response.data);
+          // console.log("test", response.data, response.data.images[0]);
+        }
       } catch (error) {
-        console.error(error);
+        console.error(error.message);
       }
-    }
+    };
 
     fetchData();
   }, [id]);
@@ -60,21 +66,21 @@ const VenueBookingB5 = () => {
             <div className="carousel-inner">
               <div className="carousel-item active">
                 <img
-                  src="https://www.weddingsutra.com/images/Vendor_Images/Venues/kaldan-samudhra-palace/kaldan-samudhra-palace-01.jpg"
+                  src={`http://localhost:8000/images/${VenueData?.images[0]}`}
                   className="d-block w-100"
                   alt="Venue Image 1"
                 />
               </div>
               <div className="carousel-item">
                 <img
-                  src="https://www.rajwadaevents.com/uploaded-files/category-images/Venue-Search-and-Hotel-Booking58_52.jpg"
+                  src={`http://localhost:8000/images/${VenueData?.images[1]}`}
                   className="d-block w-100"
                   alt="Venue Image 2"
                 />
               </div>
               <div className="carousel-item">
                 <img
-                  src="https://cdn0.weddingwire.in/vendor/3081/3_2/960/jpg/banquet-halls-devam-palace-event-space-8_15_363081-161459932444577.jpeg"
+                 src={`http://localhost:8000/images/${VenueData?.images[2]}`}
                   className="d-block w-100"
                   alt="Venue Image 3"
                 />
@@ -115,11 +121,11 @@ const VenueBookingB5 = () => {
               fontFamily: "roboto",
             }}
           >
-             {VenueData.VenueName}
+            {VenueData.VenueName}
           </h2>
           <p style={{ color: "#6C757D" }}>
             <span className="fw-bold text-dark">Description</span> <br />
-           {VenueData.VenueDescription}
+            {VenueData.VenueDescription}
           </p>
           <p style={{ color: "#28A745" }} className="fs-5">
             <span className="fw-bold text-dark">Price</span> :{" "}

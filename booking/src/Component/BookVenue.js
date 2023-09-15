@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const BookVenue = ({ handleClose }) => {
+  const {id} = useParams()
+  console.log(id)
   const [bookingDate, setBookingDate] = useState("");
   const handleBookingDateChange = (e) => {
     setBookingDate(e.target.value);

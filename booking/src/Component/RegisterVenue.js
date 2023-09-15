@@ -1,83 +1,71 @@
-import React, { useState,useEffect } from 'react';
-// import VenueCard from './VenueCard';
-import Swal from 'sweetalert2'
-import axios from 'axios'
+import React, { useState } from 'react';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const RegisterVenue = () => {
   const [venueName, setVenueName] = useState('');
   const [venueLocation, setVenueLocation] = useState('');
   const [venueDescription, setVenueDescription] = useState('');
-  const [venueImage, setVenueImage] = useState(null);
+  const [venueImages, setVenueImages] = useState([]); // Use an array to store multiple images
 
-  const handleImageChange = (e) => { setVenueImage(e.target.files[0]); };
-  const handleVenueNameChange = (e) => { setVenueName(e.target.value); };
-  const handleVenueLocationChange = (e) => { setVenueLocation(e.target.value); };
-  const handleVenueDescriptionChange = (e) => { setVenueDescription(e.target.value); };
-  // const [cardData, setCardData] = useState([]);
+  const handleImageChange = (e) => {
+    // Use 'multiple' attribute to allow multiple file selection
+    setVenueImages(e.target.files);
+  };
 
-  // const userData = async () => {
-  //   try {
-  //     const res = await axios.get("http://localhost:8000/getData");
-  //     setCardData(res.data);
-   
-  //   } catch (ex) { console.log(ex); }
-  //   console.log(cardData)
-  // };
+  const handleVenueNameChange = (e) => {
+    setVenueName(e.target.value);
+  };
 
-  // useEffect(() => {
-  //   userData();
-  // }, []);
+  const handleVenueLocationChange = (e) => {
+    setVenueLocation(e.target.value);
+  };
 
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     setRegisterForm({
-//         ...registerForm, 
-//             venueName,
-//             venueLocation,
-//             venueDescription        
-//     })
-//     console.log(registerForm)
-//     axios.post("http://localhost:8000/addData",registerForm)
-//     // alert(registerForm)
-//   };
+  const handleVenueDescriptionChange = (e) => {
+    setVenueDescription(e.target.value);
+  };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const formData = new FormData();
-  formData.append('venueName', venueName);
-  formData.append('venueLocation', venueLocation);
-  formData.append('venueDescription', venueDescription);
-  formData.append('image', venueImage);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  axios.post("http://localhost:8000/addData", formData, {
-    headers: { 'Content-Type': 'multipart/form-data' }
-  })
-    .then(response => {
-      // Check the status code in the response
-      if (response.status === 200) {
-        // Successful registration
+    const formData = new FormData();
+    formData.append('venueName', venueName);
+    formData.append('venueLocation', venueLocation);
+    formData.append('venueDescription', venueDescription);
+
+    // Append each selected image to the formData
+    for (let i = 0; i < venueImages.length; i++) {
+      formData.append('images', venueImages[i]);
+    }
+
+    axios
+      .post('http://localhost:8000/addData', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Venue Registered',
+            text: 'Your venue has been successfully registered!',
+          });
+
+          // Clear the form fields and reset the venueImages
+          setVenueName('');
+          setVenueLocation('');
+          setVenueDescription('');
+          setVenueImages([]);
+        }
+      })
+      .catch((error) => {
         Swal.fire({
-          icon: 'success',
-          title: 'Venue Registered',
-          text: 'Your venue has been successfully registered!',
+          icon: 'error',
+          title: 'Error',
+          text: 'Venue With The Same Name Exist', // Display the error message from the response
         });
-  
-        // Clear the form fields and reset the venueImage
-        setVenueName('');
-        setVenueLocation('');
-        setVenueDescription('');
-        setVenueImage(null);
-      } 
-    })
-    .catch(error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text:" Venue With The Same Name Exist", // Display the error message from the response
+        console.error(error);
       });
-      console.error(error);
-    });
-}
+  };
 
 
   return (
@@ -105,7 +93,7 @@ const handleSubmit = async (e) => {
 
             <div className="mb-3">
               <label htmlFor="venueImage" className="form-label" style={{ fontWeight: 'bold' }}>Venue Image:</label>
-              <input type="file" className="form-control" id="venueImage" accept="image/*" onChange={handleImageChange} required />
+              <input type="file" className="form-control" id="venueImage" accept="image/*" onChange={handleImageChange} multiple required />
             </div>
 
             <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#007bff', border: 'none' }}>Register Venue</button>
