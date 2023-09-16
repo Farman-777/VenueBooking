@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const BookVenue = ({ handleClose }) => {
   const {id} = useParams()
@@ -28,22 +29,37 @@ const BookVenue = ({ handleClose }) => {
     const formattedDateStr = `${day}-${month}-${year}`;
 
     const bookingData = {
+      Id:id,
       Date: formattedDateStr,
       Status: "Booked",
     };
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/insertVenueTableData",
+        'http://localhost:8000/venueRecords',
         bookingData
       );
-      console.log(response.data);
-      // Clear the form fields after successful booking
-      setBookingDate("");
+
+      if (response.status === 200) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Booking Status',
+          text: 'Your booking has been successful!',
+        });
+
+        // Clear the form field
+        setBookingDate('');
+      }
     } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: error.response.data.message || 'An error occurred', // Display the error message from the server
+      });
       console.error(error);
     }
-  };
+};
+      
 
   return (
     <div className="container">

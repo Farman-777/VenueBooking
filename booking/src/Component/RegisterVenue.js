@@ -63,7 +63,6 @@ const RegisterVenue = () => {
           title: 'Error',
           text: 'Venue With The Same Name Exist', // Display the error message from the response
         });
-        console.error(error);
       });
   };
 

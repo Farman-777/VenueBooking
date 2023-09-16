@@ -7,7 +7,6 @@ const VenueCard = ({ user }) => {
 
 
     console.log(user);
-    const accordionId = `accordion-${user._id}`; // Generate a unique ID
 
     return (
         <div className="card" style={{ width: "18rem", boxShadow: "1px 1px 12px -5px black", border: '1px solid #e0e0e0',}}>
