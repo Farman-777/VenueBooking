@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const HomePage = () => {
+const HomePage = ({setShow}) => {
+  
   return (
     <>
       <div id="myCarousel" className="carousel slide" data-bs-ride="carousel">
@@ -20,8 +22,8 @@ const HomePage = () => {
             <div className="container">
               <div className="carousel-caption text-start">
               <h1>Welcome to Our Photography Studio</h1>
-<p>Explore our stunning portfolio and capture life's moments with us.</p>
-{/* <p><a className="btn btn-lg btn-primary" href="#">Book a Session</a></p> */}
+              <p>Explore our stunning portfolio and capture life's moments with us.</p>
+              <p><Link to="/PhotographerMain" className="btn btn-lg btn-primary" onClick={() => setShow(true)}>See More</Link></p>
 
               </div>
             </div>
@@ -29,14 +31,14 @@ const HomePage = () => {
           <div className="carousel-item active">
             <img
               className="img-fluid"
-              src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+              src="https://images.unsplash.com/photo-1516873240891-4bf014598ab4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
               alt=""
             />
             <div className="container">
               <div className="carousel-caption">
               <h1>DJ Services That Move You</h1>
-<p>Feel the rhythm with our top-notch DJ entertainment services.</p>
-{/* <p><a className="btn btn-lg btn-primary" href="#">Check Availability</a></p> */}
+              <p>Feel the rhythm with our top-notch DJ entertainment services.</p>
+              <p><Link to="/DJMain" className="btn btn-lg btn-primary" onClick={() => setShow(true)}>See More</Link></p>
 
               </div>
             </div>
@@ -50,8 +52,8 @@ const HomePage = () => {
             <div className="container">
               <div className="carousel-caption text-end ">
               <h1>Catering Excellence for Your Event</h1>
-<p>Indulge in delicious culinary creations for your special occasion.</p>
-{/* <p><a className="btn btn-lg btn-primary" href="#">View Menu</a></p> */}
+              <p>Indulge in delicious culinary creations for your special occasion.</p>
+              <p><Link to="/CaterMain" className="btn btn-lg btn-primary" onClick={() => setShow(true)}>See More</Link></p>
 
               </div>
             </div>
@@ -59,14 +61,14 @@ const HomePage = () => {
           <div className="carousel-item">
             <img
               className="img-fluid"
-              src="https://images.unsplash.com/photo-1630764883473-e8c2056f0589?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+              src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2098&q=80"
               alt=""
             />
             <div className="container">
               <div className="carousel-caption text-end">
               <h1>Elegant Venues for Memorable Gatherings</h1>
-<p>Discover our exquisite venues to host your unforgettable events.</p>
-{/* <p><a className="btn btn-lg btn-primary" href="#">Explore Venues</a></p> */}
+              <p>Discover our exquisite venues to host your unforgettable events.</p>
+              <p><Link to="/VenueMain" className="btn btn-lg btn-primary" onClick={() => setShow(true)}>See More</Link></p>
 
               </div>
             </div>

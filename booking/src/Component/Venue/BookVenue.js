@@ -58,6 +58,8 @@ const BookVenue = ({ handleClose }) => {
       });
       console.error(error);
     }
+    const respon = await axios.get(`http://localhost:8000/getRecord/${id}`);
+    console.log(respon)
 };
       
 

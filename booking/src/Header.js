@@ -1,58 +1,52 @@
-import React from "react";
+import React,{useState} from "react";
+import {useNavigate} from "react-router-dom";
+import ModalComponent from "./ModalComponent";
+import Login from "./Login";
 
-const headerStyle = {
-  backgroundColor: "#007bff",
-  color: "#fff",
-  padding: "10px 0",
-};
 
-const linkStyle = {
-  color: "#fff",
-  textDecoration: "none",
-  margin: "0 10px",
-};
-
-const Header = () => {
+const Header = ({setShow}) => {
+  const [showDateModal,setShowDateModal] = useState(false)
+  const navigate = useNavigate()
   return (
 <>
 <nav className="navbar navbar-expand-lg navbar-dark text-center" style={{background:"#240742",fontFamily:"Roboto"}}>
   <div className="container-fluid">
-    <a className="navbar-brand" href="#">Navbar</a>
+    <a className="navbar-brand">Navbar</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">Home</a>
+          <a className="nav-link active" style={{cursor:"pointer"}} aria-current="page"  onClick={() => setShow(false)}>Home</a>
         </li>
 
-        <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           Services
+         <li className="nav-item dropdown">
+          <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           Vendor Registration
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a className="dropdown-item" href="#">Venue Booking</a></li>
-            <li><a className="dropdown-item" href="#">Photographer Booking</a></li>
-            {/* <li><hr className="dropdown-divider" /></li> */}
-            <li><a className="dropdown-item" href="#">DJ Booking</a></li>
-            <li><a className="dropdown-item" href="#">Cater Booking</a></li>
+            <li className="dropdown-item" onClick={()=> { setShow(true); navigate("/registerVenue") }}>Venue Registration</li>
+            <li className="dropdown-item" onClick={()=> { setShow(true); navigate("/registerDJ") }}>DJ Registration </li>
+            <li className="dropdown-item" onClick={()=> { setShow(true); navigate("/registerCater") }}>Cater Registration </li>
+            <li className="dropdown-item" onClick={()=> { setShow(true); navigate("/registerPhotographer") }}>Photographer Registration </li>
 
           </ul>
         </li>
-        <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">About Us</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">Contact Us</a>
-        </li>
+        <li className="nav-link active" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/aboutus") }}>About Us</li>
+        <li className="nav-link active" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/contactus") }}>Contact Us</li>
         </ul>
       <div>
         {/* <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" /> */}
-        <button className="btn btn-success" type="submit">Login</button>
+        <button className="btn btn-success" type="submit" style={{fontFamily:"roboto"}} onClick={() => setShowDateModal(true)}>Login</button>
       </div>
     </div>
   </div>
+  <ModalComponent
+        show={showDateModal}
+        width={"70%"}
+        modalBody={<Login handleClose={() => setShowDateModal(false)}  />}      
+  />
 </nav>
 </>
   );

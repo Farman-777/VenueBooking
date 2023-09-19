@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPhotoGrapher = () => {
+  const navigate = useNavigate()
   const [PhotoGrapherName, setPhotoGrapherName] = useState('');
   const [PhotoGrapherLocation, setPhotoGrapherLocation] = useState('');
   const [PhotoGrapherDescription, setPhotoGrapherDescription] = useState('');
@@ -56,7 +58,7 @@ const RegisterPhotoGrapher = () => {
           setPhotoGrapherDescription('');
           setPhotoGrapherImages([]);
         }
-      })
+      }).then(() => navigate("/PhotoGrapherMain"))
       .catch((error) => {
         Swal.fire({
           icon: 'error',
@@ -68,7 +70,7 @@ const RegisterPhotoGrapher = () => {
 
 
   return (
-    <div className="container mt-2">
+    <div className="container mt-2 p-4 shadow-lg">
       <div className="card">
         <div className="card-header" style={{ backgroundColor: '#007bff', color: '#fff', textAlign: 'center' }}>
           <h1 className="mb-0">Register Your PhotoGrapher</h1>

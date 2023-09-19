@@ -1,32 +1,77 @@
-import React from 'react'
-import { Route,Routes } from 'react-router-dom';
-import Footer from './Footer';
-import MainComponent from './Component/Venue/MainComponent'
-import VenueBookingB5 from './Component/Venue/VenueBookingB5'
-import Header from './Header';
-import HomePage from './HomePage';
+import React, { useState,useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import Footer from "./Footer";
+import MainComponent from "./Component/Venue/MainComponent";
+import VenueBookingB5 from "./Component/Venue/VenueBookingB5";
+import RegisterVenue from './Component/Venue/RegisterVenue'
 
+import MainComponentOne from "./Component/PhotoGrapher/MainComponentOne";
+import PhotoGrapherBookingB5 from './Component/PhotoGrapher/PhotoGrapherBookingB5'
+import RegisterPhotoGrapher from './Component/PhotoGrapher/RegisterPhotoGrapher'
 
+import MainComponentTwo from "./Component/Cater/MainComponentTwo";
+import CaterBookingB5 from './Component/Cater/CaterBookingB5'
+import RegisterCater from './Component/Cater/RegisterCater'
+
+import MainComponentThree from "./Component/DJ/MainComponentThree";
+import DJBookingB5 from './Component/DJ/DJBookingB5'
+import RegisterDJ from './Component/DJ/RegisterDJ'
+
+import Header from "./Header";
+import HomePage from "./HomePage";
+import Login from "./Login";
+
+import ContactUs from "./ContactUs";
+import AboutUs from "./AboutUs";
 
 const App = () => {
+  // const [show, setShow] = useState(false);
+    // Initialize show state with the value from localStorage or default to false
+    const [show, setShow] = useState(localStorage.getItem("show") === "true" || false);
+
+    // useEffect to update localStorage when show changes
+    useEffect(() => {
+      localStorage.setItem("show", show);
+    }, [show]);
+
   return (
-    <div className='App'>
-      {/* <MainComponentThree /> */}
-      <Header />
-      <HomePage />
-      <Footer />  
-      <Routes>
-      <Route path='/main' element={<MainComponent />} />    
-      <Route path='venueBookingB5/:id' element={<VenueBookingB5 />} />
-      </Routes>   
- 
+    <div className="App">
+  
+      <Header setShow={setShow}/>
+      {/* <Header /> */}
+      {show ? (
+        <Routes>
+
+          <Route path="/VenueMain" element={<MainComponent />} />
+          <Route path="/venueBookingB5/:id" element={<VenueBookingB5 />} />
+          <Route path="/registerVenue" element={<RegisterVenue />} />   
+
+          <Route path="/DJMain" element={<MainComponentThree />} />
+          <Route path="/DJBookingB5/:id" element={<DJBookingB5 />} />
+          <Route path="/registerDJ" element={<RegisterDJ />} />
+
+          <Route path="/CaterMain" element={<MainComponentTwo />} />
+          <Route path="/CaterBookingB5/:id" element={<CaterBookingB5 />} />
+          <Route path="/registerCater" element={<RegisterCater />} />
+
+          <Route path="/PhotographerMain" element={<MainComponentOne />} />
+          <Route path="/PhotoGrapherBookingB5/:id" element={<PhotoGrapherBookingB5 />} />
+          <Route path="/registerPhotoGrapher" element={<RegisterPhotoGrapher />} />
+
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/login" element={<Login />} ></Route>
+        </Routes>
+      ) : (
+        <HomePage setShow={setShow} />
+      )}
+      
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
 export default App;
-
-
 
 
 /*

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterVenue = () => {
+  const navigate = useNavigate();
   const [venueName, setVenueName] = useState('');
   const [venueLocation, setVenueLocation] = useState('');
   const [venueDescription, setVenueDescription] = useState('');
@@ -56,7 +58,7 @@ const RegisterVenue = () => {
           setVenueDescription('');
           setVenueImages([]);
         }
-      })
+      }).then(() => navigate("/VenueMain"))
       .catch((error) => {
         Swal.fire({
           icon: 'error',
@@ -64,11 +66,12 @@ const RegisterVenue = () => {
           text: 'Venue With The Same Name Exist', // Display the error message from the response
         });
       });
+
   };
 
 
   return (
-    <div className="container mt-2">
+    <div className="container mt-2 p-4 shadow-lg">
       <div className="card">
         <div className="card-header" style={{ backgroundColor: '#007bff', color: '#fff', textAlign: 'center' }}>
           <h1 className="mb-0">Register Your Venue</h1>
@@ -99,11 +102,6 @@ const RegisterVenue = () => {
           </form>
         </div>
       </div>
-{/* <div className='ms-3 p-4' style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '20px', marginTop: "30px", borderRadius: "10px", overflow: 'hidden', border: '1px solid #e0e0e0' }}>
-      {cardData.map((user) => (
-        <VenueCard key={user._id} user={user} />
-      ))}
-    </div> */}
     </div>
   )
         }

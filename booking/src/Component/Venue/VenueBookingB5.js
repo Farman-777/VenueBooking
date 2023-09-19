@@ -158,13 +158,13 @@ const VenueBookingB5 = () => {
         show={showDateModal}
         width={"90%"}
         modalBody={<DateModal handleClose={() => setShowDateModal(false)} />}
-      ></ModalComp>
+      />
 
       <ModalComp
         show={showDateModal1}
         width={"90%"}
         modalBody={<BookVenue handleClose={() => setShowDateModal1(false)} />}
-      ></ModalComp>
+      />
     </div>
   );
 };

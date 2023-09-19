@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterCater = () => {
+  const navigate = useNavigate();
   const [CaterName, setCaterName] = useState('');
   const [CaterLocation, setCaterLocation] = useState('');
   const [CaterDescription, setCaterDescription] = useState('');
@@ -56,7 +58,7 @@ const RegisterCater = () => {
           setCaterDescription('');
           setCaterImages([]);
         }
-      })
+      }).then(() => navigate("/CaterMain"))
       .catch((error) => {
         Swal.fire({
           icon: 'error',
@@ -68,7 +70,7 @@ const RegisterCater = () => {
 
 
   return (
-    <div className="container mt-2">
+    <div className="container mt-2 p-4 shadow-lg">
       <div className="card">
         <div className="card-header" style={{ backgroundColor: '#007bff', color: '#fff', textAlign: 'center' }}>
           <h1 className="mb-0">Register Your Cater</h1>
