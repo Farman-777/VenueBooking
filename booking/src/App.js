@@ -1,22 +1,25 @@
 import React from 'react'
 import { Route,Routes } from 'react-router-dom';
-import MainComponent from './Component/MainComponent';
-import VenueBookingB5 from './Component/VenueBookingB5';
-// import FileUpload from './NewComponent/FileUpload';
-import RegisterVenue from './Component/RegisterVenue';
-import BookVenue from './Component/BookVenue';
+import Footer from './Footer';
+import MainComponent from './Component/Venue/MainComponent'
+import VenueBookingB5 from './Component/Venue/VenueBookingB5'
+import Header from './Header';
+import HomePage from './HomePage';
+
+
 
 const App = () => {
   return (
     <div className='App'>
-      {/* <FileUpload /> */}
-      {/* <RegisterVenue /> */}
+      {/* <MainComponentThree /> */}
+      <Header />
+      <HomePage />
+      <Footer />  
       <Routes>
-      <Route path="/" element={<MainComponent />} />
-      <Route path="/venueBookingB5/:id" element={<VenueBookingB5 />} />
-      <Route path="/registerVenue" element={<RegisterVenue />} />
-      <Route path="/venueBook" element={<BookVenue />} />
-      </Routes>      
+      <Route path='/main' element={<MainComponent />} />    
+      <Route path='venueBookingB5/:id' element={<VenueBookingB5 />} />
+      </Routes>   
+ 
     </div>
   )
 }

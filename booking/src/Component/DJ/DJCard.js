@@ -1,0 +1,50 @@
+import React from "react";
+
+const DJCard = ({ user }) => {
+  return (
+    <div
+      className="card"
+      style={{
+        width: "18rem",
+        boxShadow: "1px 1px 12px -5px black",
+        border: "1px solid #e0e0e0",
+      }}
+    >
+      <img
+        src={`http://localhost:8003/Images/${user.images[0]}`}
+        className="card-img-top img-fluid"
+        alt="DJ"
+        style={{
+          height: "200px",
+          objectFit: "cover",
+          borderTopLeftRadius: "10px",
+          borderTopRightRadius: "10px",
+        }}
+      />
+      <div className="card-body">
+        <h5
+          className="card-title"
+          style={{
+            fontSize: "1.25rem",
+            fontWeight: "bold",
+            marginBottom: "10px",
+            color: "#333",
+          }}
+        >
+          {user.DJName}
+        </h5>
+        <p
+          className="card-text"
+          style={{ color: "#555", marginBottom: "15px" }}
+        >
+          Location: {user.DJLocation}
+        </p>
+        <button type="button" class="btn btn-primary">
+          View More
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default DJCard;
