@@ -6,6 +6,7 @@ const ModalComponent = ({
   width,
   style,
   show,
+  marginTop,
   ...other
 }) => {
   const [modalStyle, setModalStyle] = useState({
@@ -28,7 +29,7 @@ const ModalComponent = ({
         style={{ maxWidth: width }}
         {...other}
       >
-        <div className="modal-content" style={{marginTop:"8%",background:"none",border:"none"}}>
+        <div className="modal-content" style={{marginTop:marginTop,background:"none",border:"none"}}>
           {/* <div className="modal-body">{modalBody}</div> */}
           {modalBody}
           {/* <div className="modal-footer">{modalFooter}</div> */}

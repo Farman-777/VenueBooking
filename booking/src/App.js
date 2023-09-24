@@ -19,10 +19,11 @@ import RegisterDJ from './Component/DJ/RegisterDJ'
 
 import Header from "./Header";
 import HomePage from "./HomePage";
-import Login from "./Login";
+import Login from "./SignIn";
 
 import ContactUs from "./ContactUs";
 import AboutUs from "./AboutUs";
+import Forget from "./Forget";
 
 const App = () => {
   // const [show, setShow] = useState(false);
@@ -61,7 +62,8 @@ const App = () => {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/login" element={<Login />} ></Route>
-        </Routes>
+          <Route path="/forget" element={<Forget />} ></Route>
+         </Routes>
       ) : (
         <HomePage setShow={setShow} />
       )}

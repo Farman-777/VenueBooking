@@ -68,7 +68,7 @@ server.post("/addDJData", upload.array("images", 4), async (req, res) => {
       .status(400)
       .json({ message: "DJ with the same name and place already exists" });
   }
-
+//condition && req.body avail
   let DJ = new RegisterDJ();
   DJ.DJName = req.body.DJName;
   DJ.DJLocation = req.body.DJLocation;

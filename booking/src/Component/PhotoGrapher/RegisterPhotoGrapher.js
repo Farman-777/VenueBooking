@@ -70,7 +70,11 @@ const RegisterPhotoGrapher = () => {
 
 
   return (
-    <div className="container mt-2 p-4 shadow-lg">
+    <div className="container mt-2 p-4" 
+    style={{
+      boxShadow:"rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px",
+      borderRadius:"16px"
+      }}>
       <div className="card">
         <div className="card-header" style={{ backgroundColor: '#007bff', color: '#fff', textAlign: 'center' }}>
           <h1 className="mb-0">Register Your PhotoGrapher</h1>

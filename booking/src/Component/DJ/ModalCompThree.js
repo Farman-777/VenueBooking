@@ -30,7 +30,7 @@ const ModalCompThree = ({
       >
         <div className="modal-content" style={{marginTop:"6%"}}>
           <div className="modal-body">{modalBody}</div>
-          <div className="modal-footer">{modalFooter}</div>
+          {/* <div className="modal-footer">{modalFooter}</div> */}
         </div>
       </div>
     </div>

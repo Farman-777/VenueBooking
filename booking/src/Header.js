@@ -1,11 +1,13 @@
 import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
 import ModalComponent from "./ModalComponent";
-import Login from "./Login";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
 
 const Header = ({setShow}) => {
   const [showDateModal,setShowDateModal] = useState(false)
+  const [showDateModal1,setShowDateModal1] = useState(false)
   const navigate = useNavigate()
   return (
 <>
@@ -29,7 +31,7 @@ const Header = ({setShow}) => {
             <li className="dropdown-item" onClick={()=> { setShow(true); navigate("/registerVenue") }}>Venue Registration</li>
             <li className="dropdown-item" onClick={()=> { setShow(true); navigate("/registerDJ") }}>DJ Registration </li>
             <li className="dropdown-item" onClick={()=> { setShow(true); navigate("/registerCater") }}>Cater Registration </li>
-            <li className="dropdown-item" onClick={()=> { setShow(true); navigate("/registerPhotographer") }}>Photographer Registration </li>
+            <li className="dropdown-item ms-2" onClick={()=> { setShow(true); navigate("/registerPhotographer") }}>Photographer Registration </li>
 
           </ul>
         </li>
@@ -37,16 +39,21 @@ const Header = ({setShow}) => {
         <li className="nav-link active" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/contactus") }}>Contact Us</li>
         </ul>
       <div>
-        {/* <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" /> */}
-        <button className="btn btn-success" type="submit" style={{fontFamily:"roboto"}} onClick={() => setShowDateModal(true)}>Login</button>
+       <button className="btn btn-success me-2" type="submit" style={{fontFamily:"roboto"}} onClick={() => { setShowDateModal(true) }}>SignIn</button>
+       <button className="btn btn-success" type="submit" style={{fontFamily:"roboto"}} onClick={() => { setShowDateModal1(true) }}>SignUp</button>
       </div>
     </div>
   </div>
   <ModalComponent
         show={showDateModal}
-        width={"70%"}
-        modalBody={<Login handleClose={() => setShowDateModal(false)}  />}      
-  />
+        width={"45%"}
+        marginTop={"17%"}
+        modalBody={<SignIn handleClose={() => setShowDateModal(false)}  />} />
+  <ModalComponent
+        show={showDateModal1}
+        width={"45%"}
+        marginTop={"17%"}
+        modalBody={<SignUp handleClose={() => setShowDateModal1(false)}  />} />
 </nav>
 </>
   );
