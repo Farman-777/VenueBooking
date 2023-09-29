@@ -27,7 +27,7 @@ const Forget = ({ handleClose }) => {
               text: "Check Your Email!",
             });
             // Clear the form fields
-            setUserEmail("");
+            // setUserEmail("");
             
             // Call handleClose only when all fields are non-empty
             // handleClose();
@@ -52,6 +52,7 @@ const Forget = ({ handleClose }) => {
       });
     }
   };
+  console.log("printing ",userEmail)
 
   return (
     <div>

@@ -173,14 +173,31 @@ server.post("/verifyOTP", async (req, res) => {
   return res.status(200).json({ message: "OTP is correct." });
 });
 
-server.post("/newPassword",(req,res)=>{
-const newPass = req.body.userPassword1;
-const email = req.body.email;
-console.log("email ",email)
-console.log("newPass ",newPass)
-// const userAccount = User.findOne({})
-})
 
+server.post("/newPassword", async (req, res) => {
+  try {
+    const { userPassword1, email } = req.body; // Destructure the properties directly
+    console.log("email ", email);
+    console.log("newPass ", userPassword1);
+
+    // Check if the email exists in your database
+    const userAccount = await User.findOne({ Email: email });
+    
+    // Hash the new password using bcrypt
+    const hashedPassword = await bcrypt.hash(userPassword1, 10); // You can adjust the salt rounds (e.g., 10) as needed
+
+    // Update the user's password with the hashed password
+    userAccount.Password = hashedPassword;
+
+    // Save the updated user object with the new password
+    await userAccount.save();
+
+    res.status(200).json({ message: 'Password updated successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 server.listen(Port, () => {
   console.log(`server is running on port : ${Port}`);

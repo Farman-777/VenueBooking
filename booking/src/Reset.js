@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 const Reset = ({ handleClose,handleClose1,handleClose2,passedEmail }) => {
   const [userPassword1, setUserPassword1] = useState("");
   const [userPassword2, setUserPassword2] = useState("");
-  const [showDateModal, setShowDateModal] = useState(false);
+  const [showDateModal1, setShowDateModal1] = useState(false);
 
   console.log("passedEmail ",passedEmail)
 
@@ -38,8 +38,8 @@ const Reset = ({ handleClose,handleClose1,handleClose2,passedEmail }) => {
             // Success message
             Swal.fire({
               icon: "success",
-              title: "",
-              text: "Sign In Successfully",
+              title: "Password",
+              text: "Changed Successfully",
             });
 
             // Clear the form fields
@@ -48,6 +48,8 @@ const Reset = ({ handleClose,handleClose1,handleClose2,passedEmail }) => {
 
             // Call handleClose only when all fields are non-empty
             handleClose();
+            handleClose1();
+            handleClose2();
           }
         })
         .catch((error) => {
@@ -55,7 +57,7 @@ const Reset = ({ handleClose,handleClose1,handleClose2,passedEmail }) => {
           Swal.fire({
             icon: "error",
             title: "",
-            text: "Check Password Or Password",
+            text: error.message,
           });
         });
     } else {
