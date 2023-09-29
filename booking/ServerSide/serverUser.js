@@ -123,13 +123,13 @@ server.post("/sentEmail", async (req, res) => {
         service: "Gmail",
         port: 465,
         auth: {
-          user: "farmanmalik4487@gmail.com",
-          pass: "drjayetmacoqdutn",
+          user: "tshivam057@gmail.com",
+          pass: "rsjabjzjqgdyuuhl",
         },
       });
 
       let info = await transporter.sendMail({
-        from: "farmanmalik1302@gmail.com",
+        from: "tshivam057@gmail.com",
         to: email,
         subject: "Reset Password",
         html: `

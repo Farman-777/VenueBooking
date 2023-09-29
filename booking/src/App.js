@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./Footer";
-import MainComponent from "./Component/Venue/MainComponent";
+import MainComponent from './ModalComponent'
 import VenueBookingB5 from "./Component/Venue/VenueBookingB5";
 import RegisterVenue from './Component/Venue/RegisterVenue'
 
@@ -17,13 +17,13 @@ import MainComponentThree from "./Component/DJ/MainComponentThree";
 import DJBookingB5 from './Component/DJ/DJBookingB5'
 import RegisterDJ from './Component/DJ/RegisterDJ'
 
-import Header from "./Header";
+import Header from "./Navbar/Header";
 import HomePage from "./HomePage";
-import Login from "./SignIn";
+import SignIn from "./Navbar/SignIn";
 
-import ContactUs from "./ContactUs";
-import AboutUs from "./AboutUs";
-import Forget from "./Forget";
+import ContactUs from './Navbar/ContactUs'
+import AboutUs from "./Navbar/AboutUs";
+import Forget from "./Authentication/Forget";
 
 const App = () => {
   // const [show, setShow] = useState(false);
@@ -61,7 +61,7 @@ const App = () => {
 
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/login" element={<Login />} ></Route>
+          <Route path="/signIn" element={<SignIn />} ></Route>
           <Route path="/forget" element={<Forget />} ></Route>
          </Routes>
       ) : (

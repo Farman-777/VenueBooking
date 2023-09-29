@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
-import ModalComponent from "./ModalComponent";
-import SignIn from "./SignIn";
+import ModalComponent from "../ModalComponent";
+import SignIn from './SignIn'
 import SignUp from "./SignUp";
 
 

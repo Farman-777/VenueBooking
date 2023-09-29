@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import ModalComponent from "./ModalComponent";
-import Forget from "./Forget";
+import ModalComponent from "../ModalComponent";
+import Forget from "../Authentication/Forget";
 
 const SignIn = ({ handleClose }) => {
   const [userEmail, setUserEmail] = useState("");

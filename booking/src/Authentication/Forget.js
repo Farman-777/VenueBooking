@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import OTP from "./OTP";
-import ModalComponent from "./ModalComponent";
+import ModalComponent from "../ModalComponent";
 
 const Forget = ({ handleClose }) => {
   const [showDateModal1,setShowDateModal1] = useState(false)

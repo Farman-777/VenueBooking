@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import Reset from "./Reset";
-import ModalComponent from "./ModalComponent";
+import ModalComponent from "../ModalComponent";
 
 const OTP = ({ handleClose,handleClose1 ,email}) => {
   const [userOTP, setUserOTP] = useState("");
