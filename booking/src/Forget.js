@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import OTP from "./OTP";
+import ModalComponent from "./ModalComponent";
 
 const Forget = ({ handleClose }) => {
+  const [showDateModal1,setShowDateModal1] = useState(false)
   const [userEmail, setUserEmail] = useState("");
 
   const handleSubmit = (e) => {
@@ -15,7 +18,7 @@ const Forget = ({ handleClose }) => {
     console.log(userObj); // Check if userObj is logged to the console
     if (userEmail.trim() !== "" ) {
       axios
-        .post("http://localhost:8005/forgetData", userObj)
+        .post("http://localhost:8005/sentEmail", userObj)
         .then((response) => {
           if (response.status === 200) {
             Swal.fire({
@@ -27,7 +30,8 @@ const Forget = ({ handleClose }) => {
             setUserEmail("");
             
             // Call handleClose only when all fields are non-empty
-            handleClose();
+            // handleClose();
+            setShowDateModal1(true);
           }
         })
         .catch((error) => {
@@ -84,6 +88,11 @@ const Forget = ({ handleClose }) => {
           Submit
         </button>
       </form>
+      <ModalComponent
+        show={showDateModal1}
+        width={"45%"}
+        marginTop={"17%"}
+        modalBody={<OTP handleClose={() => setShowDateModal1(false)} handleClose1={handleClose}  email={userEmail}/>} />
     </div>
   );
 };
