@@ -7,7 +7,7 @@ const Reset = ({ handleClose,handleClose1,handleClose2,passedEmail }) => {
   const [userPassword2, setUserPassword2] = useState("");
   const [showDateModal1, setShowDateModal1] = useState(false);
 
-  console.log("passedEmail ",passedEmail)
+  // console.log("passedEmail ",passedEmail)
 
   const handleSubmit = (e) => {
     e.preventDefault();

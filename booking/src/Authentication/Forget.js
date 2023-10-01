@@ -52,7 +52,7 @@ const Forget = ({ handleClose }) => {
       });
     }
   };
-  console.log("printing ",userEmail)
+  // console.log("printing ",userEmail)
 
   return (
     <div>

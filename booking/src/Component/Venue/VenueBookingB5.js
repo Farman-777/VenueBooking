@@ -5,9 +5,10 @@ import ModalComp from "./ModalComp";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const VenueBookingB5 = () => {
+
+const VenueBookingB5 = ({handleAppVenueItem}) => {
   const [showDateModal, setShowDateModal] = useState(false);
-  const [showDateModal1, setShowDateModal1] = useState(false);
+  // const [showDateModal1, setShowDateModal1] = useState(false);
   const [VenueData, setVenueData] = useState({
     images: []
   });
@@ -31,6 +32,10 @@ const VenueBookingB5 = () => {
 
     fetchData();
   }, [id]);
+
+  const handleBooking = (item) => {
+    handleAppVenueItem(item);
+  }
 
   return (
     <div className="container " style={{ marginTop: "9%" ,marginBottom: "15%"}}>
@@ -142,7 +147,7 @@ const VenueBookingB5 = () => {
           >
             Check Availability
           </button>
-          <button
+          {/* <button
             className="btn btn-success ms-4"
             style={{
               boxShadow:
@@ -151,6 +156,16 @@ const VenueBookingB5 = () => {
             onClick={() => setShowDateModal1(true)}
           >
             Book Here
+          </button> */}
+          <button
+            className="btn btn-success ms-4"
+            style={{
+              boxShadow:
+                "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.53) 0px 3px 6px",
+            }}
+            onClick={() => handleBooking(VenueData)}
+          >
+            Add To Cart
           </button>
         </div>
       </div>
@@ -160,11 +175,6 @@ const VenueBookingB5 = () => {
         modalBody={<DateModal handleClose={() => setShowDateModal(false)} />}
       />
 
-      <ModalComp
-        show={showDateModal1}
-        width={"90%"}
-        modalBody={<BookVenue handleClose={() => setShowDateModal1(false)} />}
-      />
     </div>
   );
 };

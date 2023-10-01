@@ -7,7 +7,7 @@ import ModalComponent from "../ModalComponent";
 const OTP = ({ handleClose,handleClose1 ,email}) => {
   const [userOTP, setUserOTP] = useState("");
   const [showDateModal2,setShowDateModal2] = useState(false)
-  console.log("email from forget to otp",email)
+  // console.log("email from forget to otp",email)
 
   const handleSubmit = (e) => {
     e.preventDefault();

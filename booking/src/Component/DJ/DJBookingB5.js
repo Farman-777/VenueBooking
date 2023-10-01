@@ -5,7 +5,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import DateModalThree from "./DateModalThree";
 
-const DJBookingB5 = () => {
+const DJBookingB5 = ({handleAppDJItem}) => {
   const [showDateModal, setShowDateModal] = useState(false);
   const [showDateModal1, setShowDateModal1] = useState(false);
   const [DJData, setDJData] = useState({
@@ -31,6 +31,10 @@ const DJBookingB5 = () => {
 
     fetchData();
   }, [id]);
+
+  const handleDJ = (item) => {
+    handleAppDJItem(item);
+  }
 
   return (
     <div className="container " style={{ marginTop: "5%" }}>
@@ -148,9 +152,9 @@ const DJBookingB5 = () => {
               boxShadow:
                 "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.53) 0px 3px 6px",
             }}
-            onClick={() => setShowDateModal1(true)}
+            onClick={() => handleDJ(DJData)}
           >
-            Book Here
+            Add To Cart
           </button>
         </div>
       </div>
