@@ -134,7 +134,7 @@ const VenueBookingB5 = ({handleAppVenueItem}) => {
           </p>
           <p style={{ color: "#28A745" }} className="fs-5">
             <span className="fw-bold text-dark">Price</span> :{" "}
-            <span style={{ fontWeight: "600" }}>₹100,000</span>
+            <span style={{ fontWeight: "600" }}>{VenueData.VenuePrice}</span>
           </p>
 
           <button
@@ -147,16 +147,6 @@ const VenueBookingB5 = ({handleAppVenueItem}) => {
           >
             Check Availability
           </button>
-          {/* <button
-            className="btn btn-success ms-4"
-            style={{
-              boxShadow:
-                "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.53) 0px 3px 6px",
-            }}
-            onClick={() => setShowDateModal1(true)}
-          >
-            Book Here
-          </button> */}
           <button
             className="btn btn-success ms-4"
             style={{

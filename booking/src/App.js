@@ -78,18 +78,12 @@ const App = () => {
           <Route path="/registerDJ" element={<RegisterDJ />} />
 
           <Route path="/CaterMain" element={<MainComponentTwo />} />
-          <Route path="/CaterBookingB5/:id" element={<CaterBookingB5 />} />
+          <Route path="/CaterBookingB5/:id" element={<CaterBookingB5 handleAppCaterItem={handleCartItem}/>} />
           <Route path="/registerCater" element={<RegisterCater />} />
 
           <Route path="/PhotographerMain" element={<MainComponentOne />} />
-          <Route
-            path="/PhotoGrapherBookingB5/:id"
-            element={<PhotoGrapherBookingB5 />}
-          />
-          <Route
-            path="/registerPhotoGrapher"
-            element={<RegisterPhotoGrapher />}
-          />
+          <Route path="/PhotoGrapherBookingB5/:id" element={<PhotoGrapherBookingB5 handleAppPhotoGraphItem={handleCartItem}/>} />
+          <Route path="/registerPhotoGrapher" element={<RegisterPhotoGrapher />} />
 
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/aboutus" element={<AboutUs />} />

@@ -22,6 +22,7 @@ main().catch((err) => console.log(err));
 const RegisterationSchema = new mongoose.Schema({
   VenueName: String,
   VenueLocation: String,
+  VenuePrice:Number,
   VenueDescription: String,
   images: [String], // Array to store image paths
 });
@@ -72,6 +73,7 @@ server.post("/addData", upload.array("images", 4), async (req, res) => {
   let venue = new RegisterVenue();
   venue.VenueName = req.body.venueName;
   venue.VenueLocation = req.body.venueLocation;
+  venue.VenuePrice = req.body.venuePrice;
   venue.VenueDescription = req.body.venueDescription;
   venue.images = req.files.map((file) => file.filename);
 

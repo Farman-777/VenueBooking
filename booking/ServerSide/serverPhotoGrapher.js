@@ -22,6 +22,7 @@ main().catch((err) => console.log(err));
 const RegisterationSchema = new mongoose.Schema({
   PhotoGrapherName: String,
   PhotoGrapherLocation: String,
+  PhotoGrapherPrice:Number,
   PhotoGrapherDescription: String,
   images: [String], // Array to store image paths
 });
@@ -72,6 +73,7 @@ server.post("/addPhotoData", upload.array("images", 4), async (req, res) => {
   let PhotoGrapher = new RegisterPhotoGrapher();
   PhotoGrapher.PhotoGrapherName = req.body.PhotoGrapherName;
   PhotoGrapher.PhotoGrapherLocation = req.body.PhotoGrapherLocation;
+  PhotoGrapher.PhotoGrapherPrice = req.body.PhotoGrapherPrice;
   PhotoGrapher.PhotoGrapherDescription = req.body.PhotoGrapherDescription;
   PhotoGrapher.images = req.files.map((file) => file.filename);
 

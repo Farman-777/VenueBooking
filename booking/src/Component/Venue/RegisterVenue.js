@@ -7,6 +7,7 @@ const RegisterVenue = () => {
   const navigate = useNavigate();
   const [venueName, setVenueName] = useState('');
   const [venueLocation, setVenueLocation] = useState('');
+  const [venuePrice,setVenuePrice] = useState(0)
   const [venueDescription, setVenueDescription] = useState('');
   const [venueImages, setVenueImages] = useState([]); // Use an array to store multiple images
 
@@ -27,12 +28,16 @@ const RegisterVenue = () => {
     setVenueDescription(e.target.value);
   };
 
+  const handleVenuePriceChange = (e) => {
+    setVenuePrice(e.target.value);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append('venueName', venueName);
     formData.append('venueLocation', venueLocation);
+    formData.append('venuePrice', venuePrice);
     formData.append('venueDescription', venueDescription);
 
     // Append each selected image to the formData
@@ -55,6 +60,7 @@ const RegisterVenue = () => {
           // Clear the form fields and reset the venueImages
           setVenueName('');
           setVenueLocation('');
+          setVenuePrice('');
           setVenueDescription('');
           setVenueImages([]);
         }
@@ -89,6 +95,10 @@ const RegisterVenue = () => {
             <div className="mb-3">
               <label htmlFor="venueLocation" className="form-label" style={{ fontWeight: 'bold' }}> Venue Location:</label>
               <input type="text" className="form-control" id="venueLocation" value={venueLocation} onChange={handleVenueLocationChange} required />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="VenuePrice" className="form-label" style={{ fontWeight: 'bold' }}> Venue Price:</label>
+              <input type="number" className="form-control" id="VenuePrice" value={venuePrice} onChange={handleVenuePriceChange} required />
             </div>
             <div className="mb-3">
               <label htmlFor="venueDescription" className="form-label" style={{ fontWeight: 'bold' }}>

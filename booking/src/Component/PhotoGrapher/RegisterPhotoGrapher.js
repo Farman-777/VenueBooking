@@ -7,6 +7,7 @@ const RegisterPhotoGrapher = () => {
   const navigate = useNavigate()
   const [PhotoGrapherName, setPhotoGrapherName] = useState('');
   const [PhotoGrapherLocation, setPhotoGrapherLocation] = useState('');
+  const [PhotoGrapherPrice,setPhotoGrapherPrice] = useState(0)
   const [PhotoGrapherDescription, setPhotoGrapherDescription] = useState('');
   const [PhotoGrapherImages, setPhotoGrapherImages] = useState([]); // Use an array to store multiple images
 
@@ -27,12 +28,17 @@ const RegisterPhotoGrapher = () => {
     setPhotoGrapherDescription(e.target.value);
   };
 
+  const handlePhotoGrapherPriceChange = (e) => {
+    setPhotoGrapherPrice(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append('PhotoGrapherName', PhotoGrapherName);
     formData.append('PhotoGrapherLocation', PhotoGrapherLocation);
+    formData.append('PhotoGrapherPrice', PhotoGrapherPrice);
     formData.append('PhotoGrapherDescription', PhotoGrapherDescription);
 
     // Append each selected image to the formData
@@ -41,7 +47,7 @@ const RegisterPhotoGrapher = () => {
     }
 
     axios
-      .post('http://localhost:8002/addPhotoData', formData, {
+      .post('http://localhost:8001/addPhotoData', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((response) => {
@@ -56,6 +62,7 @@ const RegisterPhotoGrapher = () => {
           setPhotoGrapherName('');
           setPhotoGrapherLocation('');
           setPhotoGrapherDescription('');
+          setPhotoGrapherPrice(0);
           setPhotoGrapherImages([]);
         }
       }).then(() => navigate("/PhotoGrapherMain"))
@@ -88,6 +95,10 @@ const RegisterPhotoGrapher = () => {
             <div className="mb-3">
               <label htmlFor="PhotoGrapherLocation" className="form-label" style={{ fontWeight: 'bold' }}> PhotoGrapher Location:</label>
               <input type="text" className="form-control" id="PhotoGrapherLocation" value={PhotoGrapherLocation} onChange={handlePhotoGrapherLocationChange} required />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="PhotoGrapherPrice" className="form-label" style={{ fontWeight: 'bold' }}> PhotoGrapher Price:</label>
+              <input type="number" className="form-control" id="PhotoGrapherPrice" value={PhotoGrapherPrice} onChange={handlePhotoGrapherPriceChange} required />
             </div>
             <div className="mb-3">
               <label htmlFor="PhotoGrapherDescription" className="form-label" style={{ fontWeight: 'bold' }}>

@@ -5,7 +5,7 @@ import ModalCompTwo from './ModalCompTwo'
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const CaterBookingB5 = () => {
+const CaterBookingB5 = ({handleAppCaterItem}) => {
   const [showDateModal, setShowDateModal] = useState(false);
   const [showDateModal1, setShowDateModal1] = useState(false);
   const [CaterData, setCaterData] = useState({
@@ -32,6 +32,10 @@ const CaterBookingB5 = () => {
 
     fetchData();
   }, [id]);
+
+  const handleCater = (item) => {
+    handleAppCaterItem(item);
+  }
 
   return (
     <div className="container " style={{ marginTop: "5%" }}>
@@ -149,9 +153,9 @@ const CaterBookingB5 = () => {
               boxShadow:
                 "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.53) 0px 3px 6px",
             }}
-            onClick={() => setShowDateModal1(true)}
+            onClick={() => handleCater(CaterData)}
           >
-            Book Here
+            Add To Cart
           </button>
         </div>
       </div>

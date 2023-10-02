@@ -5,7 +5,7 @@ import ModalCompOne from "./ModalCompOne";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const PhotoGrapherBookingB5 = () => {
+const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
   const [showDateModal, setShowDateModal] = useState(false);
   const [showDateModal1, setShowDateModal1] = useState(false);
   const [PhotoGrapherData, setPhotoGrapherData] = useState({
@@ -32,6 +32,10 @@ const PhotoGrapherBookingB5 = () => {
 
     fetchData();
   }, [id]);
+
+  const handlePhotoGraph = (item) => {
+    handleAppPhotoGraphItem(item);
+  }
 
   return (
     <div className="container " style={{ marginTop: "5%" }}>
@@ -130,7 +134,7 @@ const PhotoGrapherBookingB5 = () => {
           </p>
           <p style={{ color: "#28A745" }} className="fs-5">
             <span className="fw-bold text-dark">Price</span> :{" "}
-            <span style={{ fontWeight: "600" }}>₹100,000</span>
+            <span style={{ fontWeight: "600" }}>{PhotoGrapherData.PhotoGrapherPrice}</span>
           </p>
 
           <button
@@ -149,9 +153,9 @@ const PhotoGrapherBookingB5 = () => {
               boxShadow:
                 "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.53) 0px 3px 6px",
             }}
-            onClick={() => setShowDateModal1(true)}
+            onClick={() => handlePhotoGraph(PhotoGrapherData)}
           >
-            Book Here
+            Add To Cart
           </button>
         </div>
       </div>
@@ -160,12 +164,13 @@ const PhotoGrapherBookingB5 = () => {
         width={"90%"}
         modalBody={<DateModalPhotographer handleClose={() => setShowDateModal(false)} />}
       ></ModalCompOne>
-
+{/* 
       <ModalCompOne
         show={showDateModal1}
         width={"90%"}
         modalBody={<BookPhotographer handleClose={() => setShowDateModal1(false)} />}
-      ></ModalCompOne>
+      ></ModalCompOne> 
+      */}
     </div>
   );
 };

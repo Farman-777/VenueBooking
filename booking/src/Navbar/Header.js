@@ -29,9 +29,9 @@ const Header = ({setShow}) => {
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
             <li className="dropdown-item" onClick={()=> { setShow(true); navigate("/registerVenue") }}>Venue Registration</li>
-            <li className="dropdown-item" onClick={()=> { setShow(true); navigate("/registerDJ") }}>DJ Registration </li>
-            <li className="dropdown-item" onClick={()=> { setShow(true); navigate("/registerCater") }}>Cater Registration </li>
-            <li className="dropdown-item ms-2" onClick={()=> { setShow(true); navigate("/registerPhotographer") }}>Photographer Registration </li>
+            <li className="dropdown-item" onClick={()=> { setShow(true); navigate("/registerDJ") }}>DJ Registration</li>
+            <li className="dropdown-item" onClick={()=> { setShow(true); navigate("/registerCater") }}>Cater Registration</li>
+            <li className="dropdown-item" onClick={()=> { setShow(true); navigate("/registerPhotographer") }}>Photographer Registration</li>
 
           </ul>
         </li>
