@@ -134,7 +134,7 @@ const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
           </p>
           <p style={{ color: "#28A745" }} className="fs-5">
             <span className="fw-bold text-dark">Price</span> :{" "}
-            <span style={{ fontWeight: "600" }}>{PhotoGrapherData.PhotoGrapherPrice}</span>
+            <span style={{ fontWeight: "600" }}>₹{PhotoGrapherData.PhotoGrapherPrice}</span>
           </p>
 
           <button

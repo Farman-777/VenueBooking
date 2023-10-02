@@ -7,6 +7,7 @@ const RegisterDJ = () => {
   const navigate = useNavigate()
   const [DJName, setDJName] = useState('');
   const [DJLocation, setDJLocation] = useState('');
+  const [DJPrice,setDJPrice] = useState(0)
   const [DJDescription, setDJDescription] = useState('');
   const [DJImages, setDJImages] = useState([]); // Use an array to store multiple images
 
@@ -27,12 +28,17 @@ const RegisterDJ = () => {
     setDJDescription(e.target.value);
   };
 
+  const handleDJPriceChange = (e) => {
+    setDJPrice(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append('DJName', DJName);
     formData.append('DJLocation', DJLocation);
+    formData.append('DJPrice', DJPrice);
     formData.append('DJDescription', DJDescription);
 
     // Append each selected image to the formData
@@ -55,6 +61,7 @@ const RegisterDJ = () => {
           // Clear the form fields and reset the DJImages
           setDJName('');
           setDJLocation('');
+          setDJPrice(null);
           setDJDescription('');
           setDJImages([]);
         }
@@ -88,6 +95,10 @@ const RegisterDJ = () => {
             <div className="mb-3">
               <label htmlFor="DJLocation" className="form-label" style={{ fontWeight: 'bold' }}> DJ Location:</label>
               <input type="text" className="form-control" id="DJLocation" value={DJLocation} onChange={handleDJLocationChange} required />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="DJPrice" className="form-label" style={{ fontWeight: 'bold' }}> DJ Price:</label>
+              <input type="number" className="form-control" id="DJPrice" value={DJPrice} onChange={handleDJPriceChange} required />
             </div>
             <div className="mb-3">
               <label htmlFor="DJDescription" className="form-label" style={{ fontWeight: 'bold' }}>

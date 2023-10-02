@@ -8,13 +8,14 @@ import BookCater from "./Component/Cater/BookCater";
 import BookDJ from "./Component/DJ/BookDJ";
 import BookVenue from "./Component/Venue/BookVenue";
 
-const CartItem = ({ name, price }) => {
+const CartItem = ({ name, price,imageUrl,imageName }) => {
   const [showDateModal1, setShowDateModal1] = useState(false);
   return (
     <>
       <div className="cart-parent">
         <img
-          src="https://images.shaadisaga.com/shaadisaga_production/photos/pictures/001/019/064/new_medium/taj_palace_delhi.JPG?1565096201"
+          // src={`${imageUrl}images-1696241564801.jpg`}
+          src={`${imageUrl}${imageName}`}
           alt=""
         />
         <div className="item-details">

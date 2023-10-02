@@ -30,10 +30,14 @@ import Cart from "./Cart";
 const App = () => {
   // const [show, setShow] = useState(false);
   // Initialize show state with the value from localStorage or default to false
-  const [show, setShow] = useState(
-    localStorage.getItem("show") === "true" || false
-  );
+  const [show, setShow] = useState(localStorage.getItem("show") === "true" || false);
   const [cartData, setCartData] = useState([]);
+  const [appUrl,setAppUrl] = useState([
+    `http://localhost:8002/Images/`,
+  `http://localhost:8003/images/`,
+  `http://localhost:8001/Images/`,
+  `http://localhost:8000/images/`
+]);
 
   // useEffect to update localStorage when show changes
   useEffect(() => {
@@ -42,20 +46,16 @@ const App = () => {
 
   const handleCartItem = (item) => {
     console.log("venue item in app: ", item);
+    // setAppUrl(url)
 
-    // Check if cartData is null or undefined, and initialize it as an empty array if it is
     if (!cartData) {
       setCartData([]);
     }
 
-    // Check if an object with a similar property exists in cartData
     if (!cartData.some((cartItem) => cartItem._id === item._id)) {
-      // If not present, add it to cartData
       const updatedCartData = [...cartData, item];
       setCartData(updatedCartData);
-      console.log(`cardata id : ${cartData._id} and item id : ${item._id}`);
     } else {
-      // If already present, you can handle it as desired, e.g., show a message
       alert("Object with a similar property is already in the cart.");
     }
     console.log("cartData : ", cartData);
@@ -64,7 +64,7 @@ const App = () => {
   return (
     <div className="App">
       <Header setShow={setShow} />
-      {cartData.length > 0 && <Cart cartData={cartData} setCartData={setCartData} />}
+      {cartData.length > 0 && <Cart cartData={cartData} setCartData={setCartData} imageUrl = {appUrl}/>}
 
       {show ? (
         <Routes>

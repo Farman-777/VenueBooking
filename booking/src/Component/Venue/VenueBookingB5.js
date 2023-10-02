@@ -134,7 +134,7 @@ const VenueBookingB5 = ({handleAppVenueItem}) => {
           </p>
           <p style={{ color: "#28A745" }} className="fs-5">
             <span className="fw-bold text-dark">Price</span> :{" "}
-            <span style={{ fontWeight: "600" }}>{VenueData.VenuePrice}</span>
+            <span style={{ fontWeight: "600" }}>₹{VenueData.VenuePrice}</span>
           </p>
 
           <button

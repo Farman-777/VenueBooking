@@ -22,6 +22,7 @@ main().catch((err) => console.log(err));
 const RegisterationSchema = new mongoose.Schema({
   DJName: String,
   DJLocation: String,
+  DJPrice: Number,
   DJDescription: String,
   images: [String], // Array to store image paths
 });
@@ -72,6 +73,7 @@ server.post("/addDJData", upload.array("images", 4), async (req, res) => {
   let DJ = new RegisterDJ();
   DJ.DJName = req.body.DJName;
   DJ.DJLocation = req.body.DJLocation;
+  DJ.DJPrice = req.body.DJPrice;
   DJ.DJDescription = req.body.DJDescription;
   DJ.images = req.files.map((file) => file.filename);
 

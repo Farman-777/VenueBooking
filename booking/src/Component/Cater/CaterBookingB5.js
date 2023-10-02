@@ -11,6 +11,7 @@ const CaterBookingB5 = ({handleAppCaterItem}) => {
   const [CaterData, setCaterData] = useState({
     images: []
   });
+  // const [imageUrl,setImageUrl] = useState('');
   const { id } = useParams();
   // window.alert(id)
 
@@ -22,6 +23,8 @@ const CaterBookingB5 = ({handleAppCaterItem}) => {
             `http://localhost:8002/getCaterData/${id}`
           );
           setCaterData(response.data);
+          // const imgUrl = `http://localhost:8002/Images/`;
+          // setImageUrl(imgUrl);
           console.log(response.data)
 
         }
@@ -34,6 +37,7 @@ const CaterBookingB5 = ({handleAppCaterItem}) => {
   }, [id]);
 
   const handleCater = (item) => {
+    
     handleAppCaterItem(item);
   }
 
@@ -134,7 +138,7 @@ const CaterBookingB5 = ({handleAppCaterItem}) => {
           </p>
           <p style={{ color: "#28A745" }} className="fs-5">
             <span className="fw-bold text-dark">Price</span> :{" "}
-            <span style={{ fontWeight: "600" }}>₹100,000</span>
+            <span style={{ fontWeight: "600" }}>₹{CaterData.CaterPrice}</span>
           </p>
 
           <button

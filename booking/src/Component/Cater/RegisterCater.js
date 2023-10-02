@@ -7,11 +7,11 @@ const RegisterCater = () => {
   const navigate = useNavigate();
   const [CaterName, setCaterName] = useState('');
   const [CaterLocation, setCaterLocation] = useState('');
+  const [CaterPrice, setCaterPrice] = useState(0);
   const [CaterDescription, setCaterDescription] = useState('');
   const [CaterImages, setCaterImages] = useState([]); // Use an array to store multiple images
 
   const handleImageChange = (e) => {
-    // Use 'multiple' attribute to allow multiple file selection
     setCaterImages(e.target.files);
   };
 
@@ -27,12 +27,17 @@ const RegisterCater = () => {
     setCaterDescription(e.target.value);
   };
 
+  const handleCaterPriceChange = (e) => {
+    setCaterPrice(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append('CaterName', CaterName);
     formData.append('CaterLocation', CaterLocation);
+    formData.append('CaterPrice', CaterPrice);
     formData.append('CaterDescription', CaterDescription);
 
     // Append each selected image to the formData
@@ -55,6 +60,7 @@ const RegisterCater = () => {
           // Clear the form fields and reset the CaterImages
           setCaterName('');
           setCaterLocation('');
+          setCaterPrice(0);
           setCaterDescription('');
           setCaterImages([]);
         }
@@ -88,6 +94,10 @@ const RegisterCater = () => {
             <div className="mb-3">
               <label htmlFor="CaterLocation" className="form-label" style={{ fontWeight: 'bold' }}> Cater Location:</label>
               <input type="text" className="form-control" id="CaterLocation" value={CaterLocation} onChange={handleCaterLocationChange} required />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="DJPrice" className="form-label" style={{ fontWeight: 'bold' }}> Cater Price:</label>
+              <input type="number" className="form-control" id="DJPrice" value={CaterPrice} onChange={handleCaterPriceChange} required />
             </div>
             <div className="mb-3">
               <label htmlFor="CaterDescription" className="form-label" style={{ fontWeight: 'bold' }}>

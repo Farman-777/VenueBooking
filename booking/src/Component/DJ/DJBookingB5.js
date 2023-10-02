@@ -133,7 +133,7 @@ const DJBookingB5 = ({handleAppDJItem}) => {
           </p>
           <p style={{ color: "#28A745" }} className="fs-5">
             <span className="fw-bold text-dark">Price</span> :{" "}
-            <span style={{ fontWeight: "600" }}>₹100,000</span>
+            <span style={{ fontWeight: "600" }}>₹{DJData.DJPrice}</span>
           </p>
 
           <button
