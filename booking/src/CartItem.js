@@ -10,11 +10,13 @@ import BookVenue from "./Component/Venue/BookVenue";
 
 const CartItem = ({ name, price,imageUrl,imageName }) => {
   const [showDateModal1, setShowDateModal1] = useState(false);
+  console.log(`${imageUrl}${imageName}`)
   return (
     <>
       <div className="cart-parent">
         <img
           // src={`${imageUrl}images-1696241564801.jpg`}
+          // src={`http://localhost:8003/images/images-1696240867624.jpg`}
           src={`${imageUrl}${imageName}`}
           alt=""
         />

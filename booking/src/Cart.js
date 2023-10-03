@@ -4,10 +4,10 @@ import CartItem from "./CartItem";
 
 const Cart = ({ cartData, setCartData }) => {
   const [appUrl, setAppUrl] = useState([
+    "http://localhost:8000/images/",
+    "http://localhost:8001/Images/",
     "http://localhost:8002/Images/",
     "http://localhost:8003/images/",
-    "http://localhost:8001/Images/",
-    "http://localhost:8000/images/"
   ]);
 
   console.log("newCartData  : ", cartData);
@@ -24,11 +24,12 @@ const Cart = ({ cartData, setCartData }) => {
 
   const total = prices.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
   console.log("price : ", prices);
+  console.log("Cart second key : ",Object.keys(cartData)[2]);
 
   return (
     <div>
-      {cartData?.map((item, index) => {
-        if (item.CaterName !== null && item.CaterName !== '') {
+      {cartData.length > 0 && cartData.map((item, index) => {
+        if (Object.keys(item)[2] === 'VenueName') {
           return (
             <CartItem
               key={index}
@@ -38,17 +39,7 @@ const Cart = ({ cartData, setCartData }) => {
               imageName={item.images[1]}
             />
           );
-        } else if (item.VenueName !== null && item.VenueName !== '') {
-          return (
-            <CartItem
-              key={index}
-              name={names[index]}
-              price={prices[index]}
-              imageUrl={appUrl[3]}
-              imageName={item.images[1]}
-            />
-          );
-        } else if (item.DJName !== null && item.DJName !== '') {
+        } else if (Object.keys(item)[2] === 'PhotographerName') {
           return (
             <CartItem
               key={index}
@@ -58,7 +49,8 @@ const Cart = ({ cartData, setCartData }) => {
               imageName={item.images[1]}
             />
           );
-        } else if (item.PhotoGrapherName !== null && item.PhotoGrapherName !== '') {
+        }
+        else if (Object.keys(item)[2] === 'CaterName') {
           return (
             <CartItem
               key={index}
@@ -68,7 +60,17 @@ const Cart = ({ cartData, setCartData }) => {
               imageName={item.images[1]}
             />
           );
-        }
+        } else if (Object.keys(item)[2] === 'DJName') {
+          return (
+            <CartItem
+              key={index}
+              name={names[index]}
+              price={prices[index]}
+              imageUrl={appUrl[3]}
+              imageName={item.images[1]}
+            />
+          );
+        } 
         return null; // Handle other cases or return null if none match
       })}
       <div className="total">
@@ -84,10 +86,10 @@ const Cart = ({ cartData, setCartData }) => {
 export default Cart;
 
 /*
-cater:8002 appUrl: 0,
-venue:8000 appUrl: 3,
-Photographer:8001 appUrl: 2,
-DJ:8003 appUrl: 1,
+venue:8000 appUrl: 0,
+Photographer:8001 appUrl: 1,
+cater:8002 appUrl: 2,
+DJ:8003 appUrl: 3,
  */
 
 

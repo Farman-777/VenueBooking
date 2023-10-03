@@ -32,12 +32,6 @@ const App = () => {
   // Initialize show state with the value from localStorage or default to false
   const [show, setShow] = useState(localStorage.getItem("show") === "true" || false);
   const [cartData, setCartData] = useState([]);
-  const [appUrl,setAppUrl] = useState([
-    `http://localhost:8002/Images/`,
-  `http://localhost:8003/images/`,
-  `http://localhost:8001/Images/`,
-  `http://localhost:8000/images/`
-]);
 
   // useEffect to update localStorage when show changes
   useEffect(() => {
@@ -64,13 +58,13 @@ const App = () => {
   return (
     <div className="App">
       <Header setShow={setShow} />
-      {cartData.length > 0 && <Cart cartData={cartData} setCartData={setCartData} imageUrl = {appUrl}/>}
+      {cartData.length > 0 && <Cart cartData={cartData} setCartData={setCartData} />}
 
       {show ? (
         <Routes>
           <Route path="/VenueMain" element={<MainComponent />} />
           <Route
-            path="/venueBookingB5/:id" element={<VenueBookingB5 handleAppVenueItem={handleCartItem} />}/>
+           path="/venueBookingB5/:id" element={<VenueBookingB5 handleAppVenueItem={handleCartItem} />}/>
           <Route path="/registerVenue" element={<RegisterVenue />} />
 
           <Route path="/DJMain" element={<MainComponentThree />} />
