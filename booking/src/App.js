@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./Footer";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 import MainComponent from "./Component/Venue/MainComponent";
 import VenueBookingB5 from "./Component/Venue/VenueBookingB5";
@@ -21,50 +23,87 @@ import RegisterDJ from "./Component/DJ/RegisterDJ";
 import Header from "./Navbar/Header";
 import HomePage from "./HomePage";
 import SignIn from "./Navbar/SignIn";
-
 import ContactUs from "./Navbar/ContactUs";
 import AboutUs from "./Navbar/AboutUs";
 import Forget from "./Authentication/Forget";
-import Cart from "./Cart";
+import CartNew from "./CartNew";
 
 const App = () => {
-  // const [show, setShow] = useState(false);
-  // Initialize show state with the value from localStorage or default to false
   const [show, setShow] = useState(localStorage.getItem("show") === "true" || false);
   const [cartData, setCartData] = useState([]);
 
-  // useEffect to update localStorage when show changes
   useEffect(() => {
     localStorage.setItem("show", show);
   }, [show]);
 
   const handleCartItem = (item) => {
-    console.log("venue item in app: ", item);
-    // setAppUrl(url)
+    const obj = {
+      CartKey:item.VenueName ? "VenueName" : item.DJName ? "DJName" : item.CaterName ? "CaterName" : item.PhotoGrapherName ? "PhotoGrapherName" : "",
+      title: item.VenueName ? item.VenueName : item.DJName ? item.DJName : item.CaterName ? item.CaterName : item.PhotoGrapherName ? item.PhotoGrapherName : "",
+      price: item.VenuePrice ? item.VenuePrice : item.DJPrice ? item.DJPrice : item.CaterPrice ? item.CaterPrice : item.PhotoGrapherPrice ? item.PhotoGrapherPrice : "",
+      image: [item.VenueName ? item.images[0] : item.DJName ? item.images[0] : item.CaterName ? item.images[0] : item.PhotoGrapherName ? item.images[0] : ""]
+    };
+    console.log("cart Item in App: ", obj);
 
     if (!cartData) {
       setCartData([]);
     }
 
     if (!cartData.some((cartItem) => cartItem._id === item._id)) {
+      axios
+        .post('http://localhost:8006/addCart', obj, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Cart Item Added',
+              text: 'Successfully!',
+            });
+          }
+          getData();
+        })
+        .catch((error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error.message,
+          });
+        });
+
       const updatedCartData = [...cartData, item];
       setCartData(updatedCartData);
     } else {
-      alert("Object with a similar property is already in the cart.");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Already added',
+        text: "Object with a similar property is already in the cart.",
+      });
+      console.log("cartData : ", cartData);
     }
-    console.log("cartData : ", cartData);
   };
+
+  const getData = () => {
+    axios.get("http://localhost:8006/getCart")
+      .then(result => setCartData(result.data))
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div className="App">
+      {cartData.length > 0 && (
+        <CartNew cartData={cartData} />
+      )}
       <Header setShow={setShow} />
-      {cartData.length > 0 && <Cart cartData={cartData} setCartData={setCartData} />}
 
       {show ? (
         <Routes>
           <Route path="/VenueMain" element={<MainComponent />} />
-          <Route
-           path="/venueBookingB5/:id" element={<VenueBookingB5 handleAppVenueItem={handleCartItem} />}/>
+          <Route path="/venueBookingB5/:id" element={<VenueBookingB5 handleAppVenueItem={handleCartItem} />} />
           <Route path="/registerVenue" element={<RegisterVenue />} />
 
           <Route path="/DJMain" element={<MainComponentThree />} />
@@ -72,17 +111,17 @@ const App = () => {
           <Route path="/registerDJ" element={<RegisterDJ />} />
 
           <Route path="/CaterMain" element={<MainComponentTwo />} />
-          <Route path="/CaterBookingB5/:id" element={<CaterBookingB5 handleAppCaterItem={handleCartItem}/>} />
+          <Route path="/CaterBookingB5/:id" element={<CaterBookingB5 handleAppCaterItem={handleCartItem} />} />
           <Route path="/registerCater" element={<RegisterCater />} />
 
           <Route path="/PhotographerMain" element={<MainComponentOne />} />
-          <Route path="/PhotoGrapherBookingB5/:id" element={<PhotoGrapherBookingB5 handleAppPhotoGraphItem={handleCartItem}/>} />
+          <Route path="/PhotoGrapherBookingB5/:id" element={<PhotoGrapherBookingB5 handleAppPhotoGraphItem={handleCartItem} />} />
           <Route path="/registerPhotoGrapher" element={<RegisterPhotoGrapher />} />
 
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/signIn" element={<SignIn />}></Route>
-          <Route path="/forget" element={<Forget />}></Route>
+          <Route path="/signIn" element={<SignIn />} />
+          <Route path="/forget" element={<Forget />} />
         </Routes>
       ) : (
         <HomePage setShow={setShow} />
@@ -94,8 +133,3 @@ const App = () => {
 };
 
 export default App;
-
-/*
-  Local:            http://localhost:3000        
-  On Your Network:  http://192.168.144.1:3000   
-*/

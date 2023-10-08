@@ -1,0 +1,256 @@
+*****************************************************************************
+venueData
+*****************************************************************************
+[
+    {
+        "VenueName": "Central Plaza",
+        "VenueLocation": "Connaught Place, New Delhi",
+        "VenuePrice": 80000,
+        "VenueDescription": "Central Plaza is a versatile event space located in the heart of Connaught Place. It offers a blend of modern amenities and a historic backdrop, making it a popular choice for conferences, art exhibitions, and cultural events."
+    },
+    {
+        "VenueName": "Royal Gardens",
+        "VenueLocation": "South Extension, New Delhi",
+        "VenuePrice": 90000,
+        "VenueDescription": "Royal Gardens is a stunning outdoor venue in South Extension, perfect for weddings and large gatherings. It boasts beautiful landscaping and an elegant ambiance."
+    },
+    {
+        "VenueName": "Heritage Hall",
+        "VenueLocation": "Hauz Khas, New Delhi",
+        "VenuePrice": 60000,
+        "VenueDescription": "Heritage Hall, located in Hauz Khas, is an intimate venue suitable for small gatherings, meetings, and workshops. Its historic charm adds to its appeal."
+    },
+    {
+        "VenueName": "Skyline Ballroom",
+        "VenueLocation": "Nehru Place, New Delhi",
+        "VenuePrice": 100000,
+        "VenueDescription": "Skyline Ballroom, situated in Nehru Place, offers panoramic city views. It's a great choice for upscale events and corporate gatherings."
+    },
+    {
+        "VenueName": "The Grand Pavilion",
+        "VenueLocation": "Vasant Kunj, New Delhi",
+        "VenuePrice": 120000,
+        "VenueDescription": "The Grand Pavilion is a luxurious event space in Vasant Kunj, ideal for grand weddings and high-end corporate events. It radiates elegance and opulence."
+    },
+    {
+        "VenueName": "Riverside Retreat",
+        "VenueLocation": "Mayur Vihar, New Delhi",
+        "VenuePrice": 65000,
+        "VenueDescription": "Riverside Retreat is a serene venue along the Yamuna River in Mayur Vihar. It's perfect for outdoor events, picnics, and team-building activities."
+    },
+    {
+        "VenueName": "The Royal Palace",
+        "VenueLocation": "Chanakyapuri, New Delhi",
+        "VenuePrice": 150000,
+        "VenueDescription": "The Royal Palace, nestled in Chanakyapuri, is a regal venue fit for extravagant weddings and high-profile corporate functions. It exudes grandeur and sophistication."
+    },
+    {
+        "VenueName": "Green Oasis",
+        "VenueLocation": "Rohini, New Delhi",
+        "VenuePrice": 55000,
+        "VenueDescription": "Green Oasis is a lush outdoor space in Rohini, offering a natural setting for events, picnics, and family gatherings."
+    },
+    {
+        "VenueName": "Artistic Gallery",
+        "VenueLocation": "Saket, New Delhi",
+        "VenuePrice": 70000,
+        "VenueDescription": "Artistic Gallery in Saket is a contemporary space suitable for art exhibitions, product launches, and creative events. It has a modern design."
+    },
+    {
+        "VenueName": "Lakeside Haven",
+        "VenueLocation": "Dwarka, New Delhi",
+        "VenuePrice": 85000,
+        "VenueDescription": "Lakeside Haven in Dwarka offers a tranquil setting with views of a serene lake. It's an excellent choice for outdoor weddings, receptions, and corporate retreats."
+    }
+]
+
+*********************************************************************************
+[
+    {
+        "DJName": "GrooveMaster DJ Services",
+        "DJLocation": "Connaught Place, New Delhi",
+        "DJPrice": 5000,
+        "DJDescription": "GrooveMaster DJ Services is your go-to choice for electrifying music and entertainment in Connaught Place. We specialize in DJ services for parties, weddings, and corporate events."
+    },
+    {
+        "DJName": "SpinCity DJs",
+        "DJLocation": "South Extension, New Delhi",
+        "DJPrice": 6000,
+        "DJDescription": "SpinCity DJs based in South Extension are experts in creating memorable musical experiences. Whether it's a wedding, birthday, or club event, we've got the beats you need."
+    },
+    {
+        "DJName": "BeatFusion DJs",
+        "DJLocation": "Hauz Khas, New Delhi",
+        "DJPrice": 5500,
+        "DJDescription": "BeatFusion DJs in Hauz Khas are known for their diverse music selection and mixing skills. We bring the rhythm to your events, from small gatherings to big parties."
+    },
+    {
+        "DJName": "SoundWave DJs",
+        "DJLocation": "Nehru Place, New Delhi",
+        "DJPrice": 7000,
+        "DJDescription": "SoundWave DJs at Nehru Place are masters of sound and light. We transform your events into high-energy dance parties with top-notch DJ services and equipment."
+    },
+    {
+        "DJName": "PartyPulse DJs",
+        "DJLocation": "Vasant Kunj, New Delhi",
+        "DJPrice": 7500,
+        "DJDescription": "PartyPulse DJs in Vasant Kunj keep the dance floor alive. We specialize in DJing for weddings, birthdays, and corporate events, delivering non-stop beats."
+    },
+    {
+        "DJName": "BassDrop DJs",
+        "DJLocation": "Mayur Vihar, New Delhi",
+        "DJPrice": 6000,
+        "DJDescription": "BassDrop DJs at Mayur Vihar are all about the bass. We create electrifying DJ experiences for outdoor events, pool parties, and more."
+    },
+    {
+        "DJName": "MixMasters DJ Crew",
+        "DJLocation": "Chanakyapuri, New Delhi",
+        "DJPrice": 8000,
+        "DJDescription": "MixMasters DJ Crew in Chanakyapuri is your source for top-tier DJing and entertainment. We rock weddings, corporate functions, and nightclubs."
+    },
+    {
+        "DJName": "Eclectic Beats DJs",
+        "DJLocation": "Rohini, New Delhi",
+        "DJPrice": 5500,
+        "DJDescription": "Eclectic Beats DJs in Rohini blend music genres to create unique experiences. We set the vibe for events of all sizes, from intimate gatherings to grand parties."
+    },
+    {
+        "DJName": "Funky Grooves DJ Services",
+        "DJLocation": "Saket, New Delhi",
+        "DJPrice": 7000,
+        "DJDescription": "Funky Grooves DJ Services in Saket bring the funk and soul to your events. We specialize in DJing for art exhibitions, product launches, and creative gatherings."
+    },
+    {
+        "DJName": "Lakeside Rhythms DJs",
+        "DJLocation": "Dwarka, New Delhi",
+        "DJPrice": 6500,
+        "DJDescription": "Lakeside Rhythms DJs in Dwarka create the perfect musical backdrop for your outdoor events, weddings, and corporate retreats. Dance by the serene lakeside."
+    }
+]
+********************************************************************************
+[
+    {
+        "CaterName": "Delightful Eats Cater",
+        "CaterLocation": "Connaught Place, New Delhi",
+        "CaterPrice": 6000,
+        "CaterDescription": "Delightful Eats Cater is your culinary partner in Connaught Place. We offer a wide range of delectable dishes and Cater services for weddings, parties, and corporate events."
+    },
+    {
+        "CaterName": "Taste of India Caters",
+        "CaterLocation": "South Extension, New Delhi",
+        "CaterPrice": 6500,
+        "CaterDescription": "Taste of India Caters based in South Extension bring the flavors of India to your events. From traditional cuisine to fusion delights, we cater to your every taste."
+    },
+    {
+        "CaterName": "Spice Fusion Cater",
+        "CaterLocation": "Hauz Khas, New Delhi",
+        "CaterPrice": 7000,
+        "CaterDescription": "Spice Fusion Cater in Hauz Khas specializes in blending spices and creating unforgettable culinary experiences. We cater for weddings, birthdays, and special occasions."
+    },
+    {
+        "CaterName": "Gourmet Delights Cater",
+        "CaterLocation": "Nehru Place, New Delhi",
+        "CaterPrice": 8000,
+        "CaterDescription": "Gourmet Delights Cater at Nehru Place offers a gourmet touch to your events. We serve up fine cuisine for weddings, corporate functions, and parties."
+    },
+    {
+        "CaterName": "Flavorsome Feasts Cater",
+        "CaterLocation": "Vasant Kunj, New Delhi",
+        "CaterPrice": 7500,
+        "CaterDescription": "Flavorsome Feasts Cater in Vasant Kunj ensures your guests savor every bite. We provide Cater services for weddings, birthdays, and special events."
+    },
+    {
+        "CaterName": "Saffron Spice Cater",
+        "CaterLocation": "Mayur Vihar, New Delhi",
+        "CaterPrice": 6500,
+        "CaterDescription": "Saffron Spice Cater at Mayur Vihar adds a touch of saffron to your events. We cater for outdoor gatherings, corporate functions, and celebrations."
+    },
+    {
+        "CaterName": "Royal Banquets Cater",
+        "CaterLocation": "Chanakyapuri, New Delhi",
+        "CaterPrice": 8500,
+        "CaterDescription": "Royal Banquets Cater in Chanakyapuri offers regal Cater services for weddings, upscale parties, and corporate galas. Experience the royal treatment."
+    },
+    {
+        "CaterName": "Green Cuisine Caters",
+        "CaterLocation": "Rohini, New Delhi",
+        "CaterPrice": 5500,
+        "CaterDescription": "Green Cuisine Caters in Rohini prioritize fresh and sustainable ingredients. We cater for intimate gatherings, outdoor events, and more."
+    },
+    {
+        "CaterName": "Artistic Flavors Cater",
+        "CaterLocation": "Saket, New Delhi",
+        "CaterPrice": 7000,
+        "CaterDescription": "Artistic Flavors Cater in Saket brings an artistic touch to your culinary experience. We cater for art exhibitions, product launches, and creative gatherings."
+    },
+    {
+        "CaterName": "Lakeside Bites Cater",
+        "CaterLocation": "Dwarka, New Delhi",
+        "CaterPrice": 6000,
+        "CaterDescription": "Lakeside Bites Cater in Dwarka complements your outdoor events with delicious bites. We cater for weddings, receptions, and corporate retreats."
+    }
+]
+************************************************************************************
+[
+    {
+        "PhotoGrapherName": "SnapMaster PhotoGraphers",
+        "PhotoGrapherLocation": "Connaught Place, New Delhi",
+        "PhotoGrapherPrice": 7500,
+        "PhotoGrapherDescription": "SnapMaster PhotoGraphers in Connaught Place capture your moments with expertise. We specialize in photography services for weddings, events, and portraits."
+    },
+    {
+        "PhotoGrapherName": "PixelPerfect PhotoGraphers",
+        "PhotoGrapherLocation": "South Extension, New Delhi",
+        "PhotoGrapherPrice": 8000,
+        "PhotoGrapherDescription": "PixelPerfect PhotoGraphers based in South Extension create visual perfection. Our photography services cover weddings, fashion shoots, and special occasions."
+    },
+    {
+        "PhotoGrapherName": "FrameFusion PhotoGrapher",
+        "PhotoGrapherLocation": "Hauz Khas, New Delhi",
+        "PhotoGrapherPrice": 7000,
+        "PhotoGrapherDescription": "FrameFusion PhotoGrapher in Hauz Khas blend creativity and technique. We offer photography services for weddings, parties, and artistic projects."
+    },
+    {
+        "PhotoGrapherName": "LensCrafters Photography",
+        "PhotoGrapherLocation": "Nehru Place, New Delhi",
+        "PhotoGrapherPrice": 8500,
+        "PhotoGrapherDescription": "LensCrafters PhotoGraphy at Nehru Place focuses on precision and artistry. We specialize in photography for weddings, corporate events, and portraits."
+    },
+    {
+        "PhotoGrapherName": "DreamClicks PhotoGraphers",
+        "PhotoGrapherLocation": "Vasant Kunj, New Delhi",
+        "PhotoGrapherPrice": 9000,
+        "PhotoGrapherDescription": "DreamClicks PhotoGraphers in Vasant Kunj turn dreams into images. Our photography services cover weddings, fashion, and lifestyle photography."
+    },
+    {
+        "PhotoGrapherName": "FramedExpressions Photography",
+        "PhotoGrapherLocation": "Mayur Vihar, New Delhi",
+        "PhotoGrapherPrice": 6500,
+        "PhotoGrapherDescription": "FramedExpressions Photography at Mayur Vihar captures expressions in every frame. We provide photography services for events, portraits, and family gatherings."
+    },
+    {
+        "PhotoGrapherName": "CreativeShots PhotoGraphers",
+        "PhotoGrapherLocation": "Chanakyapuri, New Delhi",
+        "PhotoGrapherPrice": 9500,
+        "PhotoGrapherDescription": "CreativeShots PhotoGraphers in Chanakyapuri create artistic and creative shots. Our photography services include weddings, fashion, and corporate events."
+    },
+    {
+        "PhotoGrapherName": "ColorSplash Photography",
+        "PhotoGrapherLocation": "Rohini, New Delhi",
+        "PhotoGrapherPrice": 7200,
+        "PhotoGrapherDescription": "ColorSplash Photography in Rohini adds a burst of color to your memories. We specialize in photography for weddings, outdoor events, and family portraits."
+    },
+    {
+        "PhotoGrapherName": "ArtisticFrames Photography",
+        "PhotoGrapherLocation": "Saket, New Delhi",
+        "PhotoGrapherPrice": 7800,
+        "PhotoGrapherDescription": "ArtisticFrames Photography in Saket brings an artistic touch to every frame. Our services cover weddings, creative projects, and product photography."
+    },
+    {
+        "PhotoGrapherName": "LakesideLens PhotoGraphers",
+        "PhotoGrapherLocation": "Dwarka, New Delhi",
+        "PhotoGrapherPrice": 6900,
+        "PhotoGrapherDescription": "LakesideLens PhotoGraphers in Dwarka capture the beauty of lakeside moments. We provide photography services for weddings, nature photography, and outdoor events."
+    }
+]
+

@@ -71,7 +71,7 @@ const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
             <div className="carousel-inner">
               <div className="carousel-item active">
                 <img
-                  src={`http://localhost:8001/Images/${PhotoGrapherData?.images[3]}`}
+                  src={`http://localhost:8001/Images/${PhotoGrapherData?.images[0]}`}
                   className="d-block w-100"
                   alt="PhotoGrapher Image 1"
                 />

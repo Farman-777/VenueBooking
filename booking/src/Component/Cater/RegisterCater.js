@@ -11,25 +11,11 @@ const RegisterCater = () => {
   const [CaterDescription, setCaterDescription] = useState('');
   const [CaterImages, setCaterImages] = useState([]); // Use an array to store multiple images
 
-  const handleImageChange = (e) => {
-    setCaterImages(e.target.files);
-  };
-
-  const handleCaterNameChange = (e) => {
-    setCaterName(e.target.value);
-  };
-
-  const handleCaterLocationChange = (e) => {
-    setCaterLocation(e.target.value);
-  };
-
-  const handleCaterDescriptionChange = (e) => {
-    setCaterDescription(e.target.value);
-  };
-
-  const handleCaterPriceChange = (e) => {
-    setCaterPrice(e.target.value);
-  };
+  const handleImageChange = (e) => {setCaterImages(e.target.files);};
+  const handleCaterNameChange = (e) => {setCaterName(e.target.value);};
+  const handleCaterLocationChange = (e) => {setCaterLocation(e.target.value);};
+  const handleCaterDescriptionChange = (e) => {setCaterDescription(e.target.value);};
+  const handleCaterPriceChange = (e) => {setCaterPrice(e.target.value);};
 
   const handleSubmit = async (e) => {
     e.preventDefault();

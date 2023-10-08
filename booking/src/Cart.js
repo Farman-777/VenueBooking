@@ -3,6 +3,7 @@ import "./Cart.css";
 import CartItem from "./CartItem";
 
 const Cart = ({ cartData, setCartData }) => {
+
   const [appUrl, setAppUrl] = useState([
     "http://localhost:8000/images/",
     "http://localhost:8001/Images/",
@@ -15,16 +16,16 @@ const Cart = ({ cartData, setCartData }) => {
   const names = cartData.map(item => {
     const key = Object.keys(item)[2];
     return item[key];
-  });
+  }); console.log("names : ",names)
 
   const prices = cartData.map(item => {
     const key = Object.keys(item)[4];
     return item[key];
-  });
+  }); console.log("prices : ",prices)
 
   const total = prices.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
   console.log("price : ", prices);
-  console.log("Cart second key : ",Object.keys(cartData)[2]);
+
 
   return (
     <div>
@@ -37,9 +38,10 @@ const Cart = ({ cartData, setCartData }) => {
               price={prices[index]}
               imageUrl={appUrl[0]}
               imageName={item.images[1]}
+              bookNameKey='VenueName'
             />
           );
-        } else if (Object.keys(item)[2] === 'PhotographerName') {
+        } else if (Object.keys(item)[2] === 'PhotoGrapherName') {
           return (
             <CartItem
               key={index}
@@ -47,6 +49,7 @@ const Cart = ({ cartData, setCartData }) => {
               price={prices[index]}
               imageUrl={appUrl[1]}
               imageName={item.images[1]}
+              bookNameKey='PhotoGrapherName'
             />
           );
         }
@@ -58,6 +61,7 @@ const Cart = ({ cartData, setCartData }) => {
               price={prices[index]}
               imageUrl={appUrl[2]}
               imageName={item.images[1]}
+              bookNameKey='CaterName'
             />
           );
         } else if (Object.keys(item)[2] === 'DJName') {
@@ -68,6 +72,7 @@ const Cart = ({ cartData, setCartData }) => {
               price={prices[index]}
               imageUrl={appUrl[3]}
               imageName={item.images[1]}
+              bookNameKey='DJName'
             />
           );
         } 

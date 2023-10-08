@@ -1,22 +1,57 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
+
 import ModalCompOne from "./Component/PhotoGrapher/ModalCompOne";
 import ModalCompTwo from "./Component/Cater/ModalCompTwo";
 import ModalCompThree from "./Component/DJ/ModalCompThree";
 import ModalComp from "./Component/Venue/ModalComp";
+
 import BookPhotographer from "./Component/PhotoGrapher/BookPhotographer";
 import BookCater from "./Component/Cater/BookCater";
 import BookDJ from "./Component/DJ/BookDJ";
 import BookVenue from "./Component/Venue/BookVenue";
 
-const CartItem = ({ name, price,imageUrl,imageName }) => {
-  const [showDateModal1, setShowDateModal1] = useState(false);
-  console.log(`${imageUrl}${imageName}`)
+import ModalComponent from "./ModalComponent";
+
+const CartItem = ({ name, price, imageUrl, imageName, id }) => {
+  console.log("id : ",id)
+  console.log("name : ", name);
+  console.log(`${imageUrl}${imageName}`);
+
+  const handleClick = () => {
+    console.log("itemNew");
+  };
+const obj = {
+  id:id
+}
+
+console.log(obj.id);
+
+  const handleDelete = (id) => {
+    axios.post("http://localhost:8006/deleteCart",obj)
+      .then((response) => {
+        if (response.status === 200) {
+          Swal.fire({
+            icon: "success",
+            title: "Cart Item Deleted",
+            text: "Successfully!",
+          });
+        }
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: error.message,
+        });
+      });
+  };
+
   return (
     <>
       <div className="cart-parent">
         <img
-          // src={`${imageUrl}images-1696241564801.jpg`}
-          // src={`http://localhost:8003/images/images-1696240867624.jpg`}
           src={`${imageUrl}${imageName}`}
           alt=""
         />
@@ -26,7 +61,7 @@ const CartItem = ({ name, price,imageUrl,imageName }) => {
             <p>Price: {price}</p>
           </div>
           <div className="item-actions">
-            <h6 className="border border-2 border-success mt-2 p-1 ">
+            <h6 className="border border-2 border-success mt-2 p-1">
               01-02-23
             </h6>
           </div>
@@ -34,22 +69,22 @@ const CartItem = ({ name, price,imageUrl,imageName }) => {
         <button
           type="date"
           className="btn btn-success"
-          onClick={() => setShowDateModal1(true)}
+          onClick={() => {
+            console.log("hi : ", name);
+            handleClick();
+          }}
         >
           Select Date
         </button>
-        <button className="btn btn-danger">Remove</button>
+        <button
+          className="btn btn-danger"
+          onClick={() => handleDelete(id)}
+        >
+          Remove
+        </button>
       </div>
-      <ModalCompOne
-        show={showDateModal1}
-        width={"90%"}
-        modalBody={
-          <BookPhotographer handleClose={() => setShowDateModal1(false)} />
-        }
-      />
     </>
   );
 };
 
 export default CartItem;
-
