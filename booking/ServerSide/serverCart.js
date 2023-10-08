@@ -44,11 +44,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 server.post("/addCart", upload.array("image", 1), async (req, res) => {
+  console.log("req.body : ",req.body)
   // Collect image filenames from uploaded files
   const imageFilename = req.body.image[0];
 
   // Check if an item with the same CartKey already exists
-  const existingCartItem = await Cart.findOne({ CartKey: req.body.CartKey });
+  const existingCartItem = await Cart.findOne({ CartTitle: req.body.title });
 
   if (existingCartItem) {
     // If an item with the same CartKey exists, respond with an error message
@@ -75,6 +76,7 @@ server.post("/addCart", upload.array("image", 1), async (req, res) => {
 });
 
 
+
 server.get("/getCart",async (req,res) => {
   const cartData1 = await Cart.find({});
   res.status(200).json(cartData1);
@@ -82,18 +84,15 @@ server.get("/getCart",async (req,res) => {
 
 server.post("/deleteCart", async (req, res) => {
   try {
-    const { id } = req.body; // Access the id directly from req.body
-    console.warn(id);
-    const deletedCart = await Cart.findByIdAndDelete(id);
+    const { CartKey1 } = req.body; // Access the id directly from req.body
+    console.warn("CartKey1 : ",CartKey1);
+    const deletedCart = await Cart.findByIdAndDelete(CartKey1);
     console.warn("line 81 : ", deletedCart);
 
-    if (deletedCart !== undefined) {
+    if (deletedCart !== undefined && deletedCart !== null) {
       // Item successfully deleted
       res.status(200).json({ message: "Cart item deleted successfully" });
-    } else {
-      // Item not found
-      res.status(404).json({ message: "Cart item not found" });
-    }
+    } 
   } catch (error) {
     // Handle any errors that occur during the deletion
     console.error("Error deleting cart item:", error);

@@ -14,47 +14,34 @@ import BookVenue from "./Component/Venue/BookVenue";
 
 import ModalComponent from "./ModalComponent";
 
-const CartItem = ({ name, price, imageUrl, imageName, id }) => {
-  console.log("id : ",id)
+const CartItem = ({ name, price, imageUrl, imageName, id,getData }) => {
+  console.log("id : ", id);
   console.log("name : ", name);
   console.log(`${imageUrl}${imageName}`);
 
   const handleClick = () => {
     console.log("itemNew");
   };
-const obj = {
-  id:id
-}
+  const obj = { CartKey1: id };
 
-console.log(obj.id);
+  console.log(obj.CartKey1);
 
-  const handleDelete = (id) => {
-    axios.post("http://localhost:8006/deleteCart",obj)
-      .then((response) => {
-        if (response.status === 200) {
-          Swal.fire({
-            icon: "success",
-            title: "Cart Item Deleted",
-            text: "Successfully!",
-          });
-        }
-      })
-      .catch((error) => {
+  const handleDelete = () => {
+    axios.post("http://localhost:8006/deleteCart", obj).then((response) => {
+      if (response.status === 200) {
         Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: error.message,
+          icon: "success",
+          title: "Cart Item Deleted",
+          text: "Successfully!",
         });
-      });
+        getData();
+      }
+    });
   };
-
   return (
     <>
       <div className="cart-parent">
-        <img
-          src={`${imageUrl}${imageName}`}
-          alt=""
-        />
+        <img src={`${imageUrl}${imageName}`} alt="" />
         <div className="item-details">
           <div className="item-info">
             <span>{name}</span>
@@ -76,10 +63,7 @@ console.log(obj.id);
         >
           Select Date
         </button>
-        <button
-          className="btn btn-danger"
-          onClick={() => handleDelete(id)}
-        >
+        <button className="btn btn-danger" onClick={() => handleDelete()}>
           Remove
         </button>
       </div>

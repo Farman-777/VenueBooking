@@ -37,6 +37,7 @@ const App = () => {
   }, [show]);
 
   const handleCartItem = (item) => {
+    console.log("Cart recieved : ",item)
     const obj = {
       CartKey:item.VenueName ? "VenueName" : item.DJName ? "DJName" : item.CaterName ? "CaterName" : item.PhotoGrapherName ? "PhotoGrapherName" : "",
       title: item.VenueName ? item.VenueName : item.DJName ? item.DJName : item.CaterName ? item.CaterName : item.PhotoGrapherName ? item.PhotoGrapherName : "",
@@ -48,8 +49,6 @@ const App = () => {
     if (!cartData) {
       setCartData([]);
     }
-
-    if (!cartData.some((cartItem) => cartItem._id === item._id)) {
       axios
         .post('http://localhost:8006/addCart', obj, {
           headers: { 'Content-Type': 'multipart/form-data' },
@@ -66,23 +65,13 @@ const App = () => {
         })
         .catch((error) => {
           Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: error.message,
+            icon: "warning",
+            title: "Item Already Added",
+            text: "This item is already in your cart.",
           });
         });
-
-      const updatedCartData = [...cartData, item];
-      setCartData(updatedCartData);
-    } else {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Already added',
-        text: "Object with a similar property is already in the cart.",
-      });
-      console.log("cartData : ", cartData);
+      // console.log("cartData : ", cartData);
     }
-  };
 
   const getData = () => {
     axios.get("http://localhost:8006/getCart")
@@ -96,7 +85,7 @@ const App = () => {
   return (
     <div className="App">
       {cartData.length > 0 && (
-        <CartNew cartData={cartData} />
+        <CartNew cartData={cartData} getData={getData}/>
       )}
       <Header setShow={setShow} />
 

@@ -8,7 +8,7 @@ Photographer:8001 appUrl: 1,
 cater:8002 appUrl: 2,
 DJ:8003 appUrl: 3,
  */
-const CartNew = ({cartData}) => {
+const CartNew = ({cartData,getData}) => {
     
   const [appUrl, setAppUrl] = useState([
     "http://localhost:8000/images/",
@@ -31,6 +31,7 @@ const CartNew = ({cartData}) => {
   {cartData.map((item, index) => (
     <li key={index} style={{listStyle:"none"}}>
       <CartItem
+        getData={getData}
         name={item.CartTitle}
         price={item.CartPrice}
         // description={item.VenueDescription || item.DJDescription || item.CaterDescription || item.PhotoGrapherDescription}
