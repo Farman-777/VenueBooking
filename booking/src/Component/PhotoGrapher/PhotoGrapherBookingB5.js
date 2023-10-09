@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DateModalPhotographer from "./DateModalPhotographer";
-import BookPhotographer from "./BookPhotographer";
-import ModalCompOne from "./ModalCompOne";
+// import BookPhotographer from "./BookPhotographer";
+import ModalComp from "../../ModalComp";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
@@ -159,17 +159,17 @@ const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
           </button>
         </div>
       </div>
-      <ModalCompOne
+      <ModalComp
         show={showDateModal}
         width={"90%"}
         modalBody={<DateModalPhotographer handleClose={() => setShowDateModal(false)} />}
-      ></ModalCompOne>
+      ></ModalComp>
 {/* 
-      <ModalCompOne
+      <ModalComp
         show={showDateModal1}
         width={"90%"}
         modalBody={<BookPhotographer handleClose={() => setShowDateModal1(false)} />}
-      ></ModalCompOne> 
+      ></ModalComp> 
       */}
     </div>
   );

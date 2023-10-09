@@ -2,22 +2,26 @@ import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-import ModalCompOne from "./Component/PhotoGrapher/ModalCompOne";
-import ModalCompTwo from "./Component/Cater/ModalCompTwo";
-import ModalCompThree from "./Component/DJ/ModalCompThree";
-import ModalComp from "./Component/Venue/ModalComp";
+// import ModalCompOne from "./Component/PhotoGrapher/ModalCompOne";
+// import ModalCompTwo from "./Component/Cater/ModalCompTwo";
+// import ModalCompThree from "./Component/DJ/ModalCompThree";
+import ModalComp from "./ModalComp";
 
-import BookPhotographer from "./Component/PhotoGrapher/BookPhotographer";
+import BookPhotographer from './Component/PhotoGrapher/BookPhotographer'
 import BookCater from "./Component/Cater/BookCater";
 import BookDJ from "./Component/DJ/BookDJ";
 import BookVenue from "./Component/Venue/BookVenue";
 
-import ModalComponent from "./ModalComponent";
+// import ModalComponent from "./ModalComponent";
 
-const CartItem = ({ name, price, imageUrl, imageName, id,getData }) => {
+const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName}) => {
+  const [showModal,setShowModal] = useState(false);
   console.log("id : ", id);
   console.log("name : ", name);
   console.log(`${imageUrl}${imageName}`);
+
+  console.log("keyName : ",keyName);
+  const comp =  ["BookVenue","BookCater","BookDJ","BookPhotographer"];
 
   const handleClick = () => {
     console.log("itemNew");
@@ -38,6 +42,7 @@ const CartItem = ({ name, price, imageUrl, imageName, id,getData }) => {
       }
     });
   };
+  const temp = [BookVenue];
   return (
     <>
       <div className="cart-parent">
@@ -59,6 +64,7 @@ const CartItem = ({ name, price, imageUrl, imageName, id,getData }) => {
           onClick={() => {
             console.log("hi : ", name);
             handleClick();
+            setShowModal(true);
           }}
         >
           Select Date
@@ -67,6 +73,17 @@ const CartItem = ({ name, price, imageUrl, imageName, id,getData }) => {
           Remove
         </button>
       </div>
+      <ModalComp
+        show={showModal}
+        width={"90%"}
+        modalBody={
+        (keyName === "DJName") ? <BookDJ handleClose={() => setShowModal(false)} /> :
+        (keyName === "CaterName") ? <BookCater handleClose={() => setShowModal(false)} /> :
+        (keyName === "PhotoGrapherName") ? <BookPhotographer handleClose={() => setShowModal(false)} /> :
+        (keyName === "VenueName") ? <BookVenue handleClose={() => setShowModal(false)} /> :
+        null
+    }
+      />
     </>
   );
 };

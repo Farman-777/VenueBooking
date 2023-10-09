@@ -69,7 +69,7 @@ const BookCater = ({ handleClose }) => {
                 textAlign: "center",
               }}
             >
-              <h1 >Book a Venue</h1>
+              <h1 >Book a Cater</h1>
             </div>
             <div className="card-body">
               <form onSubmit={handleSubmit}>
@@ -95,7 +95,7 @@ const BookCater = ({ handleClose }) => {
                   className="btn btn-primary"
                   style={{ backgroundColor: "#007bff", border: "none" }}
                 >
-                  Book Venue
+                  Book Cater
                 </button>
               </form>
             </div>

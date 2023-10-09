@@ -9,15 +9,14 @@ cater:8002 appUrl: 2,
 DJ:8003 appUrl: 3,
  */
 const CartNew = ({cartData,getData}) => {
-    
   const [appUrl, setAppUrl] = useState([
     "http://localhost:8000/images/",
     "http://localhost:8001/Images/",
     "http://localhost:8002/Images/",
     "http://localhost:8003/images/",
   ]);
-
-
+  console.log("keyName Object : ",cartData[0]);
+  console.log("keyName Object output : ",cartData[0].CartKey);
   // Extract item names and prices correctly
   const prices = cartData.map(item => item.CartPrice);
 
@@ -34,7 +33,6 @@ const CartNew = ({cartData,getData}) => {
         getData={getData}
         name={item.CartTitle}
         price={item.CartPrice}
-        // description={item.VenueDescription || item.DJDescription || item.CaterDescription || item.PhotoGrapherDescription}
         imageUrl={
           item.CartKey === "VenueName" ? appUrl[0] :
           item.CartKey === "PhotoGrapherName" ? appUrl[1] :
@@ -50,6 +48,7 @@ const CartNew = ({cartData,getData}) => {
           ""
         }
         id={item._id}
+        keyName={item.CartKey}
       />
     </li>
   ))}

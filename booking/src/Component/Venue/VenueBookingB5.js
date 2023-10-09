@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DateModal from "./DateModal";
 import BookVenue from "./BookVenue";
-import ModalComp from "./ModalComp";
+import ModalComp from "../../ModalComp";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 

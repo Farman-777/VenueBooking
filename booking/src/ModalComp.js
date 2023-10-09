@@ -8,6 +8,7 @@ const ModalComp = ({
   show,
   ...other
 }) => {
+  // console.log(modalBody)
   const [modalStyle, setModalStyle] = useState({
     display: show ? "block" : "none",
     backgroundColor: "rgba(0, 0, 0, 0.7)",

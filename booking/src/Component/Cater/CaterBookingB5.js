@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DateModalCater from "./DateModalCater";
 import BookCater from "./BookCater";
-import ModalCompTwo from './ModalCompTwo'
+import ModalComp from "../../ModalComp";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
@@ -163,17 +163,17 @@ const CaterBookingB5 = ({handleAppCaterItem}) => {
           </button>
         </div>
       </div>
-      <ModalCompTwo
+      <ModalComp
         show={showDateModal}
         width={"90%"}
         modalBody={<DateModalCater handleClose={() => setShowDateModal(false)} />}
-      ></ModalCompTwo>
+      ></ModalComp>
 
-      <ModalCompTwo
+      <ModalComp
         show={showDateModal1}
         width={"90%"}
         modalBody={<BookCater handleClose={() => setShowDateModal1(false)} />}
-      ></ModalCompTwo>
+      ></ModalComp>
     </div>
   );
 };

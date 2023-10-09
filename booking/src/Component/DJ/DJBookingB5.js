@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import BookDJ from "./BookDJ";
-import ModalCompThree from "./ModalCompThree";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import DateModalThree from "./DateModalThree";
+import ModalComp from "../../ModalComp";
 
 const DJBookingB5 = ({handleAppDJItem}) => {
   const [showDateModal, setShowDateModal] = useState(false);
@@ -158,17 +158,17 @@ const DJBookingB5 = ({handleAppDJItem}) => {
           </button>
         </div>
       </div>
-      <ModalCompThree
+      <ModalComp
         show={showDateModal}
         width={"90%"}
         modalBody={<DateModalThree handleClose={() => setShowDateModal(false)} />}
-      ></ModalCompThree>
+      ></ModalComp>
 
-      <ModalCompThree
+      <ModalComp
         show={showDateModal1}
         width={"90%"}
         modalBody={<BookDJ handleClose={() => setShowDateModal1(false)} />}
-      ></ModalCompThree>
+      ></ModalComp>
     </div>
   );
 };
