@@ -3,9 +3,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const BookVenue = ({ handleClose }) => {
-  const {id} = useParams()
-  console.log(id)
+const BookVenue = ({ handleClose,CartId }) => {
+  console.log("ID in bookVenue using useParams : ",CartId)
   const [bookingDate, setBookingDate] = useState("");
   const handleBookingDateChange = (e) => {
     setBookingDate(e.target.value);
@@ -29,7 +28,7 @@ const BookVenue = ({ handleClose }) => {
     const formattedDateStr = `${day}-${month}-${year}`;
 
     const bookingData = {
-      Id:id,
+      Id:CartId,
       Date: formattedDateStr,
       Status: "Booked",
     };
@@ -58,8 +57,9 @@ const BookVenue = ({ handleClose }) => {
       });
       console.error(error);
     }
-    const respon = await axios.get(`http://localhost:8000/getRecord/${id}`);
-    console.log(respon)
+    // const response = await axios.get(`http://localhost:8000/getVenueRecord/${CartId}`);
+    const response = await axios.get(`http://localhost:8000/getVenueRecord?id=${CartId}`);
+    console.log(response)
 };
       
 

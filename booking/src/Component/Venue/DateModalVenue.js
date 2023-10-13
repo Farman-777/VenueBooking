@@ -1,23 +1,25 @@
 
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const DateModal = ({ handleClose }) => {
-  const { id } = useParams();
+
+const DateModalVenue = ({ handleClose,id }) => {
+  console.log("Venue id for date_table data : ",id)
   const [filter, setFilter] = useState("");
   const [tableData, setTableData] = useState([]);
-  
+
+  const getTableRecord = () => {
+    axios.get(`http://localhost:8000/getVenueRecord/${id}`).then((response) => {
+      console.log(response.data);
+      setTableData(response.data);
+    });
+  };
 
   useEffect(() => {
-    const getTableRecord = () => {
-      axios.get(`http://localhost:8000/getRecord/${id}`).then((response) => {
-        console.log(response.data);
-        setTableData(response.data);
-      });
-    };
     getTableRecord();
   }, [id]);
+  
+
   console.log("tableData ",tableData);
   // Function to handle filter change
   const handleFilterChange = (e) => {
@@ -93,4 +95,4 @@ const DateModal = ({ handleClose }) => {
   );
 };
 
-export default DateModal;
+export default DateModalVenue;

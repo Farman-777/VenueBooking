@@ -20,10 +20,11 @@ main().catch((err) => console.log(err));
 
 // MongoDB schema and model for registration
 const UserSchema = new mongoose.Schema({
-  CartTitle: String, // Change to match the title property
-  CartPrice: Number, // Change to match the price property
-  CartKey: String,  // Add cartKey property
-  image: [String],   // Change to store an array of image filenames
+  CartId:String,
+  CartTitle: String, 
+  CartPrice: Number,
+  CartKey: String,  
+  image: [String],   
 });
 
 const Cart = mongoose.model("Cart", UserSchema);
@@ -58,6 +59,7 @@ server.post("/addCart", upload.array("image", 1), async (req, res) => {
 
   // Create a new Cart instance
   const cartData = new Cart({
+    CartId:req.body.CartId,
     CartTitle: req.body.title, // using the title property from the request body
     CartPrice: req.body.price, // using the price property from the request body
     CartKey: req.body.CartKey, // using the cartKey property from the request body

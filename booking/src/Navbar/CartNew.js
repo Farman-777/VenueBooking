@@ -30,6 +30,7 @@ const CartNew = ({cartData,getData}) => {
   {cartData.map((item, index) => (
     <li key={index} style={{listStyle:"none"}}>
       <CartItem
+        CartId={item.CartId}
         getData={getData}
         name={item.CartTitle}
         price={item.CartPrice}

@@ -14,7 +14,7 @@ import BookVenue from "../Component/Venue/BookVenue";
 
 // import ModalComponent from "./ModalComponent";
 
-const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName}) => {
+const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartId}) => {
   const [showModal,setShowModal] = useState(false);
   console.log("id : ", id);
   console.log("name : ", name);
@@ -77,10 +77,10 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName}) => 
         show={showModal}
         width={"90%"}
         modalBody={
-        (keyName === "DJName") ? <BookDJ handleClose={() => setShowModal(false)} /> :
-        (keyName === "CaterName") ? <BookCater handleClose={() => setShowModal(false)} /> :
-        (keyName === "PhotoGrapherName") ? <BookPhotographer handleClose={() => setShowModal(false)} /> :
-        (keyName === "VenueName") ? <BookVenue handleClose={() => setShowModal(false)} /> :
+        (keyName === "DJName") ? <BookDJ handleClose={() => setShowModal(false)} CartId={CartId}/> :
+        (keyName === "CaterName") ? <BookCater handleClose={() => setShowModal(false)} CartId={CartId}/> :
+        (keyName === "PhotoGrapherName") ? <BookPhotographer handleClose={() => setShowModal(false)} CartId={CartId}/> :
+        (keyName === "VenueName") ? <BookVenue handleClose={() => setShowModal(false)} CartId={CartId}/> :
         null
     }
       />

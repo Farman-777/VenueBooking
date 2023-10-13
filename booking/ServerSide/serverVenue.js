@@ -122,7 +122,11 @@ server.post("/venueRecords", async (req, res) => {
     }
 
     // Create a new booking
-    const venueTableData = new BookVenuesRecord({ Id, Date, Status });
+    const venueTableData = new BookVenuesRecord();
+    venueTableData.Id = Id;
+    venueTableData.Date = Date;
+    venueTableData.Status = Status;
+
     const doc = await venueTableData.save();
     console.log(doc);
 
@@ -133,9 +137,10 @@ server.post("/venueRecords", async (req, res) => {
   }
 });
 
-server.get("/getRecord/:id", async (req, res) => {
+server.get("/getVenueRecord/:id", async (req, res) => {
   try {
     const id = req.params.id.toString();
+    console.log("id in serverVenue ",id);
     const tableRecord = await BookVenuesRecord.find({Id:id});
     res.json(tableRecord);
   } catch (error) {

@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import DateModal from "./DateModal";
-import BookVenue from "./BookVenue";
+import DateModalVenue from './DateModalVenue'
 import ModalComp from "../../ModalComp";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 
 
 const VenueBookingB5 = ({handleAppVenueItem}) => {
+  const navigate = useNavigate();
+  const { id } = useParams();
   const [showDateModal, setShowDateModal] = useState(false);
-  // const [showDateModal1, setShowDateModal1] = useState(false);
   const [VenueData, setVenueData] = useState({
     images: []
   });
-  const { id } = useParams();
   // window.alert(id)
 
   useEffect(() => {
@@ -143,7 +142,9 @@ const VenueBookingB5 = ({handleAppVenueItem}) => {
               boxShadow:
                 "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.53) 0px 3px 6px",
             }}
-            onClick={() => setShowDateModal(true)}
+            onClick={() => {
+              setShowDateModal(true)
+            }}
           >
             Check Availability
           </button>
@@ -162,7 +163,7 @@ const VenueBookingB5 = ({handleAppVenueItem}) => {
       <ModalComp
         show={showDateModal}
         width={"90%"}
-        modalBody={<DateModal handleClose={() => setShowDateModal(false)} />}
+        modalBody={<DateModalVenue handleClose={() => setShowDateModal(false)} id={id}/>}
       />
 
     </div>

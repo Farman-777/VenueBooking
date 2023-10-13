@@ -39,6 +39,7 @@ const App = () => {
   const handleCartItem = (item) => {
     console.log("Cart recieved : ",item)
     const obj = {
+      CartId:item._id,
       CartKey:item.VenueName ? "VenueName" : item.DJName ? "DJName" : item.CaterName ? "CaterName" : item.PhotoGrapherName ? "PhotoGrapherName" : "",
       title: item.VenueName ? item.VenueName : item.DJName ? item.DJName : item.CaterName ? item.CaterName : item.PhotoGrapherName ? item.PhotoGrapherName : "",
       price: item.VenuePrice ? item.VenuePrice : item.DJPrice ? item.DJPrice : item.CaterPrice ? item.CaterPrice : item.PhotoGrapherPrice ? item.PhotoGrapherPrice : "",
@@ -93,6 +94,8 @@ const App = () => {
           <Route path="/VenueMain" element={<MainComponent />} />
           <Route path="/venueBookingB5/:id" element={<VenueBookingB5 handleAppVenueItem={handleCartItem} />} />
           <Route path="/registerVenue" element={<RegisterVenue />} />
+
+
 
           <Route path="/DJMain" element={<MainComponentThree />} />
           <Route path="/DJBookingB5/:id" element={<DJBookingB5 handleAppDJItem={handleCartItem} />} />
