@@ -5,6 +5,7 @@ import axios from "axios";
 
 const DateModalThree = ({ handleClose }) => {
   const { id } = useParams();
+  console.log("DJ_ID : ",id);
   const [filter, setFilter] = useState("");
   const [tableData, setTableData] = useState([]);
   

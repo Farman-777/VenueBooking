@@ -5,12 +5,12 @@ import Swal from "sweetalert2";
 // import ModalCompOne from "./Component/PhotoGrapher/ModalCompOne";
 // import ModalCompTwo from "./Component/Cater/ModalCompTwo";
 // import ModalCompThree from "./Component/DJ/ModalCompThree";
-import ModalComp from "./ModalComp";
+import ModalComp from "../ModalComp";
 
-import BookPhotographer from './Component/PhotoGrapher/BookPhotographer'
-import BookCater from "./Component/Cater/BookCater";
-import BookDJ from "./Component/DJ/BookDJ";
-import BookVenue from "./Component/Venue/BookVenue";
+import BookPhotographer from '../Component/PhotoGrapher/BookPhotographer'
+import BookCater from "../Component/Cater/BookCater";
+import BookDJ from "../Component/DJ/BookDJ";
+import BookVenue from "../Component/Venue/BookVenue";
 
 // import ModalComponent from "./ModalComponent";
 

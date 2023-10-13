@@ -26,7 +26,7 @@ import SignIn from "./Navbar/SignIn";
 import ContactUs from "./Navbar/ContactUs";
 import AboutUs from "./Navbar/AboutUs";
 import Forget from "./Authentication/Forget";
-import CartNew from "./CartNew";
+import CartNew from "./Navbar/CartNew";
 
 const App = () => {
   const [show, setShow] = useState(localStorage.getItem("show") === "true" || false);
@@ -84,13 +84,12 @@ const App = () => {
 
   return (
     <div className="App">
-      {cartData.length > 0 && (
-        <CartNew cartData={cartData} getData={getData}/>
-      )}
-      <Header setShow={setShow} />
+      {cartData.length ? <Header setShow={setShow} cartLength={cartData.length}/> : <Header setShow={setShow} cartLength={0}/>}
 
       {show ? (
         <Routes>
+          <Route path="/" element={<HomePage/>} />
+
           <Route path="/VenueMain" element={<MainComponent />} />
           <Route path="/venueBookingB5/:id" element={<VenueBookingB5 handleAppVenueItem={handleCartItem} />} />
           <Route path="/registerVenue" element={<RegisterVenue />} />
@@ -109,9 +108,9 @@ const App = () => {
 
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/signIn" element={<SignIn />} />
-          <Route path="/forget" element={<Forget />} />
-        </Routes>
+          <Route path="/cartnew" element={cartData.length > 0 ? <CartNew cartData={cartData} getData={getData} /> : null} />
+
+          </Routes>
       ) : (
         <HomePage setShow={setShow} />
       )}
