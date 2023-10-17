@@ -166,14 +166,14 @@ const CaterBookingB5 = ({handleAppCaterItem}) => {
       <ModalComp
         show={showDateModal}
         width={"90%"}
-        modalBody={<DateModalCater handleClose={() => setShowDateModal(false)} />}
+        modalBody={<DateModalCater handleClose={() => setShowDateModal(false)} id={id} />}
       ></ModalComp>
 
-      <ModalComp
+      {/* <ModalComp
         show={showDateModal1}
         width={"90%"}
         modalBody={<BookCater handleClose={() => setShowDateModal1(false)} />}
-      ></ModalComp>
+      ></ModalComp> */}
     </div>
   );
 };

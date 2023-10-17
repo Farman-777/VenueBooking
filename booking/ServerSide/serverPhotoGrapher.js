@@ -123,7 +123,10 @@ server.post("/bookingPhotographer", async (req, res) => {
     }
 
     // Create a new booking
-    const PhotoGrapherTableData = new BookPhotoGraphersRecord({ Id, Date, Status });
+    const PhotoGrapherTableData = new BookPhotoGraphersRecord();
+    PhotoGrapherTableData.Id = Id;
+    PhotoGrapherTableData.Date = Date;
+    PhotoGrapherTableData.Status = Status;
     const doc = await PhotoGrapherTableData.save();
     console.log(doc);
 
@@ -137,6 +140,7 @@ server.post("/bookingPhotographer", async (req, res) => {
 server.get("/getPhotoRecord/:id", async (req, res) => {
   try {
     const id = req.params.id.toString();
+    console.log("PHotographer id ",id);
     const tableRecord = await BookPhotoGraphersRecord.find({Id:id});
     res.json(tableRecord);
   } catch (error) {

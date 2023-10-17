@@ -162,7 +162,7 @@ const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
       <ModalComp
         show={showDateModal}
         width={"90%"}
-        modalBody={<DateModalPhotographer handleClose={() => setShowDateModal(false)} />}
+        modalBody={<DateModalPhotographer handleClose={() => setShowDateModal(false)} id={id}/>}
       ></ModalComp>
 {/* 
       <ModalComp

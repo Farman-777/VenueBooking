@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const DateModalPhotographer = ({ handleClose }) => {
-  const { id } = useParams();
+const DateModalPhotographer = ({ handleClose,id }) => {
+  // const { id } = useParams();
   const [filter, setFilter] = useState("");
   const [tableData, setTableData] = useState([]);
   

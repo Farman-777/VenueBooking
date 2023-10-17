@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const DateModalCater = ({ handleClose }) => {
-  const { id } = useParams();
+const DateModalCater = ({ handleClose,id }) => {
+  // const { id } = useParams();
+  console.log(id)
   const [filter, setFilter] = useState("");
   const [tableData, setTableData] = useState([]);
   

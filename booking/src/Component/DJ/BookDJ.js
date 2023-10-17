@@ -3,9 +3,9 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const BookDJ = ({ handleClose }) => {
-  const {id} = useParams()
-  console.log(id)
+const BookDJ = ({ handleClose,CartId }) => {
+  // const {id} = useParams()
+  console.log(CartId)
   const [bookingDate, setBookingDate] = useState("");
   const handleBookingDateChange = (e) => {
     setBookingDate(e.target.value);
@@ -29,7 +29,7 @@ const BookDJ = ({ handleClose }) => {
     const formattedDateStr = `${day}-${month}-${year}`;
 
     const bookingData = {
-      Id:id,
+      Id:CartId,
       Date: formattedDateStr,
       Status: "Booked",
     };

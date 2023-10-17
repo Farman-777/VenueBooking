@@ -123,7 +123,10 @@ server.post("/bookingCater", async (req, res) => {
     }
 
     // Create a new booking
-    const CaterTableData = new BookCatersRecord({ Id, Date, Status });
+    const CaterTableData = new BookCatersRecord();
+    CaterTableData.Id = Id;
+    CaterTableData.Date = Date;
+    CaterTableData.Status = Status;
     const doc = await CaterTableData.save();
     console.log(doc);
 
