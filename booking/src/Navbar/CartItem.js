@@ -52,11 +52,6 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
             <span>{name}</span>
             <p>Price: {price}</p>
           </div>
-          <div className="item-actions">
-            <h6 className="border border-2 border-success mt-2 p-1">
-              01-02-23
-            </h6>
-          </div>
         </div>
         <button
           type="date"

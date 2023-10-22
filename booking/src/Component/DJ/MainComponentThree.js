@@ -37,7 +37,7 @@ function MainComponentThree() {
           }}
         >
           {cardData.map((user, i) => (
-            <Link to={`/DJBookingB5/${user._id}`} style={{ textDecoration: 'none' }}><DJCard key={i} user={user} /></Link>
+           user.Status !== "pending" && <Link to={`/DJBookingB5/${user._id}`} style={{ textDecoration: 'none' }}><DJCard key={i} user={user} /></Link>
           ))}
         </div>
       )}

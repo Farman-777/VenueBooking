@@ -4,7 +4,7 @@ import ModalComponent from "../ModalComponent";
 import SignIn from './SignIn'
 import SignUp from "./SignUp";
 // import CartNew from '../CartNew'
-import CartItem from "./CartItem";
+// import CartItem from "./CartItem";
 
 
 const Header = ({setShow,cartLength}) => {
@@ -41,6 +41,7 @@ return (
         </li>
         <li className="nav-link active" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/aboutus") }}>About Us</li>
         <li className="nav-link active" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/contactus") }}>Contact Us</li>
+        <li className="nav-link active" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/admin") }}>Admin</li>
         </ul>
       <div>
        <button className="btn btn-success me-2 " type="button" style={{fontFamily:"roboto",background:"none",border:"none"}} onClick={() => cartLength ? navigate("/cartnew") : navigate("/")}><i className="bi bi-cart-plus"><span style={{color:"white",fontWeight:"bold",marginLeft:"5px",fontSize:"20px"}}>{(cartLength !== null )?cartLength:0}</span></i></button>

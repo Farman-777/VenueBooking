@@ -8,6 +8,8 @@ const RegisterDJ = () => {
   const [DJName, setDJName] = useState('');
   const [DJLocation, setDJLocation] = useState('');
   const [DJPrice,setDJPrice] = useState(0)
+  const [DJEmail, setDJEmail] = useState('');
+  // const [DJStatus, setDJStatus] = useState('pending');
   const [DJDescription, setDJDescription] = useState('');
   const [DJImages, setDJImages] = useState([]); // Use an array to store multiple images
 
@@ -32,6 +34,11 @@ const RegisterDJ = () => {
     setDJPrice(e.target.value);
   };
 
+  const handleDJEmailChange = (e) => {
+    setDJEmail(e.target.value);
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -39,23 +46,29 @@ const RegisterDJ = () => {
     formData.append('DJName', DJName);
     formData.append('DJLocation', DJLocation);
     formData.append('DJPrice', DJPrice);
+    formData.append('DJEmail', DJEmail);
     formData.append('DJDescription', DJDescription);
+    formData.append('Status', "pending");
+    formData.append('entityType', "DJ");
+
 
     // Append each selected image to the formData
     for (let i = 0; i < DJImages.length; i++) {
       formData.append('images', DJImages[i]);
     }
 
-    axios
-      .post('http://localhost:8003/addDJData', formData, {
+    console.log(formData)
+
+    axios.post('http://localhost:8003/addDJData', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((response) => {
         if (response.status === 200) {
+          // Request was successful
           Swal.fire({
             icon: 'success',
-            title: 'DJ Registered',
-            text: 'Your DJ has been successfully registered!',
+            title: 'DJ Registered Request Sent To Admin',
+            text: 'Check After Some Time',
           });
 
           // Clear the form fields and reset the DJImages
@@ -73,9 +86,8 @@ const RegisterDJ = () => {
           text: 'DJ With The Same Name Exist', // Display the error message from the response
         });
       });
-  };
 
-
+    }
   return (
     <div className="container mt-2 p-4" 
     style={{
@@ -101,6 +113,10 @@ const RegisterDJ = () => {
               <input type="number" className="form-control" id="DJPrice" value={DJPrice} onChange={handleDJPriceChange} required />
             </div>
             <div className="mb-3">
+              <label htmlFor="DJEmail" className="form-label" style={{ fontWeight: 'bold' }}> Email</label>
+              <input type="email" className="form-control" id="DJEmail" value={DJEmail} onChange={handleDJEmailChange} required />
+            </div>
+            <div className="mb-3">
               <label htmlFor="DJDescription" className="form-label" style={{ fontWeight: 'bold' }}>
                 DJ Description:
               </label>
@@ -116,13 +132,9 @@ const RegisterDJ = () => {
           </form>
         </div>
       </div>
-{/* <div className='ms-3 p-4' style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '20px', marginTop: "30px", borderRadius: "10px", overflow: 'hidden', border: '1px solid #e0e0e0' }}>
-      {cardData.map((user) => (
-        <DJCard key={user._id} user={user} />
-      ))}
-    </div> */}
+
     </div>
   )
-        }
+}
 
 export default RegisterDJ;

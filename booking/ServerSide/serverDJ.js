@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const multer = require("multer");
+const { ObjectId } = require("mongodb");
 
 const Port = 8003;
 const server = express();
@@ -23,8 +24,11 @@ const RegisterationSchema = new mongoose.Schema({
   DJName: String,
   DJLocation: String,
   DJPrice: Number,
+  DJEmail:String,
   DJDescription: String,
   images: [String], // Array to store image paths
+  Status:String,
+  entityType:String,
 });
 
 const RegisterDJ = mongoose.model("RegisterDJs", RegisterationSchema);
@@ -74,9 +78,11 @@ server.post("/addDJData", upload.array("images", 4), async (req, res) => {
   DJ.DJName = req.body.DJName;
   DJ.DJLocation = req.body.DJLocation;
   DJ.DJPrice = req.body.DJPrice;
+  DJ.DJEmail = req.body.DJEmail;
   DJ.DJDescription = req.body.DJDescription;
   DJ.images = req.files.map((file) => file.filename);
-
+  DJ.Status = req.body.Status;
+  DJ.entityType = req.body.entityType;
   try {
     const doc = await DJ.save();
     console.log(doc);
@@ -86,6 +92,24 @@ server.post("/addDJData", upload.array("images", 4), async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+server.put('/updateDJStatus/:userId', async (req, res) => {
+  const { userId } = req.params;
+  const { newStatus } = req.body;
+  // const existItem = await RegisterDJ.findOne({_id:`${userId}`});
+  // console.log(existItem);
+  try {
+    const updatedDJ = await RegisterDJ.findByIdAndUpdate({_id:`${userId}`}, { Status: newStatus }, { new: true });
+    console.log(updatedDJ);
+    if (!updatedDJ) {
+      return res.status(404).json({ error: 'DJ not found' });
+    }
+
+    res.json(updatedDJ);
+  } catch (err) {
+    res.status(500).json({ error: 'Error updating status' });
+  }
+});
+
 
 // Endpoint to get DJ registration data
 server.get("/getDJData", async (req, res) => {

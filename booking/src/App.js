@@ -27,6 +27,7 @@ import ContactUs from "./Navbar/ContactUs";
 import AboutUs from "./Navbar/AboutUs";
 import Forget from "./Authentication/Forget";
 import CartNew from "./Navbar/CartNew";
+import AdminRequestList from "./Navbar/AdminRequestList";
 
 const App = () => {
   const [show, setShow] = useState(localStorage.getItem("show") === "true" || false);
@@ -111,6 +112,7 @@ const App = () => {
 
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/admin" element={<AdminRequestList />} />
           <Route path="/cartnew" element={cartData.length > 0 ? <CartNew cartData={cartData} getData={getData} /> : null} />
 
           </Routes>
