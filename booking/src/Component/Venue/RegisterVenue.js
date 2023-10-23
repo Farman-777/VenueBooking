@@ -8,6 +8,7 @@ const RegisterVenue = () => {
   const [venueName, setVenueName] = useState('');
   const [venueLocation, setVenueLocation] = useState('');
   const [venuePrice,setVenuePrice] = useState(0)
+  const [venueEmail, setVenueEmail] = useState("");
   const [venueDescription, setVenueDescription] = useState('');
   const [venueImages, setVenueImages] = useState([]); // Use an array to store multiple images
 
@@ -31,6 +32,9 @@ const RegisterVenue = () => {
   const handleVenuePriceChange = (e) => {
     setVenuePrice(e.target.value);
   };
+  const handleVenueEmailChange = (e) => {
+    setVenueEmail(e.target.value);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -39,6 +43,9 @@ const RegisterVenue = () => {
     formData.append('venueLocation', venueLocation);
     formData.append('venuePrice', venuePrice);
     formData.append('venueDescription', venueDescription);
+    formData.append("venueEmail", venueEmail);
+    formData.append("Status", "pending");
+    formData.append("entityType", "Venue");
 
     // Append each selected image to the formData
     for (let i = 0; i < venueImages.length; i++) {
@@ -63,6 +70,7 @@ const RegisterVenue = () => {
           setVenuePrice('');
           setVenueDescription('');
           setVenueImages([]);
+          setVenueEmail('');
         }
       }).then(() => navigate("/VenueMain"))
       .catch((error) => {
@@ -101,9 +109,11 @@ const RegisterVenue = () => {
               <input type="number" className="form-control" id="VenuePrice" value={venuePrice} onChange={handleVenuePriceChange} required />
             </div>
             <div className="mb-3">
-              <label htmlFor="venueDescription" className="form-label" style={{ fontWeight: 'bold' }}>
-                Venue Description:
-              </label>
+              <label htmlFor="VenuEmail" className="form-label" style={{ fontWeight: 'bold' }}> Venue Email:</label>
+              <input type="email" className="form-control" id="VenuEmail" value={venueEmail} onChange={handleVenueEmailChange} required />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="venueDescription" className="form-label" style={{ fontWeight: 'bold' }}>Venue Description:</label>
               <textarea className="form-control" id="venueDescription" rows="4" value={venueDescription} onChange={handleVenueDescriptionChange} required />
             </div>
 
@@ -112,7 +122,7 @@ const RegisterVenue = () => {
               <input type="file" className="form-control" id="venueImage" accept="image/*" onChange={handleImageChange} multiple required />
             </div>
 
-            <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#007bff', border: 'none' }}>Register Venue</button>
+            <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#007bff', border: 'none' }}>Submit</button>
           </form>
         </div>
       </div>

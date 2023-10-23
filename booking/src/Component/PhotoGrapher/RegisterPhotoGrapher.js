@@ -9,6 +9,7 @@ const RegisterPhotoGrapher = () => {
   const [PhotoGrapherLocation, setPhotoGrapherLocation] = useState('');
   const [PhotoGrapherPrice,setPhotoGrapherPrice] = useState(0)
   const [PhotoGrapherDescription, setPhotoGrapherDescription] = useState('');
+  const [PhotoGrapherEmail, setPhotoGrapherEmail] = useState('');
   const [PhotoGrapherImages, setPhotoGrapherImages] = useState([]); // Use an array to store multiple images
 
   const handleImageChange = (e) => {
@@ -31,6 +32,9 @@ const RegisterPhotoGrapher = () => {
   const handlePhotoGrapherPriceChange = (e) => {
     setPhotoGrapherPrice(e.target.value);
   };
+  const handlePhotoGrapherEmailChange = (e) => {
+    setPhotoGrapherEmail(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +43,10 @@ const RegisterPhotoGrapher = () => {
     formData.append('PhotoGrapherName', PhotoGrapherName);
     formData.append('PhotoGrapherLocation', PhotoGrapherLocation);
     formData.append('PhotoGrapherPrice', PhotoGrapherPrice);
-    formData.append('PhotoGrapherDescription', PhotoGrapherDescription);
+    formData.append('PhotoGrapherDescription', PhotoGrapherDescription);    
+    formData.append("PhotoGrapherEmail", PhotoGrapherEmail);
+    formData.append("Status", "pending");
+    formData.append("entityType", "Photographer");
 
     // Append each selected image to the formData
     for (let i = 0; i < PhotoGrapherImages.length; i++) {
@@ -64,6 +71,7 @@ const RegisterPhotoGrapher = () => {
           setPhotoGrapherDescription('');
           setPhotoGrapherPrice(0);
           setPhotoGrapherImages([]);
+          setPhotoGrapherEmail('');
         }
       }).then(() => navigate("/PhotoGrapherMain"))
       .catch((error) => {
@@ -101,9 +109,11 @@ const RegisterPhotoGrapher = () => {
               <input type="number" className="form-control" id="PhotoGrapherPrice" value={PhotoGrapherPrice} onChange={handlePhotoGrapherPriceChange} required />
             </div>
             <div className="mb-3">
-              <label htmlFor="PhotoGrapherDescription" className="form-label" style={{ fontWeight: 'bold' }}>
-                PhotoGrapher Description:
-              </label>
+              <label htmlFor="PhotoGrapherEmail" className="form-label" style={{ fontWeight: 'bold' }}> PhotoGrapher Email:</label>
+              <input type="email" className="form-control" id="PhotoGrapherEmail" value={PhotoGrapherEmail} onChange={handlePhotoGrapherEmailChange} required />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="PhotoGrapherDescription" className="form-label" style={{ fontWeight: 'bold' }}>PhotoGrapher Description:</label>
               <textarea className="form-control" id="PhotoGrapherDescription" rows="4" value={PhotoGrapherDescription} onChange={handlePhotoGrapherDescriptionChange} required />
             </div>
 
@@ -112,15 +122,10 @@ const RegisterPhotoGrapher = () => {
               <input type="file" className="form-control" id="PhotoGrapherImage" accept="image/*" onChange={handleImageChange} multiple required />
             </div>
 
-            <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#007bff', border: 'none' }}>Register PhotoGrapher</button>
+            <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#007bff', border: 'none' }}>Submit</button>
           </form>
         </div>
       </div>
-{/* <div className='ms-3 p-4' style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '20px', marginTop: "30px", borderRadius: "10px", overflow: 'hidden', border: '1px solid #e0e0e0' }}>
-      {cardData.map((user) => (
-        <PhotoGrapherCard key={user._id} user={user} />
-      ))}
-    </div> */}
     </div>
   )
         }

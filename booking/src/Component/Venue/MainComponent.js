@@ -37,7 +37,7 @@ function MainComponent() {
           }}
         >
           {cardData.map((user, i) => (
-            <Link to={`/venueBookingB5/${user._id}`} style={{textDecoration:"none"}}><VenueCard  key={i} user={user} /></Link>
+           user.Status !=="pending" && <Link to={`/venueBookingB5/${user._id}`} style={{textDecoration:"none"}}><VenueCard  key={i} user={user} /></Link>
           ))}
         </div>
       )}

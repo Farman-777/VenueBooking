@@ -23,8 +23,11 @@ const RegisterationSchema = new mongoose.Schema({
   VenueName: String,
   VenueLocation: String,
   VenuePrice:Number,
+  VenueEmail:String,
   VenueDescription: String,
   images: [String], // Array to store image paths
+  Status:String,
+  entityType:String,
 });
 
 const RegisterVenue = mongoose.model("RegisterVenues", RegisterationSchema);
@@ -74,8 +77,11 @@ server.post("/addData", upload.array("images", 4), async (req, res) => {
   venue.VenueName = req.body.venueName;
   venue.VenueLocation = req.body.venueLocation;
   venue.VenuePrice = req.body.venuePrice;
+  venue.VenueEmail = req.body.venueEmail;
   venue.VenueDescription = req.body.venueDescription;
   venue.images = req.files.map((file) => file.filename);
+  venue.Status = req.body.Status;
+  venue.entityType = req.body.entityType;
 
   try {
     const doc = await venue.save();
@@ -84,6 +90,24 @@ server.post("/addData", upload.array("images", 4), async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+server.put('/updateVenueStatus/:userId', async (req, res) => {
+  const { userId } = req.params;
+  const { newStatus } = req.body;
+  // const existItem = await RegisterVenue.findOne({_id:`${userId}`});
+  // console.log(existItem);
+  try {
+    const updatedVenue = await RegisterVenue.findByIdAndUpdate({_id:`${userId}`}, { Status: newStatus }, { new: true });
+    console.log(updatedVenue);
+    if (!updatedVenue) {
+      return res.status(404).json({ error: 'Venue not found' });
+    }
+
+    res.json(updatedVenue);
+  } catch (err) {
+    res.status(500).json({ error: 'Error updating status' });
   }
 });
 

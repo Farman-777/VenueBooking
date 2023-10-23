@@ -23,8 +23,11 @@ const RegisterationSchema = new mongoose.Schema({
   PhotoGrapherName: String,
   PhotoGrapherLocation: String,
   PhotoGrapherPrice:Number,
+  PhotoGrapherEmail:String,
   PhotoGrapherDescription: String,
   images: [String], // Array to store image paths
+  Status:String,
+  entityType:String,
 });
 
 const RegisterPhotoGrapher = mongoose.model("RegisterPhotoGraphers", RegisterationSchema);
@@ -74,8 +77,11 @@ server.post("/addPhotoData", upload.array("images", 4), async (req, res) => {
   PhotoGrapher.PhotoGrapherName = req.body.PhotoGrapherName;
   PhotoGrapher.PhotoGrapherLocation = req.body.PhotoGrapherLocation;
   PhotoGrapher.PhotoGrapherPrice = req.body.PhotoGrapherPrice;
+  PhotoGrapher.PhotoGrapherEmail = req.body.PhotoGrapherEmail;
   PhotoGrapher.PhotoGrapherDescription = req.body.PhotoGrapherDescription;
   PhotoGrapher.images = req.files.map((file) => file.filename);
+  PhotoGrapher.Status = req.body.Status;
+  PhotoGrapher.entityType = req.body.entityType;
 
   try {
     const doc = await PhotoGrapher.save();
@@ -84,6 +90,24 @@ server.post("/addPhotoData", upload.array("images", 4), async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+server.put('/updatePhotographerStatus/:userId', async (req, res) => {
+  const { userId } = req.params;
+  const { newStatus } = req.body;
+  // const existItem = await RegisterCater.findOne({_id:`${userId}`});
+  // console.log(existItem);
+  try {
+    const updatedPhotographer = await RegisterPhotoGrapher.findByIdAndUpdate({_id:`${userId}`}, { Status: newStatus }, { new: true });
+    console.log(updatedPhotographer);
+    if (!updatedPhotographer) {
+      return res.status(404).json({ error: 'Photographer not found' });
+    }
+
+    res.json(updatedPhotographer);
+  } catch (err) {
+    res.status(500).json({ error: 'Error updating status' });
   }
 });
 

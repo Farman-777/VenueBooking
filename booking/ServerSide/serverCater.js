@@ -22,9 +22,12 @@ main().catch((err) => console.log(err));
 const RegisterationSchema = new mongoose.Schema({
   CaterName: String,
   CaterLocation: String,
-  CaterPrice: Number,
+  CaterPrice: Number,  
+  CaterEmail:String,
   CaterDescription: String,
   images: [String], // Array to store image paths
+  Status:String,
+  entityType:String,
 });
 
 const RegisterCater = mongoose.model("RegisterCaters", RegisterationSchema);
@@ -74,8 +77,11 @@ server.post("/addCaterData", upload.array("images", 4), async (req, res) => {
   Cater.CaterName = req.body.CaterName;
   Cater.CaterLocation = req.body.CaterLocation;
   Cater.CaterPrice = req.body.CaterPrice;
+  Cater.CaterEmail = req.body.CaterEmail;
   Cater.CaterDescription = req.body.CaterDescription;
   Cater.images = req.files.map((file) => file.filename);
+  Cater.Status = req.body.Status;
+  Cater.entityType = req.body.entityType;
 
   try {
     const doc = await Cater.save();
@@ -86,7 +92,23 @@ server.post("/addCaterData", upload.array("images", 4), async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+server.put('/updateCaterStatus/:userId', async (req, res) => {
+  const { userId } = req.params;
+  const { newStatus } = req.body;
+  // const existItem = await RegisterCater.findOne({_id:`${userId}`});
+  // console.log(existItem);
+  try {
+    const updatedCater = await RegisterCater.findByIdAndUpdate({_id:`${userId}`}, { Status: newStatus }, { new: true });
+    console.log(updatedCater);
+    if (!updatedCater) {
+      return res.status(404).json({ error: 'Cater not found' });
+    }
 
+    res.json(updatedCater);
+  } catch (err) {
+    res.status(500).json({ error: 'Error updating status' });
+  }
+});
 // Endpoint to get Cater registration data
 server.get("/getCaterData", async (req, res) => {
   try {

@@ -4,7 +4,6 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const multer = require("multer");
-const { ObjectId } = require("mongodb");
 
 const Port = 8003;
 const server = express();
@@ -78,9 +77,9 @@ server.post("/addDJData", upload.array("images", 4), async (req, res) => {
   DJ.DJName = req.body.DJName;
   DJ.DJLocation = req.body.DJLocation;
   DJ.DJPrice = req.body.DJPrice;
-  DJ.DJEmail = req.body.DJEmail;
   DJ.DJDescription = req.body.DJDescription;
   DJ.images = req.files.map((file) => file.filename);
+  DJ.DJEmail = req.body.DJEmail;
   DJ.Status = req.body.Status;
   DJ.entityType = req.body.entityType;
   try {
