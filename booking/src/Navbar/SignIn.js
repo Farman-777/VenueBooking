@@ -3,8 +3,11 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import ModalComponent from "../ModalComponent";
 import Forget from "../Authentication/Forget";
-
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const SignIn = ({ handleClose }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [showDateModal ,setShowDateModal] = useState(false)
@@ -35,6 +38,8 @@ const SignIn = ({ handleClose }) => {
             setUserPassword("");
 
             // Call handleClose only when all fields are non-empty
+            dispatch({ type: "login" });
+            navigate("/admin");
             handleClose();
          }      
         })

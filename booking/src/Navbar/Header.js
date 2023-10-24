@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import ModalComponent from "../ModalComponent";
 import SignIn from './SignIn'
 import SignUp from "./SignUp";
+import { useSelector } from "react-redux";
 // import CartNew from '../CartNew'
 // import CartItem from "./CartItem";
 
@@ -12,7 +13,11 @@ const Header = ({setShow,cartLength}) => {
   console.log(cartLength)
   const [showDateModal,setShowDateModal] = useState(false)
   const [showDateModal1,setShowDateModal1] = useState(false)
-
+  const [Sign,setSign] = useState({
+    in:"SignIn",
+    out:"SignOut"
+  })
+const {isAuthenticated} = useSelector(state => state.root)
 return (
 <>
 <nav className="navbar navbar-expand-lg navbar-dark text-center" style={{background:"#240742",fontFamily:"Roboto"}}>
@@ -27,7 +32,7 @@ return (
           <a className="nav-link active" style={{cursor:"pointer"}} aria-current="page"  onClick={() => {setShow(false); navigate("/")}}>Home</a>
         </li>
 
-         <li className="nav-item dropdown">
+        {!isAuthenticated && <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
            Vendor Registration
           </a>
@@ -38,15 +43,15 @@ return (
             <li className="dropdown-item" onClick={()=> { setShow(true); navigate("/registerPhotographer") }}>Photographer Registration</li>
 
           </ul>
-        </li>
+        </li>}
         <li className="nav-link active" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/aboutus") }}>About Us</li>
         <li className="nav-link active" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/contactus") }}>Contact Us</li>
         <li className="nav-link active" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/admin") }}>Admin</li>
         </ul>
       <div>
-       <button className="btn btn-success me-2 " type="button" style={{fontFamily:"roboto",background:"none",border:"none"}} onClick={() => cartLength ? navigate("/cartnew") : navigate("/")}><i className="bi bi-cart-plus"><span style={{color:"white",fontWeight:"bold",marginLeft:"5px",fontSize:"20px"}}>{(cartLength !== null )?cartLength:0}</span></i></button>
-       <button className="btn btn-success me-2" type="button" style={{fontFamily:"roboto"}} onClick={() => { setShowDateModal(true) }}>SignIn</button>
-       <button className="btn btn-success" type="button" style={{fontFamily:"roboto"}} onClick={() => { setShowDateModal1(true) }}>SignUp</button>
+       {!isAuthenticated && <button className="btn btn-success me-2 " type="button" style={{fontFamily:"roboto",background:"none",border:"none"}} onClick={() => cartLength ? navigate("/cartnew") : navigate("/")}><i className="bi bi-cart-plus"><span style={{color:"white",fontWeight:"bold",marginLeft:"5px",fontSize:"20px"}}>{(cartLength !== null )?cartLength:0}</span></i></button>}
+       {!isAuthenticated && <button className="btn btn-success me-2" type="button" style={{fontFamily:"roboto"}} onClick={() => { setShowDateModal(true); }}>SignIn</button>}
+       {!isAuthenticated && <button className="btn btn-success" type="button" style={{fontFamily:"roboto"}} onClick={() => { setShowDateModal1(true) }}>SignUp</button>}
       </div>
     </div>
   </div>
@@ -58,7 +63,8 @@ return (
   <ModalComponent
     show={showDateModal1}
     width={"45%"}
-    marginTop={"17%"} 
+    marginTop={"17%"}
+    bgShadowPoint={"1"} 
     modalBody={<SignUp handleClose={() => setShowDateModal1(false)} />}/>
   
 </nav>

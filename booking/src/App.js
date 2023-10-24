@@ -28,8 +28,13 @@ import AboutUs from "./Navbar/AboutUs";
 import Forget from "./Authentication/Forget";
 import CartNew from "./Navbar/CartNew";
 import AdminRequestList from "./Navbar/AdminRequestList";
+import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
+import { useSelector } from "react-redux";
+import SignUp from "./Navbar/SignUp";
+import Temp from './Temp';
 
 const App = () => {
+  const {isAuthenticated} = useSelector(state => state.root);
   const [show, setShow] = useState(localStorage.getItem("show") === "true" || false);
   const [cartData, setCartData] = useState([]);
 
@@ -112,7 +117,10 @@ const App = () => {
 
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/admin" element={<AdminRequestList />} />
+          <Route path="/signIn" element={<SignIn />} />
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/temp" element={<Temp />} />
+          <Route path="/admin" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <AdminRequestList /> </ProtectedRoute>} />
           <Route path="/cartnew" element={cartData.length > 0 ? <CartNew cartData={cartData} getData={getData} /> : null} />
 
           </Routes>

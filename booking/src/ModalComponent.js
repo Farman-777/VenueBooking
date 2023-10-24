@@ -7,17 +7,18 @@ const ModalComponent = ({
   style,
   show,
   marginTop,
+  bgShadowPoint="0.7",
   ...other
 }) => {
   const [modalStyle, setModalStyle] = useState({
     display: show ? "block" : "none",
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    backgroundColor: `rgba(0, 0, 0, ${bgShadowPoint})`,
   });
 
   useEffect(() => {
     setModalStyle({
       display: show ? "block" : "none",
-      backgroundColor: "rgba(0, 0, 0, 0.7)",
+      backgroundColor: `rgba(0, 0, 0, ${bgShadowPoint})`,
     });
   }, [show]);
 
