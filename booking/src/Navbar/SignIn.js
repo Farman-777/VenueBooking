@@ -6,8 +6,10 @@ import Forget from "../Authentication/Forget";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 const SignIn = ({ handleClose }) => {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [showDateModal ,setShowDateModal] = useState(false)
@@ -19,12 +21,12 @@ const SignIn = ({ handleClose }) => {
       userPassword: userPassword,
     };
 
-    console.log("client side",userObj); // Check if userObj is logged to the console
-    if (
-      userEmail.trim() !== "" &&
-      userPassword.trim() !== ""
-    ) {
-      axios
+    if(userEmail === "x@gmail.com" && userPassword === "123456"){      
+      if (
+        userEmail.trim() !== "" &&
+        userPassword.trim() !== ""
+        ) {
+          axios
         .post("http://localhost:8005/getUserData", userObj)
         .then((response) => {
           if (response.status === 200) {
@@ -36,31 +38,74 @@ const SignIn = ({ handleClose }) => {
             // Clear the form fields
             setUserEmail("");
             setUserPassword("");
-
+            
             // Call handleClose only when all fields are non-empty
-            dispatch({ type: "login" });
+            dispatch({ type: "loginAdmin" });
             navigate("/admin");
             handleClose();
-         }      
+          }      
         })
         .catch(error => {
-              Swal.fire({
-              icon: "error",
-              title: "",
-              text: "Check Email Or Password",
-            });
+          Swal.fire({
+            icon: "error",
+            title: "",
+            text: "Check Email Or Password",
+          });
         })
         
-    } else {
-      // Display a message or handle the case where not all fields are filled
-      Swal.fire({
-        icon: "warning",
-        title: "",
-        text: "Please Fill All Fields",
-      });
+      } else {
+        // Display a message or handle the case where not all fields are filled
+        Swal.fire({
+          icon: "warning",
+          title: "",
+          text: "Please Fill All Fields",
+        });
+      }
     }
-  };
+    else{
+      if (
+        userEmail.trim() !== "" &&
+        userPassword.trim() !== ""
+        ) {
+          axios
+        .post("http://localhost:8005/getUserData", userObj)
+        .then((response) => {
+          if (response.status === 200) {
+            Swal.fire({
+              icon: "success",
+              title: "",
+              text: "SignIn Successfully",
+            });
+            // Clear the form fields
+            setUserEmail("");
+            setUserPassword("");
+            
+            // Call handleClose only when all fields are non-empty
+            dispatch({ type: "loginUser" });
+            // navigate("/admin");
+            handleClose();
+          }      
+        })
+        .catch(error => {
+          Swal.fire({
+            icon: "error",
+            title: "",
+            text: "Check Email Or Password",
+          });
+        })
+        
+      } else {
+        // Display a message or handle the case where not all fields are filled
+        Swal.fire({
+          icon: "warning",
+          title: "",
+          text: "Please Fill All Fields",
+        });
+      }
+    }
+}
 
+    
   return (
     <div>
       <form
@@ -106,9 +151,7 @@ const SignIn = ({ handleClose }) => {
           type="submit"
           className="btn btn-primary"
           onClick={handleSubmit}
-        >
-          Submit
-        </button>
+        >Submit</button>
         <hr/>
         <p className="fs-5 " role="button" tabindex="0"  onClick={() => { setShowDateModal(true) }}>Forgot password?</p>        
       </form>

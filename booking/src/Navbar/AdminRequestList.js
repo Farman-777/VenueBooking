@@ -225,7 +225,7 @@ const AdminRequestList = () => {
       <button
         className="btn btn-danger mb-2"
         onClick={() => {
-          dispatch({ type: "logout" });
+          dispatch({ type: "logoutAdmin" });
         }}
       >
         Logout

@@ -1,13 +1,26 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 export const rootReducer = createReducer(
-  { isAuthenticated: false },
+  { isAuthenticated: false ,
+    isAdmin:false,
+    isAuthenticatedUser:false,
+  },
   {
-    login: (state) => {
+    loginAdmin: (state) => {
       state.isAuthenticated = true;
+      state.isAdmin = true;
     },
-    logout: (state) => {
+    logoutAdmin: (state) => {
       state.isAuthenticated = false;
+      state.isAdmin = false;
     },
+    loginUser: (state) => {
+      state.isAuthenticatedUser = true;
+
+    },
+    logoutUser: (state) => {
+      state.isAuthenticatedUser = false;
+    },
+   
   }
 );

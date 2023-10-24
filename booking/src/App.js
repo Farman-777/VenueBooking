@@ -101,8 +101,6 @@ const App = () => {
           <Route path="/venueBookingB5/:id" element={<VenueBookingB5 handleAppVenueItem={handleCartItem} />} />
           <Route path="/registerVenue" element={<RegisterVenue />} />
 
-
-
           <Route path="/DJMain" element={<MainComponentThree />} />
           <Route path="/DJBookingB5/:id" element={<DJBookingB5 handleAppDJItem={handleCartItem} />} />
           <Route path="/registerDJ" element={<RegisterDJ />} />
