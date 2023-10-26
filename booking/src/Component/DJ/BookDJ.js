@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const BookDJ = ({ handleClose,CartId }) => {
-  // const {id} = useParams()
-  console.log(CartId)
+
   const [bookingDate, setBookingDate] = useState("");
+
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, "0");
+    const day = today.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   const handleBookingDateChange = (e) => {
     setBookingDate(e.target.value);
   };
@@ -35,10 +42,7 @@ const BookDJ = ({ handleClose,CartId }) => {
     };
 
     try {
-      const response = await axios.post(
-        'http://localhost:8003/bookingDJ',
-        bookingData
-      );
+      const response = await axios.post('http://localhost:8003/bookingDJ',bookingData);
 
       if (response.status === 200) {
         Swal.fire({
@@ -92,6 +96,7 @@ const BookDJ = ({ handleClose,CartId }) => {
                     id="bookingDate"
                     value={bookingDate}
                     onChange={handleBookingDateChange}
+                    min={getCurrentDate()}
                     required
                   />
                 </div>

@@ -7,6 +7,14 @@ const BookCater = ({ handleClose,CartId }) => {
   // const {id} = useParams()
   console.log(CartId)
   const [bookingDate, setBookingDate] = useState("");
+
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, "0");
+    const day = today.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
   const handleBookingDateChange = (e) => {
     setBookingDate(e.target.value);
   };
@@ -87,6 +95,7 @@ const BookCater = ({ handleClose,CartId }) => {
                     id="bookingDate"
                     value={bookingDate}
                     onChange={handleBookingDateChange}
+                    min={getCurrentDate()}
                     required
                   />
                 </div>
