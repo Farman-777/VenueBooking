@@ -4,7 +4,7 @@ import React from "react";
 const Footer = () => {
   return (
 <>
-<div class="row text-center mt-4 mb-2 justify-content-center p-2 text-white" style={{fontFamily:"roboto",background:"#240742"}}>
+<div class="row text-center mt-4 mb-2 justify-content-center p-2 text-white" style={{fontFamily:"roboto",background:"#1d2731"}}>
 <div class="col-lg-3 mt-2">
   <img src="https://t3.ftcdn.net/jpg/01/10/11/00/360_F_110110063_4kxHX5YKcqrKqFz9udsaqmjkTCoOhKHc.jpg" alt="DJ Image" width="140" height="140" class="bd-placeholder-img rounded-circle" />
   <h2>Book Your DJ</h2>

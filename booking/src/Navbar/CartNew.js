@@ -25,7 +25,7 @@ const CartNew = ({cartData,getData}) => {
 
   return (
     <div>
-      {/* <h2>Cart Items</h2> */}
+      <h2>Cart Items</h2>
       <ul>
   {cartData.map((item, index) => (
     <li key={index} style={{listStyle:"none"}}>
