@@ -32,7 +32,9 @@ const AboutUs = () => {
         </div>
         <div className="col-lg-6">
           <img
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80&w=2080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            // src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80&w=2080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            // src="https://plus.unsplash.com/premium_photo-1683984171269-04c84ee23234?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src='https://plus.unsplash.com/premium_photo-1663051107165-eca06e463aad?auto=format&fit=crop&q=80&w=2008&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
             alt="About Us"
             className="img-fluid rounded"
             style={{ ...shadowStyle, transition: 'transform 0.3s', cursor: 'pointer' }}
@@ -70,39 +72,16 @@ const AboutUs = () => {
           <div className="accordion-item">
             <h2 className="accordion-header" id="question3">
               <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#answer3" aria-expanded="false" aria-controls="answer3" >
-                Question 3: How can I customize my event package?
+                Question 2: Where does it come from?
               </button>
             </h2>
             <div id="answer3" className="accordion-collapse collapse" aria-labelledby="question3" >
               <div className="accordion-body">
-                Yes, we understand that every event is unique. We offer customizable packages to suit your specific requirements. Contact us to discuss your preferences and create a personalized package.
+                Contrary to popular belief, Lorem Ipsum is not simply random text.
               </div>
             </div>
           </div>
-          <div className="accordion-item">
-            <h2 className="accordion-header" id="question4">
-              <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#answer4" aria-expanded="false" aria-controls="answer4" >
-                Question 4: What sets OurEventMagic apart from others?
-              </button>
-            </h2>
-            <div id="answer4" className="accordion-collapse collapse" aria-labelledby="question4" >
-              <div className="accordion-body">
-                At OurEventMagic, we prioritize your satisfaction and the success of your event. Our team of professionals is dedicated to delivering top-notch services, attention to detail, and a commitment to excellence. We stand out because we care about making your event truly magical.
-              </div>
-            </div>
-          </div>
-          <div className="accordion-item">
-            <h2 className="accordion-header" id="question5">
-              <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#answer5" aria-expanded="false" aria-controls="answer5" >
-                Question 5: Can you make my event unique and special?
-              </button>
-            </h2>
-            <div id="answer5" className="accordion-collapse collapse" aria-labelledby="question5" >
-              <div className="accordion-body">
-                We go above and beyond to make your special moments truly magical. Our team of experienced professionals works tirelessly to ensure that every detail is perfect and that your event runs smoothly.
-              </div>
-            </div>
-          </div>
+          {/* Add more FAQ items as needed */}
         </div>
       </div>
     </div>

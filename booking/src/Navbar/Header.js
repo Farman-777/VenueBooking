@@ -31,7 +31,7 @@ return (
           <a className="nav-link active" style={{cursor:"pointer"}} aria-current="page"  onClick={() => {setShow(false); navigate("/")}}>Home</a>
         </li>
 
-        {!isAuthenticated && !isAdmin &&  <li className="nav-item dropdown">
+        {!isAuthenticated && !isAdmin && !isAuthenticatedUser &&  <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
            Vendor Registration
           </a>
