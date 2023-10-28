@@ -25,13 +25,14 @@ import HomePage from "./HomePage";
 import SignIn from "./Navbar/SignIn";
 import ContactUs from "./Navbar/ContactUs";
 import AboutUs from "./Navbar/AboutUs";
-import Forget from "./Authentication/Forget";
 import CartNew from "./Navbar/CartNew";
 import AdminRequestList from "./Navbar/AdminRequestList";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import { useSelector } from "react-redux";
 import SignUp from "./Navbar/SignUp";
 import Temp from './Temp';
+
+import PaymentSuccess from './payComps/PaymentSucess'
 
 const App = () => {
   const {isAuthenticated} = useSelector(state => state.root);
@@ -92,7 +93,7 @@ const App = () => {
   return (
     <div className="App">
       {cartData.length ? <Header setShow={setShow} cartLength={cartData.length}/> : <Header setShow={setShow} cartLength={0}/>}
-
+      {/* <Home /> */}
       {show ? (
         <Routes>
           <Route path="/" element={<HomePage/>} />
@@ -120,6 +121,8 @@ const App = () => {
           <Route path="/temp" element={<Temp />} />
           <Route path="/admin" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <AdminRequestList /> </ProtectedRoute>} />
           <Route path="/cartnew" element={cartData.length > 0 ? <CartNew cartData={cartData} getData={getData} /> : null} />
+          
+          <Route path="/paymentsuccess" element={<PaymentSuccess />} />
 
           </Routes>
       ) : (

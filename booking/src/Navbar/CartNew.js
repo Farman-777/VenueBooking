@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CartItem from './CartItem';
 import './CartNew.css'
-
+import axios from 'axios';
 /*
 venue:8000 appUrl: 0,
 Photographer:8001 appUrl: 1,
@@ -9,6 +9,7 @@ cater:8002 appUrl: 2,
 DJ:8003 appUrl: 3,
  */
 const CartNew = ({cartData,getData}) => {
+  
   const [appUrl, setAppUrl] = useState([
     "http://localhost:8000/images/",
     "http://localhost:8001/Images/",
@@ -22,6 +23,41 @@ const CartNew = ({cartData,getData}) => {
 
   // Calculate the total price
   const total = prices.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  // const total = 19999;
+
+  //pament coding starting here
+
+  const checkoutHandler = async (amount) => {
+    const { data: {key} } = await axios.get("http://localhost:4000/api/getKey");
+    const { data: {order} } = await axios.post("http://localhost:4000/api/checkout", {
+      amount,
+    });
+
+    const options = {
+      key: key, // Replace with your actual Razorpay Key
+      amount: order.amount,
+      currency: "INR",
+      name: "Venue Booking Project",
+      description: "Test Transaction",
+      image: "https://d6xcmfyh68wv8.cloudfront.net/assets/razorpay-glyph.svg",
+      order_id: order.id, // Use the actual order ID from the server response
+      callback_url: "http://localhost:4000/api/paymentVerification",
+      prefill: {
+        name: "Gaurav Kumar",
+        email: "gaurav.kumar@example.com",
+        contact: "9000090000",
+      },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+
+    const razor = new window.Razorpay(options);
+    razor.open();
+  };
 
   return (
     <div>
@@ -61,6 +97,9 @@ const CartNew = ({cartData,getData}) => {
           Rs - <span className="price">{total}</span>
         </span>
       </div>
+        <div> 
+          <button className='btn btn-success ms-4' onClick={() => {checkoutHandler(Number(total));console.log(total)} }>Payment</button>
+        </div>
     </div>
   );
 }
