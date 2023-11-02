@@ -18,7 +18,7 @@ const Header = ({setShow,cartLength}) => {
   console.log(isAuthenticatedUser);
 return (
 <>
-<nav className="navbar navbar-expand-lg navbar-dark text-center" style={{background:"#1d2731",fontFamily:"Roboto"}}>
+<nav className="navbar navbar-expand-lg navbar-dark text-center text-dark" style={{background:"#13795b",fontFamily:"Roboto"}}>
 {/* <nav className="navbar navbar-expand-lg navbar-dark text-center" style={{background:"#563d7c",fontFamily:"Roboto"}}> */}
   <div className="container-fluid">
     <a className="navbar-brand">Navbar</a>

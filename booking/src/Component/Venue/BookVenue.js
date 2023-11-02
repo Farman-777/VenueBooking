@@ -41,31 +41,27 @@ const BookVenue = ({ handleClose, CartId }) => {
       Status: "Booked",
     };
 
-    try {
-      const response = await axios.post("http://localhost:8000/venueRecords",bookingData);
+   // Sending a POST request to create a booking record
+axios.post("http://localhost:8000/venueRecords", bookingData)
+.then((response) => {
+  if (response.status === 200) {
+    // If the request is successful, show a success message
+    Swal.fire({
+      icon: "success",
+      title: "Booking Status",
+      text: "Your booking has been successful!",
+    });
 
-      if (response.status === 200) {
-        Swal.fire({
-          icon: "success",
-          title: "Booking Status",
-          text: "Your booking has been successful!",
-        });
+    // Clear the form field
+    setBookingDate("");
+  } else { console.error("Unexpected response status:", response.status); }
+}).catch((error) => { console.error("Error while creating a booking:", error); });
 
-        // Clear the form field
-        setBookingDate("");
-      }
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: error.response.data.message || "An error occurred",
-      });
-      console.error(error);
-    }
+axios.get(`http://localhost:8000/getVenueRecord?id=${CartId}`)
+.then((response) => { console.log(response); })
+.catch((error) => {   console.error("Error while retrieving venue records:", error); });
 
-    const response = await axios.get(`http://localhost:8000/getVenueRecord?id=${CartId}`);
-    console.log(response);
-  };
+};
 
   return (
     <div className="container">

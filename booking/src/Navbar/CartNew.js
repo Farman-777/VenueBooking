@@ -9,7 +9,7 @@ cater:8002 appUrl: 2,
 DJ:8003 appUrl: 3,
  */
 const CartNew = ({cartData,getData}) => {
-  
+  console.log(cartData);
   const [appUrl, setAppUrl] = useState([
     "http://localhost:8000/images/",
     "http://localhost:8001/Images/",
@@ -18,11 +18,28 @@ const CartNew = ({cartData,getData}) => {
   ]);
   console.log("keyName Object : ",cartData[0]);
   console.log("keyName Object output : ",cartData[0].CartKey);
-  // Extract item names and prices correctly
-  const prices = cartData.map(item => item.CartPrice);
 
-  // Calculate the total price
-  const total = prices.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  let VenueLength = 1;
+  let CaterLength = 4;
+  let DJLength = 2;
+  let PhotographerLength = 3;
+  
+  // Initialize the total
+  let total = 0;
+  
+  // Calculate the total price based on CartKey
+  for (const item of cartData) {
+    if (item.CartKey === "VenueName") {
+      total += item.CartPrice * VenueLength;
+    } else if (item.CartKey === "CaterName") {
+      total += item.CartPrice * CaterLength;
+    } else if (item.CartKey === "DJName") {
+      total += item.CartPrice * DJLength;
+    } else if (item.CartKey === "PhotoGrapherName") {
+      total += item.CartPrice * PhotographerLength;
+    }
+  }
+  
   // const total = 19999;
 
   //pament coding starting here
@@ -95,14 +112,12 @@ const CartNew = ({cartData,getData}) => {
 
       <div className="total">
         <span className="total-text">Total Price of your Cart</span>
-        <span className="rupees">
-          Rs - ₹ <span className="price">{total}</span>
+        <span className="rupees"> ₹ <span className="price">{total}</span>
         </span>
       </div>
       <div className="total">
         <span className="total-text">30 % of Total Price of your Cart</span>
-        <span className="rupees">
-          Rs - ₹ <span className="price">{reducedTotal}</span>
+        <span className="rupees"> ₹ <span className="price">{reducedTotal}</span>
         </span>
       </div>
         <div> 
