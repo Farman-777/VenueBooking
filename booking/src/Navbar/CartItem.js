@@ -12,10 +12,15 @@ import BookCater from "../Component/Cater/BookCater";
 import BookDJ from "../Component/DJ/BookDJ";
 import BookVenue from "../Component/Venue/BookVenue";
 
+import { useSelector } from "react-redux";
+
 // import ModalComponent from "./ModalComponent";
 
 const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartId}) => {
+  
+  const {isAuthenticatedUser } = useSelector(state => state.root)
   const [showModal,setShowModal] = useState(false);
+  
   console.log("id : ", id);
   console.log("name : ", name);
   console.log(`${imageUrl}${imageName}`);
@@ -24,6 +29,17 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
   const comp =  ["BookVenue","BookCater","BookDJ","BookPhotographer"];
 
   const handleClick = () => {
+    if (isAuthenticatedUser) {
+      setShowModal(true);
+    } else {
+      Swal.fire({
+        icon: 'error', // Use 'icon' instead of 'button' for Swal
+        title: 'User Not Logged In', // Use 'title' instead of 'text' for Swal
+        text: 'Please log in to continue.', // Provide a more informative message
+      });
+    }
+
+      
     console.log("itemNew");
   };
   const obj = { CartKey1: id };
@@ -59,7 +75,7 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
           onClick={() => {
             console.log("hi : ", name);
             handleClick();
-            setShowModal(true);
+            
           }}
         >
           Select Date

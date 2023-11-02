@@ -59,6 +59,8 @@ const CartNew = ({cartData,getData}) => {
     razor.open();
   };
 
+  const reducedTotal = total * 0.3;
+
   return (
     <div>
       <h2>Cart Items</h2>
@@ -94,11 +96,17 @@ const CartNew = ({cartData,getData}) => {
       <div className="total">
         <span className="total-text">Total Price of your Cart</span>
         <span className="rupees">
-          Rs - <span className="price">{total}</span>
+          Rs - ₹ <span className="price">{total}</span>
+        </span>
+      </div>
+      <div className="total">
+        <span className="total-text">30 % of Total Price of your Cart</span>
+        <span className="rupees">
+          Rs - ₹ <span className="price">{reducedTotal}</span>
         </span>
       </div>
         <div> 
-          <button className='btn btn-success ms-4' onClick={() => {checkoutHandler(Number(total));console.log(total)} }>Payment</button>
+          <button className='btn btn-success ms-4' onClick={() => {checkoutHandler(reducedTotal);console.log(total)} }>Payment</button>
         </div>
     </div>
   );
