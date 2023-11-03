@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CartItem from './CartItem';
 import './CartNew.css'
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+
 /*
 venue:8000 appUrl: 0,
 Photographer:8001 appUrl: 1,
@@ -9,6 +11,7 @@ cater:8002 appUrl: 2,
 DJ:8003 appUrl: 3,
  */
 const CartNew = ({cartData,getData}) => {
+  const {VenueLength,CaterLength,DJLength,PhotographerLength } = useSelector(state => state.root)
   console.log(cartData);
   const [appUrl, setAppUrl] = useState([
     "http://localhost:8000/images/",
@@ -19,26 +22,23 @@ const CartNew = ({cartData,getData}) => {
   console.log("keyName Object : ",cartData[0]);
   console.log("keyName Object output : ",cartData[0].CartKey);
 
-  let VenueLength = 1;
-  let CaterLength = 4;
-  let DJLength = 2;
-  let PhotographerLength = 3;
   
-  // Initialize the total
-  let total = 0;
-  
+  const [total, setTotal] = useState(0); // Initialize total as a state variable
+
   // Calculate the total price based on CartKey
+ useEffect(()=>{
   for (const item of cartData) {
-    if (item.CartKey === "VenueName") {
-      total += item.CartPrice * VenueLength;
-    } else if (item.CartKey === "CaterName") {
-      total += item.CartPrice * CaterLength;
-    } else if (item.CartKey === "DJName") {
-      total += item.CartPrice * DJLength;
-    } else if (item.CartKey === "PhotoGrapherName") {
-      total += item.CartPrice * PhotographerLength;
+    if (item.CartKey === 'VenueName') {
+      setTotal((prevTotal) => prevTotal + item.CartPrice * VenueLength);
+    } else if (item.CartKey === 'CaterName') {
+      setTotal((prevTotal) => prevTotal + item.CartPrice * CaterLength);
+    } else if (item.CartKey === 'DJName') {
+      setTotal((prevTotal) => prevTotal + item.CartPrice * DJLength);
+    } else if (item.CartKey === 'PhotoGrapherName') {
+      setTotal((prevTotal) => prevTotal + item.CartPrice * PhotographerLength);
     }
   }
+ },[VenueLength,CaterLength,DJLength,PhotographerLength])
   
   // const total = 19999;
 
