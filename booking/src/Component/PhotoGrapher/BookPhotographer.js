@@ -97,13 +97,7 @@ const BookPhotographer = ({ handleClose,CartId }) => {
                     required
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  style={{ backgroundColor: "#007bff", border: "none" }}
-                >
-                  Book Photographer
-                </button>
+                <button type="submit" className="btn btn-primary" style={{ backgroundColor: "#007bff", border: "none" }}  >Book Photographer </button>
               </form>
             </div>
           </div>

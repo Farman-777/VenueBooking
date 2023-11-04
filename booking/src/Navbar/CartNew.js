@@ -3,6 +3,9 @@ import CartItem from './CartItem';
 import './CartNew.css'
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
+import ModalComponent from '../ModalComponent';
+import SignIn from './SignIn';
 
 /*
 venue:8000 appUrl: 0,
@@ -11,7 +14,8 @@ cater:8002 appUrl: 2,
 DJ:8003 appUrl: 3,
  */
 const CartNew = ({cartData,getData}) => {
-  const {VenueLength,CaterLength,DJLength,PhotographerLength } = useSelector(state => state.root)
+  const {VenueLength,CaterLength,DJLength,PhotographerLength,isAuthenticatedUser } = useSelector(state => state.root)
+  const [showDateModal,setShowDateModal] = useState(false);
   console.log(cartData);
   const [appUrl, setAppUrl] = useState([
     "http://localhost:8000/images/",
@@ -23,28 +27,36 @@ const CartNew = ({cartData,getData}) => {
   console.log("keyName Object output : ",cartData[0].CartKey);
 
   
-  const [total, setTotal] = useState(0); // Initialize total as a state variable
 
-  // Calculate the total price based on CartKey
- useEffect(()=>{
-  for (const item of cartData) {
-    if (item.CartKey === 'VenueName') {
-      setTotal((prevTotal) => prevTotal + item.CartPrice * VenueLength);
-    } else if (item.CartKey === 'CaterName') {
-      setTotal((prevTotal) => prevTotal + item.CartPrice * CaterLength);
-    } else if (item.CartKey === 'DJName') {
-      setTotal((prevTotal) => prevTotal + item.CartPrice * DJLength);
-    } else if (item.CartKey === 'PhotoGrapherName') {
-      setTotal((prevTotal) => prevTotal + item.CartPrice * PhotographerLength);
+
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    // Calculate the total price based on CartKey and quantity
+    let newTotal = 0;
+
+    for (const item of cartData) {
+      let itemPrice = item.CartPrice;
+
+      if (item.CartKey === 'VenueName') {
+        itemPrice *= VenueLength;
+      } else if (item.CartKey === 'CaterName') {
+        itemPrice *= CaterLength;
+      } else if (item.CartKey === 'DJName') {
+        itemPrice *= DJLength;
+      } else if (item.CartKey === 'PhotoGrapherName') {
+        itemPrice *= PhotographerLength;
+      }
+
+      newTotal += itemPrice;
     }
-  }
- },[VenueLength,CaterLength,DJLength,PhotographerLength])
-  
-  // const total = 19999;
 
-  //pament coding starting here
+    setTotal(newTotal);
+  }, [cartData, VenueLength, CaterLength, DJLength, PhotographerLength]);
+
 
   const checkoutHandler = async (amount) => {
+    if(isAuthenticatedUser){
     const { data: {key} } = await axios.get("http://localhost:4000/api/getKey");
     const { data: {order} } = await axios.post("http://localhost:4000/api/checkout", {
       amount,
@@ -73,12 +85,31 @@ const CartNew = ({cartData,getData}) => {
     };
 
     const razor = new window.Razorpay(options);
-    razor.open();
+    razor.open(); } else {
+      Swal.fire({
+        title: 'Login Required',
+        text: 'Please log in to access this feature.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Log In',
+        cancelButtonText: 'Cancel',
+        customClass: {
+          confirmButton: 'btn btn-primary',
+          cancelButton: 'btn btn-secondary',
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setShowDateModal(true);
+        }
+      });
+      
+    }
   };
 
   const reducedTotal = total * 0.3;
 
   return (
+    <>
     <div>
       <h2>Cart Items</h2>
       <ul>
@@ -124,7 +155,12 @@ const CartNew = ({cartData,getData}) => {
           <button className='btn btn-success ms-4' onClick={() => {checkoutHandler(reducedTotal);console.log(total)} }>Payment</button>
         </div>
     </div>
+    <ModalComponent
+    show={showDateModal}
+    width={"45%"}
+    marginTop={"17%"} 
+    modalBody={<SignIn handleClose={() => setShowDateModal(false)} />} />
+    </>
   );
 }
 export default CartNew;
-

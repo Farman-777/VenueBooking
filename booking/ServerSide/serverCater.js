@@ -171,6 +171,23 @@ server.get("/getCaterRecord/:id", async (req, res) => {
 });
 
 
+server.delete('/deleteCaterRequest/:requestId', async (req, res) => {
+  const requestId = req.params.requestId;
+
+  try {
+    const result = await RegisterCater.deleteOne({ _id: requestId });
+
+    if (result.deletedCount === 1) {
+      res.status(204).send(); // Respond with a 204 No Content status for success
+    } else {
+      res.status(404).json({ error: 'Request not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 server.listen(Port, () => {
   console.log(`server is running on port : ${Port}`);
 });

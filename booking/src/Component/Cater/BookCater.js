@@ -99,13 +99,7 @@ const BookCater = ({ handleClose,CartId }) => {
                     required
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  style={{ backgroundColor: "#007bff", border: "none" }}
-                >
-                  Book Cater
-                </button>
+                <button type="submit" className="btn btn-primary" style={{ backgroundColor: "#007bff", border: "none" }} > Book Cater </button>
               </form>
             </div>
           </div>

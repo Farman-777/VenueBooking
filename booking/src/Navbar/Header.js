@@ -4,6 +4,7 @@ import ModalComponent from "../ModalComponent";
 import SignIn from './SignIn'
 import SignUp from "./SignUp";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 // import CartNew from '../CartNew'
 // import CartItem from "./CartItem";
 
@@ -14,8 +15,20 @@ const Header = ({setShow,cartLength}) => {
   // console.log(cartLength)
   const [showDateModal,setShowDateModal] = useState(false)
   const [showDateModal1,setShowDateModal1] = useState(false)
+  const [userName,setUserName] = useState("");
   const {isAuthenticated, isAdmin,isAuthenticatedUser } = useSelector(state => state.root)
   console.log(isAuthenticatedUser);
+
+  
+  const handleEmail = (email) => {
+    axios.get("http://localhost:8005/getUserName", {
+      params: { email: email }
+    })
+    .then(result => setUserName(result.data[0].Name));
+  }
+
+
+  
 return (
 <>
 <nav className="navbar navbar-expand-lg navbar-dark text-center text-dark" style={{background:"#13795b",fontFamily:"Roboto"}}>
@@ -56,7 +69,7 @@ return (
       <div>
        {!isAuthenticated && !isAdmin &&  <button className="btn btn-success me-2 " type="button" style={{fontFamily:"roboto",background:"none",border:"none"}} onClick={() => cartLength ? navigate("/cartnew") : navigate("/")}><i className="bi bi-cart-plus"><span style={{color:"white",fontWeight:"bold",marginLeft:"5px",fontSize:"20px"}}>{(cartLength !== null )?cartLength:0}</span></i></button>}
        {!isAuthenticated && !isAdmin && !isAuthenticatedUser &&  <button className="btn btn-success me-2" type="button" style={{fontFamily:"roboto"}} onClick={() => { setShowDateModal(true);}}>Sign in</button>}
-       {!isAuthenticated && !isAdmin &&  isAuthenticatedUser &&  <button className="btn btn-success me-2" type="button" style={{fontFamily:"roboto"}} onClick={() => { dispatch({type:"logoutUser"}) }}>Sign out</button>}
+       {!isAuthenticated && !isAdmin &&  isAuthenticatedUser &&  <button className="btn btn-success me-2" type="button" style={{fontFamily:"roboto"}} onClick={() => { dispatch({type:"logoutUser"}) }}><span>{userName} | </span> Sign out</button>}
        {!isAuthenticated && !isAdmin && !isAuthenticatedUser &&  <button className="btn btn-success" type="button" style={{fontFamily:"roboto"}} onClick={() => { setShowDateModal1(true) }}>SignUp</button>}
 
       </div>
@@ -66,7 +79,7 @@ return (
     show={showDateModal}
     width={"45%"}
     marginTop={"17%"} 
-    modalBody={<SignIn handleClose={() => setShowDateModal(false)} />} />}
+    modalBody={<SignIn handleClose={() => setShowDateModal(false)} handleEmail={handleEmail} />} />}
   <ModalComponent
     show={showDateModal1}
     width={"45%"}

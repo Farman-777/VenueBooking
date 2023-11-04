@@ -199,6 +199,13 @@ server.post("/newPassword", async (req, res) => {
   }
 });
 
+server.get("/getUserName", async (req, res) => {
+  const { email } = req.query; // Use req.query to access query parameters
+  const cartData1 = await User.find({ Email: email });
+  res.status(200).json(cartData1);
+});
+
+
 server.listen(Port, () => {
   console.log(`server is running on port : ${Port}`);
 });

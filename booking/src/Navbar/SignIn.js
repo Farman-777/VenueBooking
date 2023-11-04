@@ -5,7 +5,7 @@ import ModalComponent from "../ModalComponent";
 import Forget from "../Authentication/Forget";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-const SignIn = ({ handleClose }) => {
+const SignIn = ({ handleClose,handleEmail }) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,14 +20,14 @@ const SignIn = ({ handleClose }) => {
       userEmail: userEmail,
       userPassword: userPassword,
     };
+    handleEmail(userEmail);
 
     if(userEmail === "x@gmail.com" && userPassword === "123456"){      
       if (
         userEmail.trim() !== "" &&
         userPassword.trim() !== ""
         ) {
-          axios
-        .post("http://localhost:8005/getUserData", userObj)
+          axios.post("http://localhost:8005/getUserData", userObj)
         .then((response) => {
           if (response.status === 200) {
             Swal.fire({

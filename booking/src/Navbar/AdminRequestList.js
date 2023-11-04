@@ -42,19 +42,54 @@ const AdminRequestList = () => {
     }
   }, []);
 
-  const handleAccept = (requestId) => {
-    const updatedRequests = data1.map((request) =>
+  const handleAcceptDJ = (requestId) => {
+    const updatedRequestsDJ = data1.map((request) =>
       request._id === requestId ? { ...request, Status: "accepted" } : request
     );
-    setData1(updatedRequests);
+    setData1(updatedRequestsDJ);
   };
 
-  const handleReject = (requestId) => {
-    const updatedRequests = data1.map((request) =>
+  // const handleReject = (requestId) => {
+  //   const updatedRequests = data1.map((request) =>
+  //     request._id === requestId ? { ...request, Status: "rejected" } : request
+  //   );
+  //   setData1(updatedRequests);
+  // };
+
+
+  const handleRejectDJ = (requestId) => {
+    const updatedRequestsDJ = data1.map((request) =>
       request._id === requestId ? { ...request, Status: "rejected" } : request
     );
-    setData1(updatedRequests);
+    setData1(updatedRequestsDJ);
+  
+    // Now, make an API call to delete the rejected request
+    axios.delete(`http://localhost:8003/deleteDJRequest/${requestId}`)
+      .then((response) => {
+        // Handle the response if needed
+        console.log("Request deleted:", response.data);
+  
+        // Display a success notification
+        Swal.fire({
+          icon: 'success',
+          title: 'Request Deleted',
+          text: 'The request has been deleted successfully.',
+        });
+      })
+      .catch((error) => {
+        // Handle the error
+  
+        // Display an error notification
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to delete the request.',
+        });
+  
+        console.error("Failed to delete request:", error);
+      });
   };
+
   const handleAcceptCater = (requestId) => {
     const updatedRequestsCater = data2.map((request) =>
       request._id === requestId ? { ...request, Status: "accepted" } : request
@@ -62,25 +97,90 @@ const AdminRequestList = () => {
     setData2(updatedRequestsCater);
   };
 
+  // const handleRejectCater = (requestId) => {
+  //   const updatedRequestsCater = data2.map((request) =>
+  //     request._id === requestId ? { ...request, Status: "rejected" } : request
+  //   );
+  //   setData2(updatedRequestsCater);
+  // };
+
   const handleRejectCater = (requestId) => {
-    const updatedRequestsCater = data3.map((request) =>
+    const updatedRequestsCater = data2.map((request) =>
       request._id === requestId ? { ...request, Status: "rejected" } : request
     );
     setData2(updatedRequestsCater);
+  
+    // Now, make an API call to delete the rejected request
+    axios.delete(`http://localhost:8002/CaterRequest/${requestId}`)
+      .then((response) => {
+        // Handle the response if needed
+        console.log("Request deleted:", response.data);
+  
+        // Display a success notification
+        Swal.fire({
+          icon: 'success',
+          title: 'Request Deleted',
+          text: 'The request has been deleted successfully.',
+        });
+      })
+      .catch((error) => {
+        // Handle the error
+  
+        // Display an error notification
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to delete the request.',
+        });
+  
+        console.error("Failed to delete request:", error);
+      });
   };
   const handleAcceptVenue = (requestId) => {
-    const updatedRequestsVenue = data2.map((request) =>
+    const updatedRequestsVenue = data3.map((request) =>
       request._id === requestId ? { ...request, Status: "accepted" } : request
-    );
+    ); 
     setData3(updatedRequestsVenue);
   };
+
+  // const handleRejectVenue = (requestId) => {
+  //   const updatedRequestsVenue = data3.map((request) =>
+  //     request._id === requestId ? { ...request, Status: "rejected" } : request
+  //   );
+  //   setData3(updatedRequestsVenue);
+  // };
+
 
   const handleRejectVenue = (requestId) => {
     const updatedRequestsVenue = data3.map((request) =>
       request._id === requestId ? { ...request, Status: "rejected" } : request
     );
     setData3(updatedRequestsVenue);
+  
+    // Now, make an API call to delete the rejected request
+    axios.delete(`http://localhost:8000/deleteVenueRequest/${requestId}`)
+      .then((response) => {
+          Swal.fire({
+          icon: 'success',
+          title: 'Request Deleted',
+          text: 'The request has been deleted successfully.',
+        });
+      })
+      .catch((error) => {
+        // Handle the error
+  
+        // Display an error notification
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to delete the request.',
+        });
+  
+        console.error("Failed to delete request:", error);
+      });
   };
+
+
   const handleAcceptPhotographer = (requestId) => {
     const updatedRequestsPhotographer = data4.map((request) =>
       request._id === requestId ? { ...request, Status: "accepted" } : request
@@ -88,11 +188,43 @@ const AdminRequestList = () => {
     setData4(updatedRequestsPhotographer);
   };
 
+  // const handleRejectPhotographer = (requestId) => {
+  //   const updatedRequestsPhotographer = data4.map((request) =>
+  //     request._id === requestId ? { ...request, Status: "rejected" } : request
+  //   );
+  //   setData4(updatedRequestsPhotographer);
+  // };
   const handleRejectPhotographer = (requestId) => {
     const updatedRequestsPhotographer = data4.map((request) =>
       request._id === requestId ? { ...request, Status: "rejected" } : request
     );
     setData4(updatedRequestsPhotographer);
+  
+    // Now, make an API call to delete the rejected request
+    axios.delete(`http://localhost:8001/deletePhotographerRequest/${requestId}`)
+      .then((response) => {
+        // Handle the response if needed
+        console.log("Request deleted:", response.data);
+  
+        // Display a success notification
+        Swal.fire({
+          icon: 'success',
+          title: 'Request Deleted',
+          text: 'The request has been deleted successfully.',
+        });
+      })
+      .catch((error) => {
+        // Handle the error
+  
+        // Display an error notification
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to delete the request.',
+        });
+  
+        console.error("Failed to delete request:", error);
+      });
   };
 
   const handleStatusChange = (userId, entityType) => {
@@ -261,7 +393,7 @@ const AdminRequestList = () => {
                     <button
                       className="btn btn-success"
                       onClick={() => {
-                        handleAccept(request._id);
+                        handleAcceptDJ(request._id);
                         handleStatusChange(request._id, request.entityType);
                       }}
                     >
@@ -269,7 +401,7 @@ const AdminRequestList = () => {
                     </button>
                     <button
                       className="btn btn-danger ml-2"
-                      onClick={() => handleReject(request._id)}
+                      onClick={() => handleRejectDJ(request._id)}
                     >
                       Reject
                     </button>

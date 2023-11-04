@@ -23,13 +23,32 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
   console.log("keyName : ",keyName);
 
   const handleClick = () => {
-    if (isAuthenticatedUser) { 
-      setShowModal(true); dispatch({type:"incrementVenue"});alert(VenueLength+1);
-     } else { 
-      Swal.fire({ 
-      icon: 'error', title: 'User Not Logged In', text: 'Please log in to continue.', 
-    }); } console.log("itemNew"); 
-
+    if (isAuthenticatedUser) {
+      setShowModal(true);
+      // Use a switch statement to increment the corresponding state variable
+      switch (keyName) {
+        case "VenueName":
+          dispatch({ type: "incrementVenue" });
+          break;
+        case "CaterName":
+          dispatch({ type: "incrementCater" });
+          break;
+        case "DJName":
+          dispatch({ type: "incrementDJ" });
+          break;
+        case "PhotoGrapherName":
+          dispatch({ type: "incrementPhotographer" });
+          break;
+        default:
+          break;
+      }
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'User Not Logged In',
+        text: 'Please log in to continue.',
+      });
+    }
   };
 
   const obj = { CartKey1: id };
@@ -51,7 +70,7 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
       <div className="cart-parent">
         <img src={`${imageUrl}${imageName}`} alt="" />
         <div className="item-details"><div className="item-info"> <span>{name}</span> <p>Price: {price}</p> </div> </div>
-        <button type="date" className="btn btn-success" onClick={() => { console.log("hi : ", name); handleClick(); }}>Select Date</button>
+        <button type="date" className="btn btn-success" onClick={() => {handleClick();}}>Select Date</button>
         <button className="btn btn-danger" onClick={() => handleDelete()}>Remove</button>
       </div>
       <ModalComp show={showModal} width={"90%"}
