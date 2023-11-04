@@ -1,36 +1,52 @@
+// rootReducer.js
 import { createReducer } from "@reduxjs/toolkit";
 
 export const rootReducer = createReducer(
-  { isAuthenticated: false ,
-    isAdmin:false,
-    isAuthenticatedUser:false,
-    VenueLength : 1, 
-    CaterLength : 1, 
-    DJLength : 1, 
-    PhotographerLength : 1, 
+  {
+    isAuthenticated: false,
+    isAdmin: false,
+    isAuthenticatedUser: false,
+    VenueLength: 1,
+    CaterLength: 1,
+    DJLength: 1,
+    PhotographerLength: 1,
   },
   {
     loginAdmin: (state) => {
-      state.isAuthenticated = true;
-      state.isAdmin = true;
+      return { ...state, isAuthenticated: true, isAdmin: true };
     },
     logoutAdmin: (state) => {
-      state.isAuthenticated = false;
-      state.isAdmin = false;
+      return { ...state, isAuthenticated: false, isAdmin: false };
     },
     loginUser: (state) => {
-      state.isAuthenticatedUser = true;
-
+      return { ...state, isAuthenticatedUser: true };
     },
-    logoutUser: (state) => { state.isAuthenticatedUser = false; },
-    incrementVenue : (state) => { state.VenueLength+=1; },
-    removeVenue : (state) => { state.VenueLength = 1; } ,
-    incrementCater : (state) => { state.CaterLength+=1; },
-    removeCater : (state) => { state.CaterLength = 1; } ,
-    incrementDJ : (state) => { state.DJLength+=1; },
-    removeDJ : (state) => { state.DJLength = 1; } ,
-    incrementPhotographer : (state) => { state.PhotographerLength+=1; },
-    removePhotographer : (state) => { state.PhotographerLength = 1; } 
+    logoutUser: (state) => {
+      return { ...state, isAuthenticatedUser: false };
+    },
+    incrementVenue: (state) => {
+      return { ...state, VenueLength: state.VenueLength + 1 };
+    },
+    removeVenue: (state) => {
+      return { ...state, VenueLength: 1 };
+    },
+    incrementCater: (state) => {
+      return { ...state, CaterLength: state.CaterLength + 1 };
+    },
+    removeCater: (state) => {
+      return { ...state, CaterLength: 1 };
+    },
+    incrementDJ: (state) => {
+      return { ...state, DJLength: state.DJLength + 1 };
+    },
+    removeDJ: (state) => {
+      return { ...state, DJLength: 1 };
+    },
+    incrementPhotographer: (state) => {
+      return { ...state, PhotographerLength: state.PhotographerLength + 1 };
+    },
+    removePhotographer: (state) => {
+      return { ...state, PhotographerLength: 1 };
+    },
   }
 );
- 

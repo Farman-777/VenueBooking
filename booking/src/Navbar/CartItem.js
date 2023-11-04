@@ -11,11 +11,11 @@ import BookDJ from "../Component/DJ/BookDJ";
 import BookVenue from "../Component/Venue/BookVenue";
 
 const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartId}) => {
+  const {isAuthenticatedUser, VenueLength, CaterLength, DJLength, PhotographerLength } = useSelector(state => state.root)
+
   const dispatch = useDispatch();
-  
-  const {VenueLength } = useSelector(state => state.root)
-  const {isAuthenticatedUser } = useSelector(state => state.root)
   const [showModal,setShowModal] = useState(false);
+  const [itemLength,setItemLength] = useState(1);
   
   console.log("id : ", id);
   console.log("name : ", name);
@@ -28,16 +28,21 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
       // Use a switch statement to increment the corresponding state variable
       switch (keyName) {
         case "VenueName":
-          dispatch({ type: "incrementVenue" });
+          dispatch({ type: "incrementVenue" }); 
+          setItemLength(VenueLength)
+
           break;
         case "CaterName":
           dispatch({ type: "incrementCater" });
+          setItemLength(CaterLength)
           break;
         case "DJName":
           dispatch({ type: "incrementDJ" });
+          setItemLength(DJLength)
           break;
         case "PhotoGrapherName":
           dispatch({ type: "incrementPhotographer" });
+          setItemLength(PhotographerLength)
           break;
         default:
           break;
@@ -65,11 +70,13 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
     dispatch({type:"removeVenue"});alert(VenueLength);
   };
 
+
+
   return (
     <>
       <div className="cart-parent">
         <img src={`${imageUrl}${imageName}`} alt="" />
-        <div className="item-details"><div className="item-info"> <span>{name}</span> <p>Price: {price}</p> </div> </div>
+        <div className="item-details"><div className="item-info"> <span>{name}</span> <p>Price: {price}</p> </div> <span>Item Added {itemLength} Times </span> </div>
         <button type="date" className="btn btn-success" onClick={() => {handleClick();}}>Select Date</button>
         <button className="btn btn-danger" onClick={() => handleDelete()}>Remove</button>
       </div>
