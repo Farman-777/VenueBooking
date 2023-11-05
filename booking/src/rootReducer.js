@@ -10,6 +10,8 @@ export const rootReducer = createReducer(
     CaterLength: 1,
     DJLength: 1,
     PhotographerLength: 1,
+    userID:"",
+    userEmail:""
   },
   {
     loginAdmin: (state) => {
@@ -47,6 +49,12 @@ export const rootReducer = createReducer(
     },
     removePhotographer: (state) => {
       return { ...state, PhotographerLength: 1 };
+    },
+    addUserID: (state, action) => {
+      state.userID = action.payload;
+    },
+    removeUserID: (state) => {
+      state.userID = "";
     },
   }
 );

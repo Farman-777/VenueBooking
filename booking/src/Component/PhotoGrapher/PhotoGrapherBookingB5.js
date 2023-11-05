@@ -4,10 +4,11 @@ import DateModalPhotographer from "./DateModalPhotographer";
 import ModalComp from "../../ModalComp";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
+  const {userID} = useSelector(state => state.root);
   const [showDateModal, setShowDateModal] = useState(false);
-  const [showDateModal1, setShowDateModal1] = useState(false);
   const [PhotoGrapherData, setPhotoGrapherData] = useState({
     images: []
   });
@@ -33,8 +34,16 @@ const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
     fetchData();
   }, [id]);
 
-  const handlePhotoGraph = (item) => {
-    handleAppPhotoGraphItem(item);
+
+  const handlePhotoGraph = (item) => { 
+    if (userID.length > 0) { 
+      const itemWithUserID = {
+        ...item,
+        userID: userID
+      };
+      console.log(itemWithUserID);
+      handleAppPhotoGraphItem(itemWithUserID);
+    } 
   }
 
   return (

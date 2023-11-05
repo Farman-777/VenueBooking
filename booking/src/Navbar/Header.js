@@ -17,14 +17,14 @@ const Header = ({setShow,cartLength}) => {
   const [showDateModal1,setShowDateModal1] = useState(false)
   const [userName,setUserName] = useState("");
   const {isAuthenticated, isAdmin,isAuthenticatedUser } = useSelector(state => state.root)
-  console.log(isAuthenticatedUser);
+
+  console.log("isAuthenticatedUser : ",isAuthenticatedUser);
 
   
   const handleEmail = (email) => {
-    axios.get("http://localhost:8005/getUserName", {
-      params: { email: email }
-    })
-    .then(result => setUserName(result.data[0].Name));
+    axios.get("http://localhost:8005/getUserName", { params: { email: email } })
+    .then(result => { setUserName(result.data[0].Name); dispatch({ type:"addUserID",payload:result.data[0]._id }) });
+    // .then(result => {console.log(result.data[0]); });
   }
 
 
@@ -70,6 +70,7 @@ return (
        {!isAuthenticated && !isAdmin &&  <button className="btn btn-success me-2 " type="button" style={{fontFamily:"roboto",background:"none",border:"none"}} onClick={() => cartLength ? navigate("/cartnew") : navigate("/")}><i className="bi bi-cart-plus"><span style={{color:"white",fontWeight:"bold",marginLeft:"5px",fontSize:"20px"}}>{(cartLength !== null )?cartLength:0}</span></i></button>}
        {!isAuthenticated && !isAdmin && !isAuthenticatedUser &&  <button className="btn btn-success me-2" type="button" style={{fontFamily:"roboto"}} onClick={() => { setShowDateModal(true);}}>Sign in</button>}
        {!isAuthenticated && !isAdmin &&  isAuthenticatedUser &&  <button className="btn btn-success me-2" type="button" style={{fontFamily:"roboto"}} onClick={() => { dispatch({type:"logoutUser"}) }}><span>{userName} | </span> Sign out</button>}
+       {/* {!isAuthenticated && !isAdmin &&  isAuthenticatedUser &&  <button className="btn btn-success me-2" type="button" style={{fontFamily:"roboto"}} onClick={() => { dispatch({type:"logoutUser",type:"removeUserID"}) }}><span>{userName} | </span> Sign out</button>} */}
        {!isAuthenticated && !isAdmin && !isAuthenticatedUser &&  <button className="btn btn-success" type="button" style={{fontFamily:"roboto"}} onClick={() => { setShowDateModal1(true) }}>SignUp</button>}
 
       </div>

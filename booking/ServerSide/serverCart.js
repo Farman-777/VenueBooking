@@ -25,6 +25,7 @@ const UserSchema = new mongoose.Schema({
   CartPrice: Number,
   CartKey: String,  
   image: [String],   
+  user_ID:String,
 });
 
 const Cart = mongoose.model("Cart", UserSchema);
@@ -64,6 +65,7 @@ server.post("/addCart", upload.array("image", 1), async (req, res) => {
     CartPrice: req.body.price, // using the price property from the request body
     CartKey: req.body.CartKey, // using the cartKey property from the request body
     image: imageFilename, // Assign the array of image filenames
+    user_ID:req.body.userID,
   });
 
   try {
@@ -77,10 +79,11 @@ server.post("/addCart", upload.array("image", 1), async (req, res) => {
   }
 });
 
-
-
-server.get("/getCart",async (req,res) => {
-  const cartData1 = await Cart.find({});
+server.get("/getCart/:id",async (req,res) => {
+  const {id} = req.params;
+  console.log("farman : ",id);
+  const cartData1 = await Cart.find({user_ID:id});
+  console.log("farman : ",cartData1);
   res.status(200).json(cartData1);
 })
 

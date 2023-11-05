@@ -205,6 +205,10 @@ server.get("/getUserName", async (req, res) => {
   res.status(200).json(cartData1);
 });
 
+server.get("/userData",(req,res) => {
+  const userData = User.find({});
+  res.status(200).json(userData);
+})
 
 server.listen(Port, () => {
   console.log(`server is running on port : ${Port}`);

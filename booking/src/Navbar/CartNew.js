@@ -108,6 +108,10 @@ const CartNew = ({cartData,getData}) => {
 
   const reducedTotal = total * 0.3;
 
+  const handleEmail = (email) => {
+    console.log(email);
+  }
+
   return (
     <>
     <div>
@@ -159,7 +163,7 @@ const CartNew = ({cartData,getData}) => {
     show={showDateModal}
     width={"45%"}
     marginTop={"17%"} 
-    modalBody={<SignIn handleClose={() => setShowDateModal(false)} />} />
+    modalBody={<SignIn handleClose={() => setShowDateModal(false)} handleEmail={handleEmail} />} />
     </>
   );
 }

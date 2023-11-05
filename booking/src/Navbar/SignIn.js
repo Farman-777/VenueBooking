@@ -5,6 +5,8 @@ import ModalComponent from "../ModalComponent";
 import Forget from "../Authentication/Forget";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+
 const SignIn = ({ handleClose,handleEmail }) => {
 
   const dispatch = useDispatch();
@@ -30,11 +32,7 @@ const SignIn = ({ handleClose,handleEmail }) => {
           axios.post("http://localhost:8005/getUserData", userObj)
         .then((response) => {
           if (response.status === 200) {
-            Swal.fire({
-              icon: "success",
-              title: "",
-              text: "SignIn Successfully",
-            });
+            Swal.fire({ icon: "success", title: "", text: "SignIn Successfully", });
             // Clear the form fields
             setUserEmail("");
             setUserPassword("");
@@ -45,63 +43,30 @@ const SignIn = ({ handleClose,handleEmail }) => {
             handleClose();
           }      
         })
-        .catch(error => {
-          Swal.fire({
-            icon: "error",
-            title: "",
-            text: "Check Email Or Password",
-          });
-        })
+        .catch(error => { Swal.fire({ icon: "error", title: "", text: "Check Email Or Password", }); })
         
-      } else {
-        // Display a message or handle the case where not all fields are filled
-        Swal.fire({
-          icon: "warning",
-          title: "",
-          text: "Please Fill All Fields",
-        });
-      }
+      } else { Swal.fire({ icon: "warning", title: "", text: "Please Fill All Fields", }); }
     }
     else{
       if (
         userEmail.trim() !== "" &&
         userPassword.trim() !== ""
         ) {
-          axios
-        .post("http://localhost:8005/getUserData", userObj)
-        .then((response) => {
+          axios.post("http://localhost:8005/getUserData", userObj).then((response) => {
           if (response.status === 200) {
-            Swal.fire({
-              icon: "success",
-              title: "",
-              text: "SignIn Successfully",
-            });
-            // Clear the form fields
+            Swal.fire({ icon: "success", title: "", text: "SignIn Successfully", });
+            
             setUserEmail("");
             setUserPassword("");
             
-            // Call handleClose only when all fields are non-empty
             dispatch({ type: "loginUser" });
-            // navigate("/admin");
+            dispatch({ type: 'addUser', payload: "12345" });
+      
             handleClose();
           }      
         })
-        .catch(error => {
-          Swal.fire({
-            icon: "error",
-            title: "",
-            text: "Check Email Or Password",
-          });
-        })
-        
-      } else {
-        // Display a message or handle the case where not all fields are filled
-        Swal.fire({
-          icon: "warning",
-          title: "",
-          text: "Please Fill All Fields",
-        });
-      }
+        .catch(error => { Swal.fire({ icon: "error", title: "", text: "Check Email Or Password", }); })        
+      } else { Swal.fire({ icon: "warning", title: "", text: "Please Fill All Fields", }); }
     }
 }
 
@@ -109,49 +74,15 @@ const SignIn = ({ handleClose,handleEmail }) => {
   return (
     <div>
       <form
-        style={{
-          background: "#333333",
-          color: "white",
-          padding: "25px",
-          borderRadius: "12px",
-          border: "1px solid white",
-        }}
-        className="fs-3 text-start mt-4"
-      >
-        <div className="mb-3">
-          <label htmlFor="userEmail" className="form-label">
-            Email address
-          </label>
-          <input
-            onChange={(e) => setUserEmail(e.target.value)}
-            value={userEmail}
-            // style={{ width: "75%", position: "relative", left: "100px" }}
-            type="email"
-            className="form-control"
-            id="userEmail"
-            required
-          />
+        style={{ background: "#333333", color: "white", padding: "25px", borderRadius: "12px", border: "1px solid white", }} className="fs-3 text-start mt-4" >
+        <div className="mb-3"> <label htmlFor="userEmail" className="form-label"> Email address </label>
+          <input onChange={(e) => setUserEmail(e.target.value)} value={userEmail} type="email" className="form-control" id="userEmail" required />
         </div>
-        <div className="mb-3">
-          <label htmlFor="userPassword" className="form-label">
-            Password
-          </label>
-          <input
-            onChange={(e) => setUserPassword(e.target.value)}
-            value={userPassword}
-            // style={{ width: "75%", position: "relative", left: "100px" }}
-            type="password"
-            className="form-control"
-            id="userPassword"
-            required
-          />
+        <div className="mb-3"> <label htmlFor="userPassword" className="form-label"> Password </label>
+          <input onChange={(e) => setUserPassword(e.target.value)} value={userPassword} type="password" className="form-control" id="userPassword" required />
         </div>
 
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={handleSubmit}
-        >Submit</button>
+        <button type="submit" className="btn btn-primary" onClick={handleSubmit} >Submit</button> 
         <hr/>
         <p className="fs-5 " role="button" tabindex="0"  onClick={() => { setShowDateModal(true) }}>Forgot password?</p>        
       </form>

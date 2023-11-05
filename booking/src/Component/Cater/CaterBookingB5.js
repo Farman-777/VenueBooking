@@ -4,10 +4,11 @@ import BookCater from "./BookCater";
 import ModalComp from "../../ModalComp";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const CaterBookingB5 = ({handleAppCaterItem}) => {
+  const {userID} = useSelector(state => state.root);
   const [showDateModal, setShowDateModal] = useState(false);
-  const [showDateModal1, setShowDateModal1] = useState(false);
   const [CaterData, setCaterData] = useState({
     images: []
   });
@@ -36,9 +37,15 @@ const CaterBookingB5 = ({handleAppCaterItem}) => {
     fetchData();
   }, [id]);
 
-  const handleCater = (item) => {
-    
-    handleAppCaterItem(item);
+  const handleCater = (item) => { 
+    if (userID.length > 0) { 
+      const itemWithUserID = {
+        ...item,
+        userID: userID
+      };
+      console.log(itemWithUserID);
+      handleAppCaterItem(itemWithUserID);
+    } 
   }
 
   return (

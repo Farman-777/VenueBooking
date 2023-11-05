@@ -35,9 +35,10 @@ import Temp from './Temp';
 import PaymentSuccess from './payComps/PaymentSucess'
 
 const App = () => {
-  const {isAuthenticated} = useSelector(state => state.root);
+  const {isAuthenticated,userID} = useSelector(state => state.root);
   const [show, setShow] = useState(localStorage.getItem("show") === "true" || false);
   const [cartData, setCartData] = useState([]);
+
 
   useEffect(() => {
     localStorage.setItem("show", show);
@@ -50,45 +51,30 @@ const App = () => {
       CartKey:item.VenueName ? "VenueName" : item.DJName ? "DJName" : item.CaterName ? "CaterName" : item.PhotoGrapherName ? "PhotoGrapherName" : "",
       title: item.VenueName ? item.VenueName : item.DJName ? item.DJName : item.CaterName ? item.CaterName : item.PhotoGrapherName ? item.PhotoGrapherName : "",
       price: item.VenuePrice ? item.VenuePrice : item.DJPrice ? item.DJPrice : item.CaterPrice ? item.CaterPrice : item.PhotoGrapherPrice ? item.PhotoGrapherPrice : "",
-      image: [item.VenueName ? item.images[0] : item.DJName ? item.images[0] : item.CaterName ? item.images[0] : item.PhotoGrapherName ? item.images[0] : ""]
+      image: [item.VenueName ? item.images[0] : item.DJName ? item.images[0] : item.CaterName ? item.images[0] : item.PhotoGrapherName ? item.images[0] : ""],
+      userID:item.userID,
     };
+
     console.log("cart Item in App: ", obj);
 
     if (!cartData) {
       setCartData([]);
     }
-      axios
-        .post('http://localhost:8006/addCart', obj, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        })
+      axios.post('http://localhost:8006/addCart', obj, { headers: { 'Content-Type': 'multipart/form-data' }, })
         .then((response) => {
-          if (response.status === 200) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Cart Item Added',
-              text: 'Successfully!',
-            });
-          }
+          if (response.status === 200) { Swal.fire({ icon: 'success', title: 'Cart Item Added', text: 'Successfully!', }); }
           getData();
         })
-        .catch((error) => {
-          Swal.fire({
-            icon: "warning",
-            title: "Item Already Added",
-            text: "This item is already in your cart.",
-          });
-        });
-      // console.log("cartData : ", cartData);
+        .catch((error) => { Swal.fire({ icon: "warning", title: "Item Already Added", text: "This item is already in your cart.", }); });
+
     }
 
-  const getData = () => {
-    axios.get("http://localhost:8006/getCart")
-      .then(result => setCartData(result.data))
-  }
+  const getData = () => { axios.get(`http://localhost:8006/getCart/${userID}`).then(result => setCartData(result.data)) }
+  // const getData = () => { axios.get(`http://localhost:8006/getCart/${userId}`, { params: { id: userID } }).then(result => setCartData(result.data)) }
 
   useEffect(() => {
-    getData();
-  }, []);
+    if(userID.length > 0){ getData(); }
+  }, [userID]);
 
   return (
     <div className="App">
