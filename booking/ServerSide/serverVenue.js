@@ -28,6 +28,7 @@ const RegisterationSchema = new mongoose.Schema({
   images: [String], // Array to store image paths
   Status:String,
   entityType:String,
+  // userID:String,
 });
 
 const RegisterVenue = mongoose.model("RegisterVenues", RegisterationSchema);

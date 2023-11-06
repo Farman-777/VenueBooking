@@ -67,7 +67,7 @@ return (
         {isAuthenticated && isAdmin && <li className="nav-link active" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/admin") }}>Admin</li>}
         </ul>
       <div>
-       {!isAuthenticated && !isAdmin &&  <button className="btn btn-success me-2 " type="button" style={{fontFamily:"roboto",background:"none",border:"none"}} onClick={() => cartLength ? navigate("/cartnew") : navigate("/")}><i className="bi bi-cart-plus"><span style={{color:"white",fontWeight:"bold",marginLeft:"5px",fontSize:"20px"}}>{(cartLength !== null )?cartLength:0}</span></i></button>}
+       {!isAuthenticated && !isAdmin && isAuthenticatedUser &&  <button className="btn btn-success me-2 " type="button" style={{fontFamily:"roboto",background:"none",border:"none"}} onClick={() => cartLength ? navigate("/cartnew") : navigate("/")}><i className="bi bi-cart-plus"><span style={{color:"white",fontWeight:"bold",marginLeft:"5px",fontSize:"20px"}}>{(cartLength !== null )?cartLength:0}</span></i></button>}
        {!isAuthenticated && !isAdmin && !isAuthenticatedUser &&  <button className="btn btn-success me-2" type="button" style={{fontFamily:"roboto"}} onClick={() => { setShowDateModal(true);}}>Sign in</button>}
        {!isAuthenticated && !isAdmin &&  isAuthenticatedUser &&  <button className="btn btn-success me-2" type="button" style={{fontFamily:"roboto"}} onClick={() => { dispatch({type:"logoutUser"}) }}><span>{userName} | </span> Sign out</button>}
        {/* {!isAuthenticated && !isAdmin &&  isAuthenticatedUser &&  <button className="btn btn-success me-2" type="button" style={{fontFamily:"roboto"}} onClick={() => { dispatch({type:"logoutUser",type:"removeUserID"}) }}><span>{userName} | </span> Sign out</button>} */}

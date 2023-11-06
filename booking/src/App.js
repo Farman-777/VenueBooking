@@ -35,7 +35,7 @@ import Temp from './Temp';
 import PaymentSuccess from './payComps/PaymentSucess'
 
 const App = () => {
-  const {isAuthenticated,userID} = useSelector(state => state.root);
+  const {isAuthenticated,userID,isAuthenticatedUser} = useSelector(state => state.root);
   const [show, setShow] = useState(localStorage.getItem("show") === "true" || false);
   const [cartData, setCartData] = useState([]);
 
@@ -106,7 +106,7 @@ const App = () => {
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/temp" element={<Temp />} />
           <Route path="/admin" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <AdminRequestList /> </ProtectedRoute>} />
-          <Route path="/cartnew" element={cartData.length > 0 ? <CartNew cartData={cartData} getData={getData} /> : null} />
+          {isAuthenticatedUser && <Route path="/cartnew" element={cartData.length > 0 ? <CartNew cartData={cartData} getData={getData} /> : null} />}
           
           <Route path="/paymentsuccess" element={<PaymentSuccess />} />
 

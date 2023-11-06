@@ -51,7 +51,7 @@ server.post("/addCart", upload.array("image", 1), async (req, res) => {
   const imageFilename = req.body.image[0];
 
   // Check if an item with the same CartKey already exists
-  const existingCartItem = await Cart.findOne({ CartTitle: req.body.title });
+  const existingCartItem = await Cart.findOne({ CartTitle: req.body.title,user_ID:req.body.userID });
 
   if (existingCartItem) {
     // If an item with the same CartKey exists, respond with an error message
