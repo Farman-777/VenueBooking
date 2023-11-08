@@ -46,11 +46,11 @@ return (
 
         {!isAuthenticated && !isAdmin && !isAuthenticatedUser &&  <li className="nav-item dropdown">
  
-          <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Vendor Registeration</button>
+          <button class="btn btn-primary ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Vendor Registeration</button>
 
           <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
             <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
+            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Vendor Registeration</h5>
          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
          </div>
           <div class="offcanvas-body">
@@ -62,16 +62,16 @@ return (
 </div>
         </li>
         }
-       <li className="nav-link active" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/aboutus") }}>About Us</li>
-        <li className="nav-link active" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/contactus") }}>Contact Us</li>
-        {isAuthenticated && isAdmin && <li className="nav-link active" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/admin") }}>Admin</li>}
+       <li className="nav-link active ms-2" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/aboutus") }}>About Us</li>
+        <li className="nav-link active ms-2" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/contactus") }}>Contact Us</li>
+        {isAuthenticated && isAdmin && <li className="nav-link active ms-2" style={{cursor:"pointer"}} onClick={()=> { setShow(true); navigate("/admin") }}>Admin</li>}
         </ul>
       <div>
-       {!isAuthenticated && !isAdmin && isAuthenticatedUser &&  <button className="btn btn-success me-2 " type="button" style={{fontFamily:"roboto",background:"none",border:"none"}} onClick={() => cartLength ? navigate("/cartnew") : navigate("/")}><i className="bi bi-cart-plus"><span style={{color:"white",fontWeight:"bold",marginLeft:"5px",fontSize:"20px"}}>{(cartLength !== null )?cartLength:0}</span></i></button>}
-       {!isAuthenticated && !isAdmin && !isAuthenticatedUser &&  <button className="btn btn-success me-2" type="button" style={{fontFamily:"roboto"}} onClick={() => { setShowDateModal(true);}}>Sign in</button>}
-       {!isAuthenticated && !isAdmin &&  isAuthenticatedUser &&  <button className="btn btn-success me-2" type="button" style={{fontFamily:"roboto"}} onClick={() => { dispatch({type:"logoutUser"}) }}><span>{userName} | </span> Sign out</button>}
+       {!isAuthenticated && !isAdmin && isAuthenticatedUser &&  <button className="btn btn-success me-2 border- border-success shadow-sm " type="button" style={{fontFamily:"roboto",background:"none",border:"none"}} onClick={() => cartLength ? navigate("/cartnew") : navigate("/")}><i className="bi bi-cart-plus"><span style={{color:"white",fontWeight:"bold",marginLeft:"5px",fontSize:"20px"}}>{(cartLength !== null )?cartLength:0}</span></i></button>}
+       {!isAuthenticated && !isAdmin && !isAuthenticatedUser &&  <button className="btn btn-success me-2 border- border-success shadow-sm" type="button" style={{fontFamily:"roboto"}} onClick={() => { setShowDateModal(true);}}>Login</button>}
+       {!isAuthenticated && !isAdmin &&  isAuthenticatedUser &&  <button className="btn btn-success me-2 border- border-success shadow-sm" type="button" style={{fontFamily:"roboto"}} onClick={() => { dispatch({type:"logoutUser"}) }}><span>{userName} | </span> Logout</button>}
        {/* {!isAuthenticated && !isAdmin &&  isAuthenticatedUser &&  <button className="btn btn-success me-2" type="button" style={{fontFamily:"roboto"}} onClick={() => { dispatch({type:"logoutUser",type:"removeUserID"}) }}><span>{userName} | </span> Sign out</button>} */}
-       {!isAuthenticated && !isAdmin && !isAuthenticatedUser &&  <button className="btn btn-success" type="button" style={{fontFamily:"roboto"}} onClick={() => { setShowDateModal1(true) }}>SignUp</button>}
+       {!isAuthenticated && !isAdmin && !isAuthenticatedUser &&  <button className="btn btn-success border-1 border-success shadow-lg" type="button" style={{fontFamily:"roboto"}} onClick={() => { setShowDateModal1(true) }}>SignUp</button>}
 
       </div>
     </div>
