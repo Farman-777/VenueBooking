@@ -5,6 +5,7 @@ import SignIn from './SignIn'
 import SignUp from "./SignUp";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import imageUrl from '../Logo/CelebrateWithMe.jpeg'
 // import CartNew from '../CartNew'
 // import CartItem from "./CartItem";
 
@@ -34,7 +35,12 @@ return (
 <nav className="navbar navbar-expand-lg navbar-dark text-center text-dark" style={{background:"#13795b",fontFamily:"Roboto"}}>
 {/* <nav className="navbar navbar-expand-lg navbar-dark text-center" style={{background:"#563d7c",fontFamily:"Roboto"}}> */}
   <div className="container-fluid">
-    <a className="navbar-brand">Navbar</a>
+  <img className="navbar-brand" src={imageUrl} alt="Celebrate With Me" style={{
+    height: '50px',
+    border: '2px solid green',
+    borderRadius: '16px', 
+    boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+  }} />
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
