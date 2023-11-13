@@ -31,13 +31,13 @@ const RegisterationSchema = new mongoose.Schema({
   // userID:String,
 });
 
-const RegisterVenue = mongoose.model("RegisterVenues", RegisterationSchema);
 
 const TableSchema = new mongoose.Schema({
   Id:String,
   Date: String,
   Status: String,
 })
+const RegisterVenue = mongoose.model("RegisterVenues", RegisterationSchema);
 const BookVenuesRecord = mongoose.model("BookVenuesRecord", TableSchema);
 
 // Multer storage configuration
