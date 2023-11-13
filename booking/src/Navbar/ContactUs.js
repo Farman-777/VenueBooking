@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 const ContactUs = () => {
   const {isAuthenticated, isAdmin,isAuthenticatedUser } = useSelector(state => state.root)
+  console.log("Contact Us page isAuthenticatedUser",isAuthenticatedUser);
   const [showConfetti, setShowConfetti] = useState(false);
   const [name,setName] = useState('')
   const [email,setEmail] = useState('')
@@ -17,14 +18,15 @@ const handleMessage = (e) => { setMessage(e.target.value); }
 
 const handleFormSubmit = (e) => {
   e.preventDefault();
-  // if(!isAuthenticated){
-  //   Swal.fire({
-  //     icon: "warning",
-  //     title: "Please Login First",
-  //     text: ""
-  //   });
-  //   return
-  // }
+
+  if(isAuthenticatedUser === false){
+    Swal.fire({
+      icon: "warning",
+      title: "Please Login First",
+      text: ""
+    });
+    return
+  }
 
   // Assuming name, email, and message are defined somewhere in your component state
   const formObj = {
