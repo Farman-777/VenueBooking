@@ -38,7 +38,10 @@ const App = () => {
   const {isAuthenticated,userID,isAuthenticatedUser} = useSelector(state => state.root);
   const [show, setShow] = useState(localStorage.getItem("show") === "true" || false);
   const [cartData, setCartData] = useState([]);
-
+  const [VenueCount,setVenueCount] = useState(0);
+  const [CaterCount,setCaterCount] = useState(0);
+  const [DJCount,setDJCount] = useState(0);
+  const [PhotoGrapherCount,setPhotoGrapher] = useState(0);
 
   useEffect(() => {
     localStorage.setItem("show", show);
@@ -53,6 +56,7 @@ const App = () => {
       price: item.VenuePrice ? item.VenuePrice : item.DJPrice ? item.DJPrice : item.CaterPrice ? item.CaterPrice : item.PhotoGrapherPrice ? item.PhotoGrapherPrice : "",
       image: [item.VenueName ? item.images[0] : item.DJName ? item.images[0] : item.CaterName ? item.images[0] : item.PhotoGrapherName ? item.images[0] : ""],
       userID:item.userID,
+      BookCount:item.VenueName ? VenueCount : item.DJName ? DJCount : item.CaterName ? CaterCount : item.PhotoGrapherName ? PhotoGrapherCount : "",
     };
 
     console.log("cart Item in App: ", obj);
@@ -62,10 +66,10 @@ const App = () => {
     }
       axios.post('http://localhost:8006/addCart', obj, { headers: { 'Content-Type': 'multipart/form-data' }, })
         .then((response) => {
-          if (response.status === 200) { Swal.fire({ icon: 'success', title: 'Cart Item Added', text: 'Successfully!', }); }
+          if (response.status === 200) { Swal.fire('success','Cart Item Added', 'Successfully!', ); }
           getData();
         })
-        .catch((error) => { Swal.fire({ icon: "warning", title: "Item Already Added", text: "This item is already in your cart.", }); });
+        .catch((error) => { Swal.fire("warning","Item Already Added", "This item is already in your cart.", ); });
 
     }
 
@@ -79,8 +83,7 @@ const App = () => {
   return (
     <div className="App">
       {cartData.length ? <Header setShow={setShow} cartLength={cartData.length}/> : <Header setShow={setShow} cartLength={0}/>}
-      {/* <Home /> */}
-      {show ? (
+         {show ? (
         <Routes>
           <Route path="/" element={<HomePage/>} />
 

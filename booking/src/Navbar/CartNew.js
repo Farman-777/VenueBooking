@@ -14,22 +14,13 @@ cater:8002 appUrl: 2,
 DJ:8003 appUrl: 3,
  */
 const CartNew = ({cartData,getData}) => {
-  const {VenueLength,CaterLength,DJLength,PhotographerLength,isAuthenticatedUser } = useSelector(state => state.root)
+  const {isAuthenticatedUser } = useSelector(state => state.root)
   const [showDateModal,setShowDateModal] = useState(false);
+  const [total, setTotal] = useState(0);
   console.log(cartData);
-  const [appUrl, setAppUrl] = useState([
-    "http://localhost:8000/images/",
-    "http://localhost:8001/Images/",
-    "http://localhost:8002/Images/",
-    "http://localhost:8003/images/",
-  ]);
   console.log("keyName Object : ",cartData[0]);
   console.log("keyName Object output : ",cartData[0].CartKey);
-
-  
-
-
-  const [total, setTotal] = useState(0);
+  const [appUrl, setAppUrl] = useState(["http://localhost:8000/images/","http://localhost:8001/Images/","http://localhost:8002/Images/","http://localhost:8003/images/",]);
 
   useEffect(() => {
     // Calculate the total price based on CartKey and quantity
@@ -39,20 +30,20 @@ const CartNew = ({cartData,getData}) => {
       let itemPrice = item.CartPrice;
 
       if (item.CartKey === 'VenueName') {
-        itemPrice *= VenueLength;
+        itemPrice *= item.BookCount;
       } else if (item.CartKey === 'CaterName') {
-        itemPrice *= CaterLength;
+        itemPrice *= item.BookCount;
       } else if (item.CartKey === 'DJName') {
-        itemPrice *= DJLength;
+        itemPrice *= item.BookCount;
       } else if (item.CartKey === 'PhotoGrapherName') {
-        itemPrice *= PhotographerLength;
+        itemPrice *= item.BookCount;
       }
 
       newTotal += itemPrice;
     }
 
     setTotal(newTotal);
-  }, [cartData, VenueLength, CaterLength, DJLength, PhotographerLength]);
+  }, []);
 
 
   const checkoutHandler = async (amount) => {
@@ -106,7 +97,7 @@ const CartNew = ({cartData,getData}) => {
     }
   };
 
-  const reducedTotal = total * 0.3;
+  const reducedTotal = (total * 0.3).toFixed(2);
 
   const handleEmail = (email) => {
     console.log(email);
@@ -140,6 +131,7 @@ const CartNew = ({cartData,getData}) => {
         }
         id={item._id}
         keyName={item.CartKey}
+        BookCount={item.BookCount}
       />
     </li>
   ))}

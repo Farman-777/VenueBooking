@@ -26,6 +26,7 @@ const UserSchema = new mongoose.Schema({
   CartKey: String,  
   image: [String],   
   user_ID:String,
+  BookCount:Number,
 });
 
 const Cart = mongoose.model("Cart", UserSchema);
@@ -66,6 +67,8 @@ server.post("/addCart", upload.array("image", 1), async (req, res) => {
     CartKey: req.body.CartKey, // using the cartKey property from the request body
     image: imageFilename, // Assign the array of image filenames
     user_ID:req.body.userID,
+    BookCount:req.body.BookCount,
+    
   });
 
   try {
@@ -102,6 +105,47 @@ server.post("/deleteCart", async (req, res) => {
     // Handle any errors that occur during the deletion
     console.error("Error deleting cart item:", error);
     res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+
+server.put('/updateBookCountCart/:id', async (req, res) => {
+  const { id } = req.params;
+  const { UpdateBookCount } = req.body;
+  
+  try {
+    const existItem = await Cart.findOne({_id: id});
+    if (!existItem) {
+      return res.status(404).json({ error: 'Venue not found' });
+    }
+    const updatedVenueCartCount = await Cart.findOneAndUpdate({_id: id}, { BookCount: existItem.BookCount + UpdateBookCount }, { new: true });
+    console.log(updatedVenueCartCount);
+
+    res.json(updatedVenueCartCount);
+  } catch (err) {
+    res.status(500).json({ error: 'Error updating status' });
+  }
+});
+
+server.put('/removeBookCountCart/:id', async (req, res) => {
+  const { id } = req.params;
+  const { UpdateBookCount } = req.body;
+  
+  try {
+    const existItem = await Cart.findOne({_id: id});    
+    if (existItem.BookCount === 0) {
+      // Optional: You may want to handle the case where BookCount is already 0
+      return res.status(400).json({ error: 'length can not be less than 0' });
+    }
+    if (!existItem) {
+      return res.status(404).json({ error: 'Venue not found' });
+    }
+    const updatedVenueCartCount = await Cart.findOneAndUpdate({_id: id}, { BookCount: existItem.BookCount - UpdateBookCount }, { new: true });
+    console.log(updatedVenueCartCount);
+
+    res.json(updatedVenueCartCount);
+  } catch (err) {
+    res.status(500).json({ error: 'Error updating status' });
   }
 });
 
