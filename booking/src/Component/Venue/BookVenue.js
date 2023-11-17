@@ -3,7 +3,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const BookVenue = ({ handleClose, CartId , id , }) => {
-  console.log("ID in bookVenue using Props : ", CartId);
+  console.log("ID in bookVenue using Props : ", id);
   const [bookingDate, setBookingDate] = useState("");
   
   const getCurrentDate = () => {
@@ -26,6 +26,7 @@ const BookVenue = ({ handleClose, CartId , id , }) => {
     const day = formattedDate.getDate().toString().padStart(2, "0");
     const month = (formattedDate.getMonth() + 1).toString().padStart(2, "0");
     const year = formattedDate.getFullYear().toString().slice(-2);
+
     const formattedDateStr = `${day}-${month}-${year}`;
 
     const bookingData = { Id: CartId, Date: formattedDateStr, Status: "Booked", };

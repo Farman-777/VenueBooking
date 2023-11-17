@@ -51,7 +51,7 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
         <img src={`${imageUrl}${imageName}`} alt="" />
         <div className="item-details"><div className="item-info"> <span>{name}</span> <p>Price: {price}</p> </div> <span>Booked {BookCount} Times </span> </div>
         <button type="date" className="btn btn-success" onClick={() => {handleClick();}}>Select Date</button>
-        <button className="btn btn-danger" onClick={() => [handleDelete]()}>Remove</button>
+        <button className="btn btn-danger" onClick={() => handleDelete()}>Remove</button>
       </div>
       <ModalComp show={showModal} width={"90%"}
         modalBody={

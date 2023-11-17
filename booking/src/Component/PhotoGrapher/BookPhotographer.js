@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const BookPhotographer = ({ handleClose,CartId }) => {
+const BookPhotographer = ({ handleClose,CartId ,id }) => {
   console.log(CartId)
   const [bookingDate, setBookingDate] = useState("");
 
@@ -13,20 +13,12 @@ const BookPhotographer = ({ handleClose,CartId }) => {
     const day = today.getDate().toString().padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
-  const handleBookingDateChange = (e) => {
-    setBookingDate(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleBookingDateChange = (e) => { setBookingDate(e.target.value); };
+  const handleSubmit = async (e) => { e.preventDefault(); 
 
     // Parse the bookingDate string into a Date object
-    const dateParts = bookingDate.split("-"); // Assuming the date is in "yyyy-mm-dd" format
-    const formattedDate = new Date(
-      dateParts[0],
-      dateParts[1] - 1,
-      dateParts[2]
-    );
+    const dateParts = bookingDate.split("-");
+    const formattedDate = new Date( dateParts[0], dateParts[1] - 1, dateParts[2] );
 
     const day = formattedDate.getDate().toString().padStart(2, "0");
     const month = (formattedDate.getMonth() + 1).toString().padStart(2, "0");
@@ -34,31 +26,22 @@ const BookPhotographer = ({ handleClose,CartId }) => {
 
     const formattedDateStr = `${day}-${month}-${year}`;
 
-    const bookingData = {
-      Id:CartId,
-      Date: formattedDateStr,
-      Status: "Booked",
-    };
+    const bookingData = { Id:CartId, Date: formattedDateStr, Status: "Booked", };
 
     await axios.post('http://localhost:8001/bookingPhotographer',bookingData)
     .then((response) => {
         if (response.status === 200) {
-          Swal.fire({
-            icon: 'success',
-            title: 'Booking Status',
-            text: 'Your booking has been successful!',
-          });
-  
-          // Clear the form field
-          setBookingDate(''); }
-      }).catch((error) => {
+  axios.put(`http://localhost:8006/updateBookCountCart/${id}`, { UpdateBookCount: 1, })
+  .then((response) => {  Swal.fire("Booking Status","Your booking has been successful!","success",); })
+  .catch((error) => { Swal.fire("Error", "Failed to update VenueBook status", "error"); });
 
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: error.message, // Display the error message from the server
-        });
-      })
+  setBookingDate("");
+} else { console.error("Unexpected response status:", response.status); }
+}).catch((error) => {Swal.fire("Already Booked", "Please Select Different Date", "error"); });
+
+axios.get(`http://localhost:8001/getPhotoRecord?id=${CartId}`)
+  .then((response) => { console.log(response); })
+  .catch((error) => {   console.error("Error while retrieving venue records:", error); });
 };
       
 

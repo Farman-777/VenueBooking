@@ -164,7 +164,7 @@ server.post("/bookingDJ", async (req, res) => {
 server.get("/getDJRecord/:id", async (req, res) => {
   try {
     const id = req.params.id.toString();
-    console.log("serverDJ_ID : ",id)
+    console.log("id in serverDJ ",id)
     const tableRecord = await BookDJsRecord.find({ Id:id});
     console.log(tableRecord)
     res.json(tableRecord);

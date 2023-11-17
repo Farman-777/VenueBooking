@@ -66,10 +66,10 @@ const App = () => {
     }
       axios.post('http://localhost:8006/addCart', obj, { headers: { 'Content-Type': 'multipart/form-data' }, })
         .then((response) => {
-          if (response.status === 200) { Swal.fire('success','Cart Item Added', 'Successfully!', ); }
+          if (response.status === 200) { Swal.fire('Cart Item Added', 'Successfully!', 'success'); }
           getData();
         })
-        .catch((error) => { Swal.fire("warning","Item Already Added", "This item is already in your cart.", ); });
+        .catch((error) => { Swal.fire("Item Already Added", "This item is already in your cart.","warning", ); });
 
     }
 
