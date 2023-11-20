@@ -62,10 +62,10 @@ server.post("/addCart", upload.array("image", 1), async (req, res) => {
   // Create a new Cart instance
   const cartData = new Cart({
     CartId:req.body.CartId,
-    CartTitle: req.body.title, // using the title property from the request body
-    CartPrice: req.body.price, // using the price property from the request body
-    CartKey: req.body.CartKey, // using the cartKey property from the request body
-    image: imageFilename, // Assign the array of image filenames
+    CartTitle: req.body.title, 
+    CartPrice: req.body.price, 
+    CartKey: req.body.CartKey, 
+    image: imageFilename, 
     user_ID:req.body.userID,
     BookCount:req.body.BookCount,
     

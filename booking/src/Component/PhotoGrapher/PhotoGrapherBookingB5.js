@@ -5,6 +5,7 @@ import ModalComp from "../../ModalComp";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import ReactStars from "react-stars";
 
 const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
   const {userID} = useSelector(state => state.root);
@@ -141,6 +142,8 @@ const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
             <span className="fw-bold text-dark">Description</span> <br />
             {PhotoGrapherData.PhotoGrapherDescription}
           </p>
+          {/* <ReactStars size={20} half={true} edit={false} value={data.rating/data.rated}/> */}
+          <ReactStars size={20} half={true} edit={false} value={4.5}/>
           <p style={{ color: "#28A745" }} className="fs-5">
             <span className="fw-bold text-dark">Price</span> :{" "}
             <span style={{ fontWeight: "600" }}>₹{PhotoGrapherData.PhotoGrapherPrice}</span>

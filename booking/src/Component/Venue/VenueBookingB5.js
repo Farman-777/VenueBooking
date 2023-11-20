@@ -4,6 +4,7 @@ import ModalComp from "../../ModalComp";
 import axios from "axios";
 import { useParams,useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import ReactStars from "react-stars";
 
 
 const VenueBookingB5 = ({handleAppVenueItem}) => {
@@ -139,6 +140,9 @@ const VenueBookingB5 = ({handleAppVenueItem}) => {
             <span className="fw-bold text-dark">Description</span> <br />
             {VenueData.VenueDescription}
           </p>
+          {/* <ReactStars size={20} half={true} edit={false} value={data.rating/data.rated}/> */}
+          <p className="d-flex align-items-center"> Rating : <span><ReactStars size={20} half={true} edit={false} value={4.5}/></span></p>
+      
           <p style={{ color: "#28A745" }} className="fs-5">
             <span className="fw-bold text-dark">Price</span> :{" "}
             <span style={{ fontWeight: "600" }}>₹{VenueData.VenuePrice}</span>

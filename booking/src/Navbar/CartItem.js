@@ -30,15 +30,15 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
   const obj = { CartKey1: id };
   console.log(obj.CartKey1);
 
-  const handleDelete = () => {
-   
+  const handleRemove = () => {   
     axios.put(`http://localhost:8006/removeBookCountCart/${id}`, { UpdateBookCount: 1, })
     .then((response) => { Swal.fire("Updated!", "Venue Book status has been updated.", "success"); })
     .catch((error) => {     
       axios.post("http://localhost:8006/deleteCart", obj)
       .then((response) => {
       if (response.status === 200) { Swal.fire({ icon: "success", title: "Cart Item Deleted", text: "Successfully!",  }); 
-      getData(); }
+      // getData(); 
+    }
     });
   });
  
@@ -51,7 +51,7 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
         <img src={`${imageUrl}${imageName}`} alt="" />
         <div className="item-details"><div className="item-info"> <span>{name}</span> <p>Price: {price}</p> </div> <span>Booked {BookCount} Times </span> </div>
         <button type="date" className="btn btn-success" onClick={() => {handleClick();}}>Select Date</button>
-        <button className="btn btn-danger" onClick={() => handleDelete()}>Remove</button>
+        <button className="btn btn-danger" onClick={() => handleRemove()}>Remove</button>
       </div>
       <ModalComp show={showModal} width={"90%"}
         modalBody={
