@@ -6,9 +6,10 @@ import DateModalDJ from "./DateModalDJ";
 import ModalComp from "../../ModalComp";
 import { useSelector } from "react-redux";
 import ReactStars from "react-stars";
+import Swal from "sweetalert2";
 
 const DJBookingB5 = ({handleAppDJItem}) => {
-  const {userID} = useSelector(state => state.root);
+  const {userID,isAuthenticatedUser} = useSelector(state => state.root);
   const [showDateModal, setShowDateModal] = useState(false);
   const [DJData, setDJData] = useState({
     images: []
@@ -28,15 +29,18 @@ const DJBookingB5 = ({handleAppDJItem}) => {
     fetchData();
   }, [id]);
 
+  
   const handleDJ = (item) => { 
-    if (userID.length > 0) { 
+    if (userID.length > 0 &&  isAuthenticatedUser) { 
       const itemWithUserID = {
         ...item,
         userID: userID
       };
       console.log(itemWithUserID);
       handleAppDJItem(itemWithUserID);
-    } 
+    } else{
+      Swal.fire("Login alert","Please login first","error");
+    }
   }
   
 
@@ -73,9 +77,9 @@ const DJBookingB5 = ({handleAppDJItem}) => {
         </div>
         <div className="col-md-6">
           <h2 style={{ color: "#007BFF", fontWeight: "600", marginTop: "1%", fontFamily: "roboto", }} >{DJData.DJName}</h2>
-          <p style={{ color: "#6C757D" }}><span className="fw-bold text-dark">Description</span> <br /> {DJData.DJDescription}</p>
+          <p style={{ color: "#6C757D" }}><span className="fw-bold text-dark">Description</span> <br />{DJData.DJDescription}</p>       
           {/* <ReactStars size={20} half={true} edit={false} value={data.rating/data.rated}/> */}
-          <ReactStars size={20} half={true} edit={false} value={4.5}/>
+          <p className="d-flex align-items-center"> Rating : <span><ReactStars size={20} half={true} edit={false} value={4.5}/></span></p>
           <p style={{ color: "#28A745" }} className="fs-5"> <span className="fw-bold text-dark">Price</span> :{" "} 
           <span style={{ fontWeight: "600" }}>₹{DJData.DJPrice}</span> </p>
 

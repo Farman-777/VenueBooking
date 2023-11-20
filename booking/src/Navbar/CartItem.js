@@ -37,7 +37,7 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
       axios.post("http://localhost:8006/deleteCart", obj)
       .then((response) => {
       if (response.status === 200) { Swal.fire({ icon: "success", title: "Cart Item Deleted", text: "Successfully!",  }); 
-      // getData(); 
+      
     }
     });
   });

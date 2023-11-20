@@ -6,9 +6,10 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ReactStars from "react-stars";
+import Swal from "sweetalert2";
 
 const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
-  const {userID} = useSelector(state => state.root);
+  const {userID,isAuthenticatedUser} = useSelector(state => state.root);
   const [showDateModal, setShowDateModal] = useState(false);
   const [PhotoGrapherData, setPhotoGrapherData] = useState({
     images: []
@@ -37,14 +38,16 @@ const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
 
 
   const handlePhotoGraph = (item) => { 
-    if (userID.length > 0) { 
+    if (userID.length > 0 &&  isAuthenticatedUser) { 
       const itemWithUserID = {
         ...item,
         userID: userID
       };
       console.log(itemWithUserID);
       handleAppPhotoGraphItem(itemWithUserID);
-    } 
+    } else{
+      Swal.fire("Login alert","Please login first","error");
+    }
   }
 
   return (
@@ -143,7 +146,8 @@ const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
             {PhotoGrapherData.PhotoGrapherDescription}
           </p>
           {/* <ReactStars size={20} half={true} edit={false} value={data.rating/data.rated}/> */}
-          <ReactStars size={20} half={true} edit={false} value={4.5}/>
+          <p className="d-flex align-items-center"> Rating : <span><ReactStars size={20} half={true} edit={false} value={4.5}/></span></p>
+      
           <p style={{ color: "#28A745" }} className="fs-5">
             <span className="fw-bold text-dark">Price</span> :{" "}
             <span style={{ fontWeight: "600" }}>₹{PhotoGrapherData.PhotoGrapherPrice}</span>
