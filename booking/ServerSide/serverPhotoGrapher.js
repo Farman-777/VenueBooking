@@ -190,6 +190,42 @@ server.delete('/deletePhotographerRequest/:requestId', async (req, res) => {
   }
 });
 
+server.post("/deletePhotoGrapherDateRecord", async (req, res) => {
+  const { Id } = req.body;
+  console.log(Id)
+
+  try {
+    await BookPhotoGraphersRecord.deleteMany({ Id });
+    console.log("Venue record deleted");
+    res.status(200).json({ message: "Venue record deleted successfully" });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+server.post('/removePhotoGrapherBookDate', async (req, res) => {
+  const { Id, Date } = req.body;
+  console.log(Id, Date);
+  try {
+    const findRecord = await BookPhotoGraphersRecord.findOne({ Id, Date });
+
+    // Check if the record exists
+    if (!findRecord) {
+      return res.status(404).json({ error: 'Record not found' });
+    }
+
+    const updatedPhotoGrapherCartCount = await BookPhotoGraphersRecord.deleteOne({ Id, Date });
+    console.log(updatedPhotoGrapherCartCount);
+
+    res.json(updatedPhotoGrapherCartCount);
+  } catch (err) {
+    res.status(500).json({ error: 'Error updating status' });
+  }
+});
+
+
 server.listen(Port, () => {
   console.log(`server is running on port : ${Port}`);
 });

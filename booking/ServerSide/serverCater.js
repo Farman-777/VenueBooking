@@ -188,6 +188,43 @@ server.delete('/deleteCaterRequest/:requestId', async (req, res) => {
   }
 });
 
+server.post("/deleteCaterDateRecord", async (req, res) => {
+  const { Id } = req.body;
+  console.log(Id)
+
+  try {
+    await BookCatersRecord.deleteMany({ Id });
+    console.log("Venue record deleted");
+    res.status(200).json({ message: "Venue record deleted successfully" });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+
+server.post('/removeCaterBookDate', async (req, res) => {
+  const { Id, Date } = req.body;
+  console.log(Id, Date);
+  try {
+    const findRecord = await BookCatersRecord.findOne({ Id, Date });
+
+    // Check if the record exists
+    if (!findRecord) {
+      return res.status(404).json({ error: 'Record not found' });
+    }
+
+    const updatedCaterCartCount = await BookCatersRecord.deleteOne({ Id, Date });
+    console.log(updatedCaterCartCount);
+
+    res.json(updatedCaterCartCount);
+  } catch (err) {
+    res.status(500).json({ error: 'Error updating status' });
+  }
+});
+
+
 server.listen(Port, () => {
   console.log(`server is running on port : ${Port}`);
 });
