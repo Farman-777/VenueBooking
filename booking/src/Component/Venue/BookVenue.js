@@ -101,18 +101,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-<<<<<<< HEAD
-const BookVenue = ({ handleClose, CartId, id, getData }) => {
-  console.log("ID in bookVenue using Props : ", id);
-  const [bookingDate, setBookingDate] = useState("");
 
-=======
-
-const BookVenue = ({ handleClose, CartId , id , }) => {
+const BookVenue = ({ handleClose, CartId , id , getData }) => {
   console.log("ID in bookVenue using Props : ", id);
   const [bookingDate, setBookingDate] = useState("");
  
->>>>>>> 288114601e1377c881792e752dabf2ff85bbf264
   const getCurrentDate = () => {
     const today = new Date();
     const year = today.getFullYear();
@@ -120,24 +113,15 @@ const BookVenue = ({ handleClose, CartId , id , }) => {
     const day = today.getDate().toString().padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
-<<<<<<< HEAD
-=======
  
 
->>>>>>> 288114601e1377c881792e752dabf2ff85bbf264
 
   const handleBookingDateChange = (e) => {
     setBookingDate(e.target.value);
   };
 
-<<<<<<< HEAD
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-=======
-
   const handleSubmit = async (e) => { e.preventDefault();
 
->>>>>>> 288114601e1377c881792e752dabf2ff85bbf264
 
     // Parse the bookingDate string into a Date object
     const dateParts = bookingDate.split("-");
@@ -152,11 +136,8 @@ const BookVenue = ({ handleClose, CartId , id , }) => {
     const month = (formattedDate.getMonth() + 1).toString().padStart(2, "0");
     const year = formattedDate.getFullYear().toString().slice(-2);
 
-<<<<<<< HEAD
-
     const formattedDateStr = `${year}-${month}-${day}`;
 
-<<<<<<< HEAD
     const bookingData = {
       Id: CartId,
       Date: formattedDateStr,
@@ -201,37 +182,13 @@ const BookVenue = ({ handleClose, CartId , id , }) => {
         console.error("Error while retrieving venue records:", error);
       });
   };
-=======
-=======
-    const formattedDateStr = `${year}-${month}-${day}`;
->>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
-
-    const bookingData = { Id: CartId, Date: formattedDateStr, Status: "Booked", };
-
-
-   // Sending a POST request to create a booking record
-axios.post("http://localhost:8000/venueRecords", bookingData)
-.then((response) => {
-  if (response.status === 200) {
-
-
-    axios.put(`http://localhost:8006/updateBookCountCart/${id}`, { UpdateBookCount: 1, })
-    .then((response) => {  Swal.fire("Booking Status","Your booking has been successful!","success",); })
-    .catch((error) => { Swal.fire("Error", "Failed to update VenueBook status", "error"); });
-
-
-    setBookingDate("");
-  } else { console.error("Unexpected response status:", response.status); }
-}).catch((error) => {Swal.fire("Already Booked", "Please Select Different Date", "error"); });
-
-
 
 
   axios.get(`http://localhost:8000/getVenueRecord?id=${CartId}`)
   .then((response) => { console.log(response); })
   .catch((error) => {   console.error("Error while retrieving venue records:", error); });
-};
->>>>>>> 288114601e1377c881792e752dabf2ff85bbf264
+
+
 
 
   return (
