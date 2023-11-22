@@ -17,13 +17,8 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
   const {isAuthenticatedUser} = useSelector(state => state.root)
   const [showModal,setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
-<<<<<<< HEAD
  
   console.log("id : ", id);
-=======
-  
-  console.log("id : ", id); 
->>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
   console.log("name : ", name);
   console.log(`${imageUrl}${imageName}`);
   console.log("keyName : ",keyName);
@@ -41,10 +36,6 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
   const obj = { CartKey1: id };
   console.log(obj.CartKey1);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
   const deleteVenueBookDateRecord = () => {
     if(selectedDate !== "" && selectedDate !== undefined){
     const year = selectedDate.split("-")[0].slice(-2);
@@ -64,14 +55,9 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
     } else { return }
   }
 
-<<<<<<< HEAD
 
  
  
-=======
- 
-  
->>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
   const deleteCaterBookDateRecord = () => {
     if(selectedDate !== "" && selectedDate !== undefined){
     const year = selectedDate.split("-")[0].slice(-2);
@@ -92,11 +78,8 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
   }
 
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
   const deleteDJBookDateRecord = () => {
     if(selectedDate !== "" && selectedDate !== undefined){
     const year = selectedDate.split("-")[0].slice(-2);
@@ -115,11 +98,7 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
     })
     } else { return }
   }
-<<<<<<< HEAD
  
-=======
-  
->>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
   const deletePhotoGrapherBookDateRecord = () => {
     if(selectedDate !== "" && selectedDate !== undefined){
     const year = selectedDate.split("-")[0].slice(-2);
@@ -139,18 +118,11 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
     } else { return }
   }
 
-<<<<<<< HEAD
 
   const handleRemove = async () => {
     await axios.put(`http://localhost:8006/removeBookCountCart/${id}`, { UpdateBookCount: 1 });
   }
  
-=======
-  const handleRemove = async () => { 
-    await axios.put(`http://localhost:8006/removeBookCountCart/${id}`, { UpdateBookCount: 1 }); 
-  } 
-  
->>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
 const handleDelete = () => {
   axios.post("http://localhost:8006/deleteCart", obj)
   .then((response) => {
@@ -167,13 +139,9 @@ const handleDelete = () => {
     }
   });
 }
-<<<<<<< HEAD
  
 
 
-=======
-  
->>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
 
 
 return (
@@ -240,10 +208,6 @@ return (
   </>
 );
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
 };
 
 
