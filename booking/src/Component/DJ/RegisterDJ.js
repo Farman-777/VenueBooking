@@ -108,121 +108,34 @@ const RegisterDJ = () => {
         <div className="card-body">
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label
-                htmlFor="DJName"
-                className="form-label"
-                style={{ fontWeight: "bold" }}
-              >
-                {" "}
-                DJ Name:{" "}
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="DJName"
-                value={DJName}
-                onChange={handleDJNameChange}
-                required
+              <label htmlFor="DJName" className="form-label" style={{ fontWeight: "bold" }} >DJ Name: </label>
+              <input type="text" className="form-control" id="DJName" value={DJName} onChange={handleDJNameChange} required />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="DJLocation" className="form-label" style={{ fontWeight: "bold" }} > DJ Location: </label>
+              <input type="text" className="form-control" id="DJLocation" value={DJLocation} onChange={handleDJLocationChange} required />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="DJPrice" className="form-label" style={{ fontWeight: "bold" }} > DJ Price: </label>
+              <input  type="number" className="form-control" id="DJPrice" value={DJPrice} onChange={handleDJPriceChange} required
               />
             </div>
             <div className="mb-3">
-              <label
-                htmlFor="DJLocation"
-                className="form-label"
-                style={{ fontWeight: "bold" }}
-              >
-                {" "}
-                DJ Location:
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="DJLocation"
-                value={DJLocation}
-                onChange={handleDJLocationChange}
-                required
-              />
+              <label htmlFor="DJEmail" className="form-label" style={{ fontWeight: "bold" }} > Email </label>
+              <input type="email" className="form-control" id="DJEmail" value={DJEmail} onChange={handleDJEmailChange} required />
             </div>
             <div className="mb-3">
-              <label
-                htmlFor="DJPrice"
-                className="form-label"
-                style={{ fontWeight: "bold" }}
-              >
-                {" "}
-                DJ Price:
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                id="DJPrice"
-                value={DJPrice}
-                onChange={handleDJPriceChange}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label
-                htmlFor="DJEmail"
-                className="form-label"
-                style={{ fontWeight: "bold" }}
-              >
-                {" "}
-                Email
-              </label>
-              <input
-                type="email"
-                className="form-control"
-                id="DJEmail"
-                value={DJEmail}
-                onChange={handleDJEmailChange}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label
-                htmlFor="DJDescription"
-                className="form-label"
-                style={{ fontWeight: "bold" }}
-              >
-                DJ Description:
-              </label>
-              <textarea
-                className="form-control"
-                id="DJDescription"
-                rows="4"
-                value={DJDescription}
-                onChange={handleDJDescriptionChange}
-                required
-              />
+              <label htmlFor="DJDescription" className="form-label" style={{ fontWeight: "bold" }} > DJ Description: </label>
+              <textarea className="form-control" id="DJDescription" rows="4" value={DJDescription} onChange={handleDJDescriptionChange} required />
             </div>
 
             <div className="mb-3">
-              <label
-                htmlFor="DJImage"
-                className="form-label"
-                style={{ fontWeight: "bold" }}
-              >
-                DJ Image:
-              </label>
-              <input
-                type="file"
-                className="form-control"
-                id="DJImage"
-                accept="image/*"
-                onChange={handleImageChange}
-                multiple
-                required
+              <label htmlFor="DJImage" className="form-label" style={{ fontWeight: "bold" }} > DJ Image: </label>
+              <input type="file" className="form-control" id="DJImage" accept="image/*" onChange={handleImageChange} multiple required
               />
             </div>
 
-            <button
-              type="submit"
-              className="btn btn-primary"
-              style={{ backgroundColor: "#007bff", border: "none" }}
-            >
-              Submit
-            </button>
+            <button type="submit" className="btn btn-primary" style={{ backgroundColor: "#007bff", border: "none" }} > Submit </button>
           </form>
         </div>
       </div>

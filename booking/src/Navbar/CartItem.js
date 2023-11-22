@@ -19,6 +19,7 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
   console.log("name : ", name);
   console.log(`${imageUrl}${imageName}`);
   console.log("keyName : ",keyName);
+  
 
   const handleClick = () => {
     if (isAuthenticatedUser) {
@@ -111,7 +112,7 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
   }
 
   const handleRemove = async () => { 
-    await axios.put(`http://localhost:8006/removeBookCountCart/${id}`, { UpdateBookCount: 1 }); 
+    await axios.put(`http://localhost:8006/removeBookCountCart/${id}`, { UpdateBookCount: 1 }); getData(); 
   } 
   
 const handleDelete = () => {
@@ -187,10 +188,10 @@ return (
       show={showModal}
       width={"90%"}
       modalBody={
-        (keyName === "DJName") ? <BookDJ handleClose={() => setShowModal(false)} CartId={CartId} id={id} /> :
-        (keyName === "CaterName") ? <BookCater handleClose={() => setShowModal(false)} CartId={CartId} id={id} /> :
-        (keyName === "PhotoGrapherName") ? <BookPhotographer handleClose={() => setShowModal(false)} CartId={CartId} id={id} /> :
-        (keyName === "VenueName") ? <BookVenue handleClose={() => setShowModal(false)} CartId={CartId} id={id} /> :
+        (keyName === "DJName") ? <BookDJ getData={getData} handleClose={() => setShowModal(false)} CartId={CartId} id={id} /> :
+        (keyName === "CaterName") ? <BookCater getData={getData} handleClose={() => setShowModal(false)} CartId={CartId} id={id} /> :
+        (keyName === "PhotoGrapherName") ? <BookPhotographer getData={getData} handleClose={() => setShowModal(false)} CartId={CartId} id={id} /> :
+        (keyName === "VenueName") ? <BookVenue getData={getData} handleClose={() => setShowModal(false)} CartId={CartId} id={id} /> :
         null
       }
     />

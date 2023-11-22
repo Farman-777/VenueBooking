@@ -12,7 +12,6 @@ function MainComponentOne() {
         const res = await axios.get("http://localhost:8001/getPhotoData");
         setCardData(res.data);
         console.log(res.data);
-
       } catch (ex) {
         console.error(ex);
       }
@@ -36,9 +35,17 @@ function MainComponentOne() {
             border: "1px solid #e0e0e0",
           }}
         >
-          {cardData.map((user, i) => (
-          user.Status !=="pending" &&  <Link to={`/photoGrapherBookingB5/${user._id}`} style={{textDecoration:"none"}}><PhotoGrapherCard key={i} user={user} /></Link>
-          ))}
+          {cardData.map(
+            (user, i) =>
+              user.Status !== "pending" && (
+                <Link
+                  to={`/photoGrapherBookingB5/${user._id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <PhotoGrapherCard key={i} user={user} />
+                </Link>
+              )
+          )}
         </div>
       )}
     </div>

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const BookPhotographer = ({ handleClose,CartId ,id }) => {
-  console.log(CartId)
+const BookPhotographer = ({ handleClose, CartId, id , getData}) => {
+  console.log(CartId);
   const [bookingDate, setBookingDate] = useState("");
 
   const getCurrentDate = () => {
@@ -13,38 +13,71 @@ const BookPhotographer = ({ handleClose,CartId ,id }) => {
     const day = today.getDate().toString().padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
-  const handleBookingDateChange = (e) => { setBookingDate(e.target.value); };
-  const handleSubmit = async (e) => { e.preventDefault(); 
+  const handleBookingDateChange = (e) => {
+    setBookingDate(e.target.value);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     // Parse the bookingDate string into a Date object
     const dateParts = bookingDate.split("-");
-    const formattedDate = new Date( dateParts[0], dateParts[1] - 1, dateParts[2] );
+    const formattedDate = new Date(
+      dateParts[0],
+      dateParts[1] - 1,
+      dateParts[2]
+    );
 
     const day = formattedDate.getDate().toString().padStart(2, "0");
     const month = (formattedDate.getMonth() + 1).toString().padStart(2, "0");
     const year = formattedDate.getFullYear().toString().slice(-2);
 
-
     const formattedDateStr = `${year}-${month}-${day}`;
 
-    const bookingData = { Id:CartId, Date: formattedDateStr, Status: "Booked", };
+    const bookingData = {
+      Id: CartId,
+      Date: formattedDateStr,
+      Status: "Booked",
+    };
 
-    await axios.post('http://localhost:8001/bookingPhotographer',bookingData)
-    .then((response) => {
+    await axios
+      .post("http://localhost:8001/bookingPhotographer", bookingData)
+      .then((response) => {
         if (response.status === 200) {
-  axios.put(`http://localhost:8006/updateBookCountCart/${id}`, { UpdateBookCount: 1, })
-  .then((response) => {  Swal.fire("Booking Status","Your booking has been successful!","success",); })
-  .catch((error) => { Swal.fire("Error", "Failed to update VenueBook status", "error"); });
+          axios
+            .put(`http://localhost:8006/updateBookCountCart/${id}`, {
+              UpdateBookCount: 1,
+            })
+            .then((response) => {
+              Swal.fire(
+                "Booking Status",
+                "Your booking has been successful!",
+                "success"
+              );
+              getData();
+              setBookingDate("");
 
-  setBookingDate("");
-} else { console.error("Unexpected response status:", response.status); }
-}).catch((error) => {Swal.fire("Already Booked", "Please Select Different Date", "error"); });
+            })
+            .catch((error) => {
+              Swal.fire("Error", "Failed to update VenueBook status", "error");
+            });
+            
+        } else {
+          console.error("Unexpected response status:", response.status);
+        }
+      })
+      .catch((error) => {
+        Swal.fire("Already Booked", "Please Select Different Date", "error");
+      });
 
-axios.get(`http://localhost:8001/getPhotoRecord?id=${CartId}`)
-  .then((response) => { console.log(response); })
-  .catch((error) => {   console.error("Error while retrieving venue records:", error); });
-};
-      
+    axios
+      .get(`http://localhost:8001/getPhotoRecord?id=${CartId}`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error("Error while retrieving venue records:", error);
+      });
+  };
 
   return (
     <div className="container">
@@ -59,7 +92,7 @@ axios.get(`http://localhost:8001/getPhotoRecord?id=${CartId}`)
                 textAlign: "center",
               }}
             >
-              <h1 >Book PhotoGrapher</h1>
+              <h1>Book PhotoGrapher</h1>
             </div>
             <div className="card-body">
               <form onSubmit={handleSubmit}>
@@ -69,7 +102,8 @@ axios.get(`http://localhost:8001/getPhotoRecord?id=${CartId}`)
                     className="form-label"
                     style={{ fontWeight: "bold" }}
                   >
-                    Booking Date:
+                    {" "}
+                    Booking Date:{" "}
                   </label>
                   <input
                     type="date"
@@ -81,7 +115,13 @@ axios.get(`http://localhost:8001/getPhotoRecord?id=${CartId}`)
                     required
                   />
                 </div>
-                <button type="submit" className="btn btn-primary" style={{ backgroundColor: "#007bff", border: "none" }}  >Book Photographer </button>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  style={{ backgroundColor: "#007bff", border: "none" }}
+                >
+                  Book Photographer{" "}
+                </button>
               </form>
             </div>
           </div>
@@ -91,8 +131,9 @@ axios.get(`http://localhost:8001/getPhotoRecord?id=${CartId}`)
               className="btn btn-danger"
               onClick={handleClose}
             >
-              Close
-            </button>
+              {" "}
+              Close{" "}
+            </button>{" "}
           </div>
         </div>
       </div>

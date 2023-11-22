@@ -40,10 +40,10 @@ const CartNew = ({cartData,getData}) => {
       }
 
       newTotal += itemPrice;
-    }
 
+    }
     setTotal(newTotal);
-  }, []);
+  }, [cartData]);
 
 
   const checkoutHandler = async (amount) => {
@@ -96,7 +96,7 @@ const CartNew = ({cartData,getData}) => {
       
     }
   };
-
+  
   const reducedTotal = (total * 0.3).toFixed(2);
 
   const handleEmail = (email) => {

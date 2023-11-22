@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const BookDJ = ({ handleClose,CartId ,id}) => {
+const BookDJ = ({ handleClose,CartId ,id ,getData}) => {
   console.log("ID in bookVenue using Props : ", id);
 
   const [bookingDate, setBookingDate] = useState("");
@@ -29,35 +29,14 @@ const BookDJ = ({ handleClose,CartId ,id}) => {
 
     const bookingData = { Id:CartId, Date: formattedDateStr, Status: "Booked", };
 
-//     try {
-//       const response = await axios.post('http://localhost:8003/bookingDJ',bookingData);
-
-//       if (response.status === 200) {
-//         Swal.fire({
-//           icon: 'success',
-//           title: 'Booking Status',
-//           text: 'Your booking has been successful!',
-//         });
-
-//         // Clear the form field
-//         setBookingDate('');
-//       }
-//     } catch (error) {
-//       Swal.fire({
-//         icon: 'error',
-//         title: 'Error',
-//         text: error.response.data.message || 'An error occurred', // Display the error message from the server
-//       });
-//       console.error(error);
-//     }
-// };
-         // Sending a POST request to create a booking record
 axios.post("http://localhost:8003/bookingDJ", bookingData)
 .then((response) => {
   if (response.status === 200) {
 
     axios.put(`http://localhost:8006/updateBookCountCart/${id}`, { UpdateBookCount: 1, })
-    .then((response) => {  Swal.fire("Booking Status","Your booking has been successful!","success",); })
+    .then((response) => {  Swal.fire("Booking Status","Your booking has been successful!","success",);
+    getData();
+    setBookingDate(""); })
     .catch((error) => { Swal.fire("Error", "Failed to update VenueBook status", "error"); });
 
     setBookingDate("");

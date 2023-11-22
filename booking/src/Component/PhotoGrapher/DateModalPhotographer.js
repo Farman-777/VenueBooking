@@ -1,24 +1,24 @@
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const DateModalPhotographer = ({ handleClose,id }) => {
+const DateModalPhotographer = ({ handleClose, id }) => {
   // const { id } = useParams();
   const [filter, setFilter] = useState("");
   const [tableData, setTableData] = useState([]);
-  
 
   useEffect(() => {
     const getTableRecord = () => {
-      axios.get(`http://localhost:8001/getPhotoRecord/${id}`).then((response) => {
-        console.log(response.data);
-        setTableData(response.data);
-      });
+      axios
+        .get(`http://localhost:8001/getPhotoRecord/${id}`)
+        .then((response) => {
+          console.log(response.data);
+          setTableData(response.data);
+        });
     };
     getTableRecord();
   }, [id]);
-  console.log("tableData ",tableData);
+  console.log("tableData ", tableData);
   // Function to handle filter change
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
@@ -26,7 +26,6 @@ const DateModalPhotographer = ({ handleClose,id }) => {
 
   // // Filter the data based on the filter value
   const filteredData = tableData?.filter((item) => item.Date.includes(filter));
-
 
   const tableStyle = {
     width: "100%",
@@ -46,46 +45,46 @@ const DateModalPhotographer = ({ handleClose,id }) => {
   };
 
   return (
-    <>      
-    <div className="mb-3">
-    <label htmlFor="filter" className="form-label">
-      Filter by Date:
-    </label>
-    <input
-      type="text"
-      id="filter"
-      className="form-control"
-      value={filter}
-      onChange={handleFilterChange}
-      placeholder="Enter date in this format dd-mm-yy"
-    />
-  </div>
-  {filteredData?.length === 0 ? (
-    <p>Booking Available.</p>
-  ) : (
-      <table class="table table-hover" style={tableStyle}>
-        <thead>
-          <tr>
-            <th style={thStyle} scope="col">Date</th>
-            <th style={thStyle} scope="col">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData.map((user) => (
+    <>
+      <div className="mb-3">
+        <label htmlFor="filter" className="form-label">
+          Filter by Date:
+        </label>
+        <input
+          type="text"
+          id="filter"
+          className="form-control"
+          value={filter}
+          onChange={handleFilterChange}
+          placeholder="Enter date in this format dd-mm-yy"
+        />
+      </div>
+      {filteredData?.length === 0 ? (
+        <p>Booking Available.</p>
+      ) : (
+        <table class="table table-hover" style={tableStyle}>
+          <thead>
             <tr>
-              <td>{user.Date}</td>
-              <td>{user.Status}</td>
+              <th style={thStyle} scope="col">
+                Date
+              </th>
+              <th style={thStyle} scope="col">
+                Status
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredData.map((user) => (
+              <tr>
+                <td>{user.Date}</td>
+                <td>{user.Status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
       <div className="text-end">
-         <button
-          type="button"
-          className="btn btn-primary"
-          onClick={handleClose}
-        >
+        <button type="button" className="btn btn-primary" onClick={handleClose}>
           {filteredData?.length == 0 ? "Go For Booking" : "Close"}
         </button>
       </div>

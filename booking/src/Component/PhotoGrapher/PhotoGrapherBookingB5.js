@@ -7,15 +7,14 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ReactStars from "react-stars";
 
-const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
-  const {userID} = useSelector(state => state.root);
+const PhotoGrapherBookingB5 = ({ handleAppPhotoGraphItem }) => {
+  const { userID } = useSelector((state) => state.root);
   const [showDateModal, setShowDateModal] = useState(false);
   const [PhotoGrapherData, setPhotoGrapherData] = useState({
-    images: []
+    images: [],
   });
   const { id } = useParams();
-  // window.alert(id)
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -24,8 +23,7 @@ const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
             `http://localhost:8001/getPhotoData/${id}`
           );
           setPhotoGrapherData(response.data);
-          console.log(response.data)
-
+          console.log(response.data);
         }
       } catch (error) {
         console.error(error.message);
@@ -35,17 +33,16 @@ const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
     fetchData();
   }, [id]);
 
-
-  const handlePhotoGraph = (item) => { 
-    if (userID.length > 0) { 
+  const handlePhotoGraph = (item) => {
+    if (userID.length > 0) {
       const itemWithUserID = {
         ...item,
-        userID: userID
+        userID: userID,
       };
       console.log(itemWithUserID);
       handleAppPhotoGraphItem(itemWithUserID);
-    } 
-  }
+    }
+  };
 
   return (
     <div className="container " style={{ marginTop: "5%" }}>
@@ -95,7 +92,7 @@ const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
               </div>
               <div className="carousel-item">
                 <img
-                 src={`http://localhost:8001/Images/${PhotoGrapherData?.images[2]}`}
+                  src={`http://localhost:8001/Images/${PhotoGrapherData?.images[2]}`}
                   className="d-block w-100"
                   alt="PhotoGrapher Image 3"
                 />
@@ -143,10 +140,12 @@ const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
             {PhotoGrapherData.PhotoGrapherDescription}
           </p>
           {/* <ReactStars size={20} half={true} edit={false} value={data.rating/data.rated}/> */}
-          <ReactStars size={20} half={true} edit={false} value={4.5}/>
+          <ReactStars size={20} half={true} edit={false} value={4.5} />
           <p style={{ color: "#28A745" }} className="fs-5">
             <span className="fw-bold text-dark">Price</span> :{" "}
-            <span style={{ fontWeight: "600" }}>₹{PhotoGrapherData.PhotoGrapherPrice}</span>
+            <span style={{ fontWeight: "600" }}>
+              ₹{PhotoGrapherData.PhotoGrapherPrice}
+            </span>
           </p>
 
           <button
@@ -174,15 +173,13 @@ const PhotoGrapherBookingB5 = ({handleAppPhotoGraphItem}) => {
       <ModalComp
         show={showDateModal}
         width={"90%"}
-        modalBody={<DateModalPhotographer handleClose={() => setShowDateModal(false)} id={id}/>}
+        modalBody={
+          <DateModalPhotographer
+            handleClose={() => setShowDateModal(false)}
+            id={id}
+          />
+        }
       ></ModalComp>
-{/* 
-      <ModalComp
-        show={showDateModal1}
-        width={"90%"}
-        modalBody={<BookPhotographer handleClose={() => setShowDateModal1(false)} />}
-      ></ModalComp> 
-      */}
     </div>
   );
 };

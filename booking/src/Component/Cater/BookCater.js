@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const BookCater = ({ handleClose,CartId ,id}) => {
+const BookCater = ({ handleClose,CartId ,id,getData}) => {
   console.log("ID in bookCater using Props : ",id)
   const [bookingDate, setBookingDate] = useState("");
 
@@ -32,10 +32,11 @@ const BookCater = ({ handleClose,CartId ,id}) => {
         if (response.status === 200) {
 
           axios.put(`http://localhost:8006/updateBookCountCart/${id}`, { UpdateBookCount: 1, })
-          .then((response) => {  Swal.fire("Booking Status","Your booking has been successful!","success",); })
+          .then((response) => {  Swal.fire("Booking Status","Your booking has been successful!","success",);
+          getData()
+          setBookingDate("");})
           .catch((error) => { Swal.fire("Error", "Failed to update VenueBook status", "error"); });  
-
-          setBookingDate(''); }
+ }
       }).catch((error) => { Swal.fire({ icon: 'error', title: 'Error', text: error.message, }); })
   
       axios.get(`http://localhost:8002/getCaterRecord?id=${CartId}`)
