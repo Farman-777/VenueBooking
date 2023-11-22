@@ -213,6 +213,7 @@ server.post('/removeVenueBookDate', async (req, res) => {
   console.log(Id, Date);
   try {
     const findRecord = await BookVenuesRecord.findOne({ Id, Date });
+    console.log(findRecord)
 
     // Check if the record exists
     if (!findRecord) {

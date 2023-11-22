@@ -57,7 +57,7 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
     const year = selectedDate.split("-")[0].slice(-2);
     const formattedDate = `${year}-${selectedDate.split("-")[1]}-${selectedDate.split("-")[2]}`;
     console.log(formattedDate,CartId)
-    axios.post("http://localhost:8000/removeCaterBookDate",{Id:CartId,Date:formattedDate})
+    axios.post("http://localhost:8002/removeCaterBookDate",{Id:CartId,Date:formattedDate})
     .then(result => {
       if(result.status === 200) {
         Swal.fire("Success!","Selected date Record Deleted Successfully","success")
@@ -77,7 +77,7 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
     const year = selectedDate.split("-")[0].slice(-2);
     const formattedDate = `${year}-${selectedDate.split("-")[1]}-${selectedDate.split("-")[2]}`;
     console.log(formattedDate,CartId)
-    axios.post("http://localhost:8000/removeDJBookDate",{Id:CartId,Date:formattedDate})
+    axios.post("http://localhost:8003/removeDJBookDate",{Id:CartId,Date:formattedDate})
     .then(result => {
       if(result.status === 200) {
         Swal.fire("Success!","Selected date Record Deleted Successfully","success")
@@ -96,7 +96,7 @@ const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartI
     const year = selectedDate.split("-")[0].slice(-2);
     const formattedDate = `${year}-${selectedDate.split("-")[1]}-${selectedDate.split("-")[2]}`;
     console.log(formattedDate,CartId)
-    axios.post("http://localhost:8000/removePhotoGrapherBookDate",{Id:CartId,Date:formattedDate})
+    axios.post("http://localhost:8001/removePhotoGrapherBookDate",{Id:CartId,Date:formattedDate})
     .then(result => {
       if(result.status === 200) {
         Swal.fire("Success!","Selected date Record Deleted Successfully","success")
@@ -169,7 +169,7 @@ return (
                     <button className="btn btn-primary" onClick={deleteDJBookDateRecord}>Remove</button>
                   </div>
                 );
-                case "PhotoGraperName":
+                case "PhotoGrapherName":
                   return (
                     <div>
                       <input type="date" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
