@@ -24,7 +24,7 @@ const SignIn = ({ handleClose,handleEmail }) => {
     };
     handleEmail(userEmail);
 
-    if(userEmail === "x@gmail.com" && userPassword === "123456"){      
+    if(userEmail === "x@gmail.com" && userPassword === "12345"){      
       if (
         userEmail.trim() !== "" &&
         userPassword.trim() !== ""

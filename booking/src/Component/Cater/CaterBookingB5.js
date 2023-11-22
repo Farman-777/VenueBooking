@@ -6,9 +6,10 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ReactStars from "react-stars";
+import Swal from "sweetalert2";
 
 const CaterBookingB5 = ({handleAppCaterItem}) => {
-  const {userID} = useSelector(state => state.root);
+  const {userID ,isAuthenticatedUser} = useSelector(state => state.root);
   const [showDateModal, setShowDateModal] = useState(false);
   const [CaterData, setCaterData] = useState({
     images: []
@@ -38,15 +39,18 @@ const CaterBookingB5 = ({handleAppCaterItem}) => {
     fetchData();
   }, [id]);
 
+
   const handleCater = (item) => { 
-    if (userID.length > 0) { 
+    if (userID.length > 0 &&  isAuthenticatedUser) { 
       const itemWithUserID = {
         ...item,
         userID: userID
       };
       console.log(itemWithUserID);
       handleAppCaterItem(itemWithUserID);
-    } 
+    } else{
+      Swal.fire("Login alert","Please login first","error");
+    }
   }
 
   return (
@@ -145,7 +149,8 @@ const CaterBookingB5 = ({handleAppCaterItem}) => {
             {CaterData.CaterDescription}
           </p>
           {/* <ReactStars size={20} half={true} edit={false} value={data.rating/data.rated}/> */}
-          <ReactStars size={20} half={true} edit={false} value={4.5}/>
+          <p className="d-flex align-items-center"> Rating : <span><ReactStars size={20} half={true} edit={false} value={4.5}/></span></p>
+      
           <p style={{ color: "#28A745" }} className="fs-5">
             <span className="fw-bold text-dark">Price</span> :{" "}
             <span style={{ fontWeight: "600" }}>₹{CaterData.CaterPrice}</span>

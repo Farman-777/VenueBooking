@@ -5,11 +5,12 @@ import axios from "axios";
 import { useParams,useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ReactStars from "react-stars";
+import Swal from "sweetalert2";
 
 
 const VenueBookingB5 = ({handleAppVenueItem}) => {
   const { id } = useParams();
-  const {userID} = useSelector(state => state.root);
+  const {userID,isAuthenticatedUser} = useSelector(state => state.root);
   const [showDateModal, setShowDateModal] = useState(false);
   const [VenueData, setVenueData] = useState({
     images: []
@@ -36,14 +37,16 @@ const VenueBookingB5 = ({handleAppVenueItem}) => {
 
 
   const handleBooking = (item) => { 
-    if (userID.length > 0) { 
+    if (userID.length > 0 &&  isAuthenticatedUser) { 
       const itemWithUserID = {
         ...item,
         userID: userID
       };
       console.log(itemWithUserID);
       handleAppVenueItem(itemWithUserID);
-    } 
+    } else{
+      Swal.fire("Login alert","Please login first","error");
+    }
   }
   return (
     <div className="container " style={{ marginTop: "9%" ,marginBottom: "15%"}}>
