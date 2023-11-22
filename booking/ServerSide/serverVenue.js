@@ -384,18 +384,27 @@ server.post("/venueRecords", async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
 server.post("/deleteVenueDateRecord", async (req, res) => {
   const { Id } = req.body;
   console.log(Id)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
   try {
     await BookVenuesRecord.deleteMany({ Id });
     console.log("Venue record deleted");
     res.status(200).json({ message: "Venue record deleted successfully" });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -403,8 +412,11 @@ server.post("/deleteVenueDateRecord", async (req, res) => {
 });
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
 server.get("/getVenueRecord/:id", async (req, res) => {
   try {
     const id = req.params.id.toString();
@@ -414,7 +426,7 @@ server.get("/getVenueRecord/:id", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
-  }
+  } 
 });
 
 
@@ -438,6 +450,28 @@ server.delete('/deleteVenueRequest/:requestId', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+server.post('/removeVenueBookDate', async (req, res) => {
+  const { Id, Date } = req.body;
+  console.log(Id, Date);
+  try {
+    const findRecord = await BookVenuesRecord.findOne({ Id, Date });
+    console.log(findRecord)
+
+    // Check if the record exists
+    if (!findRecord) {
+      return res.status(404).json({ error: 'Record not found' });
+    }
+
+    const updatedVenueCartCount = await BookVenuesRecord.deleteOne({ Id, Date });
+    console.log(updatedVenueCartCount);
+
+    res.json(updatedVenueCartCount);
+  } catch (err) {
+    res.status(500).json({ error: 'Error updating status' });
+  }
+});
+
 
 
 server.post('/removeVenueBookDate', async (req, res) => {

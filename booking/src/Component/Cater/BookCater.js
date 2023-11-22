@@ -23,8 +23,8 @@ const BookCater = ({ handleClose,CartId ,id}) => {
     const month = (formattedDate.getMonth() + 1).toString().padStart(2, "0");
     const year = formattedDate.getFullYear().toString().slice(-2);
 
-    const formattedDateStr = `${day}-${month}-${year}`;
 
+    const formattedDateStr = `${year}-${month}-${day}`;
     const bookingData = { Id:CartId, Date: formattedDateStr, Status: "Booked", };
 
     axios.post('http://localhost:8002/bookingCater',bookingData)

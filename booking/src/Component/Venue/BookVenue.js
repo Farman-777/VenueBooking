@@ -131,9 +131,13 @@ const BookVenue = ({ handleClose, CartId , id , }) => {
     const month = (formattedDate.getMonth() + 1).toString().padStart(2, "0");
     const year = formattedDate.getFullYear().toString().slice(-2);
 
+<<<<<<< HEAD
 
     const formattedDateStr = `${year}-${month}-${day}`;
 
+=======
+    const formattedDateStr = `${year}-${month}-${day}`;
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
 
     const bookingData = { Id: CartId, Date: formattedDateStr, Status: "Booked", };
 

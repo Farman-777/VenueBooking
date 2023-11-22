@@ -412,42 +412,63 @@ server.delete('/deletePhotographerRequest/:requestId', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
 server.post("/deletePhotoGrapherDateRecord", async (req, res) => {
   const { Id } = req.body;
   console.log(Id)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
   try {
     await BookPhotoGraphersRecord.deleteMany({ Id });
     console.log("Venue record deleted");
     res.status(200).json({ message: "Venue record deleted successfully" });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
 server.post('/removePhotoGrapherBookDate', async (req, res) => {
   const { Id, Date } = req.body;
   console.log(Id, Date);
   try {
     const findRecord = await BookPhotoGraphersRecord.findOne({ Id, Date });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
     // Check if the record exists
     if (!findRecord) {
       return res.status(404).json({ error: 'Record not found' });
     }
 
+<<<<<<< HEAD
 
     const updatedPhotoGrapherCartCount = await BookPhotoGraphersRecord.deleteOne({ Id, Date });
     console.log(updatedPhotoGrapherCartCount);
 
 
+=======
+    const updatedPhotoGrapherCartCount = await BookPhotoGraphersRecord.deleteOne({ Id, Date });
+    console.log(updatedPhotoGrapherCartCount);
+
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
     res.json(updatedPhotoGrapherCartCount);
   } catch (err) {
     res.status(500).json({ error: 'Error updating status' });
@@ -455,8 +476,11 @@ server.post('/removePhotoGrapherBookDate', async (req, res) => {
 });
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
 server.listen(Port, () => {
   console.log(`server is running on port : ${Port}`);
 });

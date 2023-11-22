@@ -407,18 +407,27 @@ server.delete('/deleteCaterRequest/:requestId', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
 server.post("/deleteCaterDateRecord", async (req, res) => {
   const { Id } = req.body;
   console.log(Id)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
   try {
     await BookCatersRecord.deleteMany({ Id });
     console.log("Venue record deleted");
     res.status(200).json({ message: "Venue record deleted successfully" });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -426,23 +435,36 @@ server.post("/deleteCaterDateRecord", async (req, res) => {
 });
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
 server.post('/removeCaterBookDate', async (req, res) => {
   const { Id, Date } = req.body;
   console.log(Id, Date);
   try {
     const findRecord = await BookCatersRecord.findOne({ Id, Date });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
     // Check if the record exists
     if (!findRecord) {
       return res.status(404).json({ error: 'Record not found' });
     }
 
+<<<<<<< HEAD
 
     const updatedCaterCartCount = await BookCatersRecord.deleteOne({ Id, Date });
     console.log(updatedCaterCartCount);
 
 
+=======
+    const updatedCaterCartCount = await BookCatersRecord.deleteOne({ Id, Date });
+    console.log(updatedCaterCartCount);
+
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
     res.json(updatedCaterCartCount);
   } catch (err) {
     res.status(500).json({ error: 'Error updating status' });

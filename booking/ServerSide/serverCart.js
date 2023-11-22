@@ -325,7 +325,23 @@ server.put('/removeBookCountCart/:id', async (req, res) => {
   }
 });
 
+server.put('/removeBookCountCart/:id', async (req, res) => {
+  const { id } = req.params;
+  const { UpdateBookCount } = req.body;
+  
+  try {
+    const existItem = await Cart.findOne({_id: id});    
+    if (existItem.BookCount === 0) {
+      // Optional: You may want to handle the case where BookCount is already 0
+      return res.status(400).json({ error: 'length can not be less than 0' });
+    }
+    if (!existItem) {
+      return res.status(404).json({ error: 'Venue not found' });
+    }
+    const updatedVenueCartCount = await Cart.findOneAndUpdate({_id: id}, { BookCount: existItem.BookCount - UpdateBookCount }, { new: true });
+    console.log(updatedVenueCartCount);
 
+<<<<<<< HEAD
 server.put('/removeBookCountCart/:id', async (req, res) => {
   const { id } = req.params;
   const { UpdateBookCount } = req.body;
@@ -343,12 +359,17 @@ server.put('/removeBookCountCart/:id', async (req, res) => {
     console.log(updatedVenueCartCount);
 
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
     res.json(updatedVenueCartCount);
   } catch (err) {
     res.status(500).json({ error: 'Error updating status' });
   }
 });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f1d354519dc02c5328ce4823e6a60e5bad1b9a2
 
 server.listen(Port, () => {
   console.log(`server is running on port : ${Port}`);

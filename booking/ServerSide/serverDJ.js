@@ -416,6 +416,43 @@ server.delete('/deleteDJRequest/:requestId', async (req, res) => {
   }
 });
 
+server.post("/deleteDJDateRecord", async (req, res) => {
+  const { Id } = req.body;
+  console.log(Id)
+
+  try {
+    await BookDJsRecord.deleteMany({ Id });
+    console.log("Venue record deleted");
+    res.status(200).json({ message: "Venue record deleted successfully" });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+
+server.post('/removeDJBookDate', async (req, res) => {
+  const { Id, Date } = req.body;
+  console.log(Id, Date);
+  try {
+    const findRecord = await BookDJsRecord.findOne({ Id, Date });
+
+    // Check if the record exists
+    if (!findRecord) {
+      return res.status(404).json({ error: 'Record not found' });
+    }
+
+    const updatedDJCartCount = await BookDJsRecord.deleteOne({ Id, Date });
+    console.log(updatedDJCartCount);
+
+    res.json(updatedDJCartCount);
+  } catch (err) {
+    res.status(500).json({ error: 'Error updating status' });
+  }
+});
+
+
 
 server.post("/deleteDJDateRecord", async (req, res) => {
   const { Id } = req.body;
