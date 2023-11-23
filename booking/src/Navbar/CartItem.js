@@ -13,10 +13,13 @@ import BookDJ from "../Component/DJ/BookDJ";
 import BookVenue from "../Component/Venue/BookVenue";
 
 
-const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartId ,BookCount}) => {
+const CartItem = ({ name, price, imageUrl, imageName, id, getData ,keyName,CartId ,BookCount,user_ID,SetUserPayID}) => {
   const {isAuthenticatedUser} = useSelector(state => state.root)
   const [showModal,setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
+
+  console.log("user_ID : ", user_ID);
+  SetUserPayID(user_ID);
  
   console.log("id : ", id);
   console.log("name : ", name);

@@ -16,6 +16,7 @@ DJ:8003 appUrl: 3,
 const CartNew = ({cartData,getData}) => {
   const {isAuthenticatedUser } = useSelector(state => state.root)
   const [showDateModal,setShowDateModal] = useState(false);
+  const [userPayID , SetUserPayID] = useState("");
   const [total, setTotal] = useState(0);
   console.log(cartData);
   console.log("keyName Object : ",cartData[0]);
@@ -46,37 +47,111 @@ const CartNew = ({cartData,getData}) => {
   }, [cartData]);
 
 
+  // const checkoutHandler = async (amount) => {
+  //   if(isAuthenticatedUser){
+  //   const { data: {key} } = await axios.get("http://localhost:4000/api/getKey");
+  //   const { data: {order} } = await axios.post("http://localhost:4000/api/checkout", {
+  //     amount,
+  //   });
+
+  //   const options = {
+  //     key: key, // Replace with your actual Razorpay Key
+  //     amount: order.amount,
+  //     currency: "INR",
+  //     name: "Venue Booking Project",
+  //     description: "Test Transaction",
+  //     image: "https://d6xcmfyh68wv8.cloudfront.net/assets/razorpay-glyph.svg",
+  //     order_id: order.id, // Use the actual order ID from the server response
+  //     callback_url: "http://localhost:4000/api/paymentVerification",
+  //     prefill: {
+  //       name: "Gaurav Kumar",
+  //       email: "gaurav.kumar@example.com",
+  //       contact: "9000090000",
+  //     },
+  //     notes: {
+  //       address: "Razorpay Corporate Office",
+  //     },
+  //     theme: {
+  //       color: "#3399cc",
+  //     },
+  //   };
+
+  //   if (typeof window !== 'undefined') {
+  //     const razor = new window.Razorpay(options);
+  //     console.log("razor payment : ", razor);
+      
+  //     razor.open();
+  //     // if(razor.id.length !== undefined){console.log(userPayID)}
+  //     if(razor.id.length !== undefined){console.log(razor.open())}
+  //   } else {
+  //     console.error("Window object not available. Unable to create Razorpay object.");
+  //   }
+  
+  // } else {
+  //     Swal.fire({
+  //       title: 'Login Required',
+  //       text: 'Please log in to access this feature.',
+  //       icon: 'warning',
+  //       showCancelButton: true,
+  //       confirmButtonText: 'Log In',
+  //       cancelButtonText: 'Cancel',
+  //       customClass: {
+  //         confirmButton: 'btn btn-primary',
+  //         cancelButton: 'btn btn-secondary',
+  //       },
+  //     }).then((result) => {
+  //       if (result.isConfirmed) {
+  //         setShowDateModal(true);
+  //       }
+  //     });
+      
+  //   }
+  // };
+
   const checkoutHandler = async (amount) => {
-    if(isAuthenticatedUser){
-    const { data: {key} } = await axios.get("http://localhost:4000/api/getKey");
-    const { data: {order} } = await axios.post("http://localhost:4000/api/checkout", {
-      amount,
-    });
-
-    const options = {
-      key: key, // Replace with your actual Razorpay Key
-      amount: order.amount,
-      currency: "INR",
-      name: "Venue Booking Project",
-      description: "Test Transaction",
-      image: "https://d6xcmfyh68wv8.cloudfront.net/assets/razorpay-glyph.svg",
-      order_id: order.id, // Use the actual order ID from the server response
-      callback_url: "http://localhost:4000/api/paymentVerification",
-      prefill: {
-        name: "Gaurav Kumar",
-        email: "gaurav.kumar@example.com",
-        contact: "9000090000",
-      },
-      notes: {
-        address: "Razorpay Corporate Office",
-      },
-      theme: {
-        color: "#3399cc",
-      },
-    };
-
-    const razor = new window.Razorpay(options);
-    razor.open(); } else {
+    if (isAuthenticatedUser) {
+      const { data: { key } } = await axios.get("http://localhost:4000/api/getKey");
+      const { data: { order } } = await axios.post("http://localhost:4000/api/checkout", {
+        amount,
+      });
+  
+      const options = {
+        key: key,
+        amount: order.amount,
+        currency: "INR",
+        name: "Venue Booking Project",
+        description: "Test Transaction",
+        image: "https://d6xcmfyh68wv8.cloudfront.net/assets/razorpay-glyph.svg",
+        order_id: order.id,
+        callback_url: "http://localhost:4000/api/paymentVerification",
+        prefill: {
+          name: "Gaurav Kumar",
+          email: "gaurav.kumar@example.com",
+          contact: "9000090000",
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+  
+      if (typeof window !== 'undefined') {
+        const razor = new window.Razorpay(options);
+  
+        razor.on('payment.success', function (response) {
+          // The payment was successful, you can now perform actions like logging the userPayID
+          console.log("Payment successful! UserPayID: ", response.razorpay_payment_id,userPayID);
+          // Add your logic here for what to do after successful payment
+        });
+  
+        razor.open();
+      } else {
+        console.error("Window object not available. Unable to create Razorpay object.");
+      }
+  
+    } else {
       Swal.fire({
         title: 'Login Required',
         text: 'Please log in to access this feature.',
@@ -93,7 +168,6 @@ const CartNew = ({cartData,getData}) => {
           setShowDateModal(true);
         }
       });
-      
     }
   };
   
@@ -132,6 +206,8 @@ const CartNew = ({cartData,getData}) => {
         id={item._id}
         keyName={item.CartKey}
         BookCount={item.BookCount}
+        SetUserPayID={SetUserPayID}
+        user_ID={item.user_ID}
       />
     </li>
   ))}
@@ -148,7 +224,7 @@ const CartNew = ({cartData,getData}) => {
         </span>
       </div>
         <div> 
-          <button className='btn btn-success ms-4' onClick={() => {checkoutHandler(reducedTotal);console.log(total)} }>Payment</button>
+          <button className='btn btn-success ms-4' onClick={() => {checkoutHandler(reducedTotal);} }>Payment</button>
         </div>
     </div>
     <ModalComponent

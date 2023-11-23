@@ -190,6 +190,26 @@ server.put('/removeBookCountCart/:id', async (req, res) => {
   }
 });
 
+server.post("/deletepaysuccess", async (req, res) => {
+
+  try {
+    const { userID } = req.body;
+
+    // Assuming Cart is your Mongoose model
+    const deleteRecord = await Cart.deleteMany({ user_ID: userID });
+
+    // Check if any records were deleted
+    if (deleteRecord.deletedCount > 0) {
+      res.status(200).json({ status: 'success', message: 'Records deleted successfully.' });
+    } else {
+      res.status(404).json({ status: 'not found', message: 'No records found for the given user ID.' });
+    }
+  } catch (error) {
+    console.error('Error deleting records:', error);
+    res.status(500).json({ status: 'error', message: 'Internal server error.' });
+  }
+});
+
 server.listen(Port, () => {
   console.log(`server is running on port : ${Port}`);
 });
