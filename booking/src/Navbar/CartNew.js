@@ -224,7 +224,7 @@ const CartNew = ({cartData,getData}) => {
         </span>
       </div>
         <div> 
-          <button className='btn btn-success ms-4' onClick={() => {checkoutHandler(reducedTotal);} }>Payment</button>
+          <button className='btn btn-success ms-4' onClick={() => {if(reducedTotal > 0){checkoutHandler(reducedTotal);} else{alert("Please Check Your Payment Amount")}} }>Payment</button>
         </div>
     </div>
     <ModalComponent
